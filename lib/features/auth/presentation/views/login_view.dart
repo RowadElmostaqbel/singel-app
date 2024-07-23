@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/features/auth/presentation/views/sign_up_view.dart';
 
 import '../../../../core/utils/app_colors.dart';
+import '../../../bottom_nav/presentation/views/bottom_nav_view.dart';
 import '../widgets/custom_bottom_text_action.dart';
 import '../widgets/custom_navigator_button.dart';
 import '../widgets/custom_or_spacer.dart';
@@ -34,8 +36,7 @@ class _LoginViewState extends State<LoginView> {
           child: Form(
             key: formKey,
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
               child: Column(
                 children: [
                   const CustomPageTitle(
@@ -47,9 +48,10 @@ class _LoginViewState extends State<LoginView> {
                     controller: email,
                     validator: FormBuilderValidators.compose([
                       FormBuilderValidators.required(),
-                      FormBuilderValidators.email(),
+                      FormBuilderValidators.numeric(),
                     ]),
-                    icon: 'assets/icons/phone.png', keyboardType: TextInputType.phone,
+                    icon: 'assets/icons/phone.png',
+                    keyboardType: TextInputType.phone,
                   ),
                   CustomTextFormField(
                     label: 'Password',
@@ -59,7 +61,8 @@ class _LoginViewState extends State<LoginView> {
                     validator: FormBuilderValidators.compose([
                       FormBuilderValidators.required(),
                     ]),
-                    icon: 'assets/icons/lock.png', keyboardType: TextInputType.name,
+                    icon: 'assets/icons/lock.png',
+                    keyboardType: TextInputType.name,
                   ),
                   Row(
                     children: [
@@ -67,7 +70,6 @@ class _LoginViewState extends State<LoginView> {
                           side: const BorderSide(
                             color: Color(0xffB7B7B7),
                           ),
-
                           activeColor: const Color(0xffB7B7B7),
                           value: isChecked,
                           onChanged: (bool? value) {
@@ -109,8 +111,8 @@ class _LoginViewState extends State<LoginView> {
                   CustomNavigatorButton(
                     title: "Login",
                     onPressed: () {
-                      if (formKey.currentState!.validate()){
-                        //context.navigateTo(const BottomNavView());
+                      if (formKey.currentState!.validate()) {
+                        context.navigateTo(const BottomNavView());
                       }
                     },
                   ),
