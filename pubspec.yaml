@@ -52,7 +52,7 @@ dependencies:
   credit_card_type_detector:
   intl:
   animated_splash_screen:
-
+  stylish_bottom_bar: ^1.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
