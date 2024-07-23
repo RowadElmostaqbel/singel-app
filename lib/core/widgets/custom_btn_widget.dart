@@ -4,13 +4,16 @@ class CustomBtnWidget extends StatelessWidget {
   final Color color;
   final String text;
   final TextStyle titleStyle;
+
   final Function()? onTap;
+  final double? radius;
   const CustomBtnWidget({
     super.key,
     required this.color,
     required this.text,
     required this.titleStyle,
     this.onTap,
+    this.radius,
   });
 
   @override
@@ -25,7 +28,7 @@ class CustomBtnWidget extends StatelessWidget {
           vertical: 14,
         ),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50),
+          borderRadius: BorderRadius.circular(radius??50),
           color: color,
         ),
         child: Text(
