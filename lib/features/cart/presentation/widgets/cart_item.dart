@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -49,20 +48,16 @@ class CartItem extends StatelessWidget {
                   orderModel.meal.desc,
                   style: TextStyles.grey14Regular,
                 ),
-                Container(
-                  width: 80,
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: AppColors.primaryColor.withOpacity(.2),
-                  ),
-                  child: const Text(
-                    'Side Meals',
-                    style: TextStyles.primary8Medium,
+                RichText(
+                  text: TextSpan(
+                    text: orderModel.meal.price.toString(),
+                    style: TextStyles.primary24SemiBold,
+                    children: const [
+                      TextSpan(
+                        text: '  SAR',
+                        style: TextStyles.black14Medium,
+                      )
+                    ],
                   ),
                 ),
               ],
@@ -72,18 +67,6 @@ class CartItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              RichText(
-                text: TextSpan(
-                  text: orderModel.meal.price.toString(),
-                  style: TextStyles.primary24SemiBold,
-                  children: const [
-                    TextSpan(
-                      text: '  SAR',
-                      style: TextStyles.primary14Medium,
-                    )
-                  ],
-                ),
-              ),
               Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 8,

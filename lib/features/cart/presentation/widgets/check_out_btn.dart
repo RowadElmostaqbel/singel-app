@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
 
@@ -13,39 +12,21 @@ class CheckoutBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-    //  onTap: () => context.navigateTo(const CheckoutView()),
+      //  onTap: () => context.navigateTo(const CheckoutView()),
       child: Container(
         padding: const EdgeInsets.all(4),
-        margin: const EdgeInsets.only(bottom: 8, right: 24, left: 24),
+        margin: const EdgeInsets.only(bottom: 84, right: 12, left: 12),
         alignment: Alignment.center,
         height: 56,
         decoration: BoxDecoration(
           color: AppColors.primaryColor,
-          borderRadius: BorderRadius.circular(50),
+          borderRadius: BorderRadius.circular(12),
         ),
-        child: Stack(
-          children: [
-            const Center(
-                child: Text('Checkout', style: TextStyles.white18SemiBold)),
-            Align(
-              alignment: Alignment.centerRight,
-              child: Container(
-                alignment: Alignment.center,
-                height: 56,
-                width: 56,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                ),
-                child: const FittedBox(
-                  child: Icon(
-                    Icons.arrow_forward_outlined,
-                    color: AppColors.primaryColor,
-                  ),
-                ),
-              ),
-            )
-          ],
+        child: const Center(
+          child: Text(
+            'Checkout',
+            style: TextStyles.white18SemiBold,
+          ),
         ),
       ),
     );

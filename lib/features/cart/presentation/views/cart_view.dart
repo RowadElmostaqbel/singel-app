@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -17,6 +16,7 @@ class CartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomSheet: const CheckoutBtn(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -25,6 +25,7 @@ class CartView extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                const Gap(24),
                 const Center(
                   child: Text(
                     'Cart',
@@ -51,8 +52,6 @@ class CartView extends StatelessWidget {
                       ),
                       Gap(24),
                       TotalPriceWidget(),
-                      Gap(36),
-                      CheckoutBtn(),
                     ],
                   ),
               ],
