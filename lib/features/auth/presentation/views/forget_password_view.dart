@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/features/auth/presentation/views/verification_view.dart';
-import 'package:single_resturant_app/features/auth/presentation/widgets/custom_navigator_button.dart';
+import 'package:single_resturant_app/core/widgets/custom_navigator_button.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../widgets/custom_page_title.dart';
@@ -82,7 +82,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                       if (formKey.currentState!.validate()) {
                         context.navigateTo(const VerificationView());
                       }
-                    })
+                    }, padding: 50,)
               ],
             ),
           ),
