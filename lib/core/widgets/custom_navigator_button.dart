@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/utils/app_colors.dart';
+import '../utils/app_colors.dart';
 
 class CustomNavigatorButton extends StatelessWidget {
-  const CustomNavigatorButton({super.key, required this.title, required this.onPressed});
+  const CustomNavigatorButton({super.key, required this.title, required this.onPressed, required this.padding});
   final String title;
   final Function()? onPressed;
+  final double padding;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 50),
+      padding: EdgeInsets.only(top: padding),
       child: SizedBox(
         height: 56,
         width: MediaQuery.sizeOf(context).width,

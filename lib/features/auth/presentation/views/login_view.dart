@@ -6,7 +6,7 @@ import 'package:single_resturant_app/features/auth/presentation/views/sign_up_vi
 import '../../../../core/utils/app_colors.dart';
 import '../../../bottom_nav/presentation/views/bottom_nav_view.dart';
 import '../widgets/custom_bottom_text_action.dart';
-import '../widgets/custom_navigator_button.dart';
+import '../../../../core/widgets/custom_navigator_button.dart';
 import '../widgets/custom_or_spacer.dart';
 import '../widgets/custom_page_title.dart';
 import '../widgets/custom_text_form_field.dart';
@@ -114,7 +114,7 @@ class _LoginViewState extends State<LoginView> {
                       if (formKey.currentState!.validate()) {
                         context.navigateTo(const BottomNavView());
                       }
-                    },
+                    }, padding: 50,
                   ),
                   CustomBottomTextAction(
                     onTap: () {

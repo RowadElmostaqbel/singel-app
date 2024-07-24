@@ -5,7 +5,7 @@ import 'package:single_resturant_app/features/auth/presentation/widgets/social_m
 
 import '../../../../core/utils/app_colors.dart';
 import '../widgets/custom_bottom_text_action.dart';
-import '../widgets/custom_navigator_button.dart';
+import '../../../../core/widgets/custom_navigator_button.dart';
 import '../widgets/custom_or_spacer.dart';
 import '../widgets/custom_page_title.dart';
 import '../widgets/custom_photo_container.dart';
@@ -154,7 +154,7 @@ class _SignUpViewState extends State<SignUpView> {
                       if (formKey.currentState!.validate()) {
                         //context.navigateTo(const BottomNavView());
                       }
-                    },
+                    }, padding: 50,
                   ),
                   CustomBottomTextAction(
                     onTap: () {

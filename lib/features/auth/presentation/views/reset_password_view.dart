@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
-import '../widgets/custom_navigator_button.dart';
+import '../../../../core/widgets/custom_navigator_button.dart';
 import '../widgets/custom_page_title.dart';
 import '../widgets/custom_text_form_field.dart';
 import 'login_view.dart';
@@ -79,7 +79,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const LoginView()));
                     }
-                  },
+                  }, padding: 50,
                 )
               ],
             ),
