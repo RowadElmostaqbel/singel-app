@@ -5,7 +5,7 @@ import 'package:single_resturant_app/core/utils/app_colors.dart';
 import 'package:single_resturant_app/core/utils/assets.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/categories_list_view.dart';
-import 'package:single_resturant_app/features/home/presentation/widgets/client_reviews_list_view.dart';
+import 'package:single_resturant_app/features/comments/presentation/views/client_reviews_list_view.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/custom_search_and_filter_widget.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/fast_delivary_list_view.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/offers_list_view.dart';
@@ -153,62 +153,7 @@ class HomeView extends HookWidget {
             const SliverToBoxAdapter(
               child: Gap(24),
             ),
-            // SliverToBoxAdapter(
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //     children: [
-            //       const Text(
-            //         'Client’s Review',
-            //         style: TextStyles.black18SemiBold,
-            //       ),
-            //       GestureDetector(
-            //         // onTap: () => context.navigateTo(
-            //         //   const AllOffersView(),
-            //         // ),
-            //         child: Container(
-            //           alignment: Alignment.center,
-            //           padding: const EdgeInsets.symmetric(
-            //             horizontal: 8,
-            //             vertical: 4,
-            //           ),
-            //           height: 40,
-            //           decoration: BoxDecoration(
-            //             color: AppColors.primaryColor.withOpacity(.1),
-            //             borderRadius: BorderRadius.circular(6),
-            //           ),
-            //           child: Row(
-            //             children: [
-            //               Container(
-            //                 alignment: Alignment.center,
-            //                 height: 20,
-            //                 width: 20,
-            //                 decoration: const BoxDecoration(
-            //                   color: Colors.white,
-            //                   shape: BoxShape.circle,
-            //                 ),
-            //                 child: const FittedBox(
-            //                   child: Icon(
-            //                     Icons.add,
-            //                     color: AppColors.primaryColor,
-            //                   ),
-            //                 ),
-            //               ),
-            //               const Gap(8),
-            //               const Text(
-            //                 'Add New',
-            //                 style: TextStyles.primary14Regular,
-            //               ),
-            //             ],
-            //           ),
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            // const SliverToBoxAdapter(
-            //   child: Gap(24),
-            // ),
-            // const ClientReviewsListView(),
+           
             SliverToBoxAdapter(
               child: Gap(context.height * .06),
             ),

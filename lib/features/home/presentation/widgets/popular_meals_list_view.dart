@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/core/utils/text_styles.dart';
-import 'package:single_resturant_app/features/home/presentation/views/all_popular_dishes_view.dart';
+import 'package:single_resturant_app/features/home/presentation/views/all_popular_meals_view.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/popular_meal_list_item.dart';
 
 class PopularMealsListView extends StatelessWidget {
@@ -23,7 +23,7 @@ class PopularMealsListView extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () => context.navigateTo(
-                const AllPopularDishesView(),
+                const AllPopularMealsView(),
               ),
               child: const Text(
                 'Show all',

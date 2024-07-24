@@ -45,7 +45,7 @@ class OfferListITem extends StatelessWidget {
                   image: AssetImage(
                     Assets.assetsImagesSteak,
                   ),
-                  fit: BoxFit.fitHeight,
+                  fit: BoxFit.fill,
                 ),
               ),
               child: Row(
@@ -82,9 +82,10 @@ class OfferListITem extends StatelessWidget {
             ),
             Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const Gap(4),
                   Row(
                     children: [
                       const Expanded(

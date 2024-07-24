@@ -11,6 +11,7 @@ import 'package:single_resturant_app/features/place_order/data/models/order_mode
 import '../../../../core/utils/text_styles.dart';
 import '../../../cart/presentation/controllers/cubit/cart_cubit.dart';
 import '../../../home/presentation/widgets/add_to_fav_btn.dart';
+import '../../../comments/presentation/views/client_reviews_list_view.dart';
 import '../../../meal/data/models/meal_model.dart';
 import '../controllers/order_animation/cubit/order_animation_cubit.dart';
 import '../widgets/add_drinks_list_view.dart';
@@ -116,10 +117,10 @@ class MakeOrderView extends HookWidget {
                           onTap: () => context.pop(),
                           child: Container(
                             alignment: Alignment.center,
-                            width: 50,
-                            height: 50,
+                            width: 35,
+                            height: 35,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(12),
                               color: Colors.white,
                               boxShadow: [
                                 BoxShadow(
@@ -132,6 +133,7 @@ class MakeOrderView extends HookWidget {
                             child: const Icon(
                               Icons.arrow_back_ios_rounded,
                               color: AppColors.primaryColor,
+                              size: 15,
                             ),
                           ),
                         ),
@@ -143,7 +145,7 @@ class MakeOrderView extends HookWidget {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    height: 20,
+                    height: 15,
                     width: context.width,
                     decoration: const BoxDecoration(
                       color: Colors.white,
@@ -168,15 +170,14 @@ class MakeOrderView extends HookWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Gap(20),
-                        const Row(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Classic Burger',
+                              mealModel.name,
                               style: TextStyles.black24SemiBold,
                             ),
-                            Text(
+                            const Text(
                               '⭐ 4.9',
                               style: TextStyles.black16SemiBold,
                             )
@@ -195,19 +196,17 @@ class MakeOrderView extends HookWidget {
                             ],
                           ),
                         ),
-                        const Gap(8),
-                        const Text(
-                          '🔥  62 Calories',
-                          style: TextStyles.darkGrey14Regular,
-                        ),
-                        const Gap(20),
+                        // const Gap(8),
+                        // const Text(
+                        //   '🔥  62 Calories',
+                        //   style: TextStyles.darkGrey14Regular,
+                        // ),
+                        const Gap(16),
                         const Text(
                           'A popular spice and vegetables mixed favoured rice dish which  is typically prepared',
-                          style: TextStyles.grey16Medium,
+                          style: TextStyles.darkGrey16SemiBold,
                         ),
                         const Gap(20),
-                        const NutritionFactsListView(),
-                        const Gap(32),
                         const Text(
                           'Select Size',
                           style: TextStyles.black18SemiBold,
@@ -215,71 +214,83 @@ class MakeOrderView extends HookWidget {
                         const Gap(12),
                         const MealSizeListView(),
                         const Gap(36),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              'Ingredients',
-                              style: TextStyles.black18SemiBold,
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: AppColors.darkPrimaryColor,
-                              ),
-                              child: const Text(
-                                'Reset',
-                                style: TextStyles.white14Medium,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Gap(16),
-                        const Text(
-                          'Modify your addition and select what you like',
-                          style: TextStyles.grey16Medium,
-                        ),
-                        const Gap(10),
-                        SizedBox(
-                          height: 100,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) => IngredientListItem(
-                              ingredient: mealModel.ingredients[index],
-                            ),
-                            separatorBuilder: (context, index) => const Gap(16),
-                            itemCount: mealModel.ingredients.length,
-                          ),
-                        ),
-                        const Gap(32),
-                        const Text(
-                          'Add-ons',
-                          style: TextStyles.black18SemiBold,
-                        ),
-                        const Gap(16),
-                        SizedBox(
-                          height: 100,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) => IngredientListItem(
-                              ingredient: mealModel.ingredients[index],
-                            ),
-                            separatorBuilder: (context, index) => const Gap(16),
-                            itemCount: mealModel.ingredients.length,
-                          ),
-                        ),
-                        const Gap(32),
-                        const AddDrinksListView(),
-                        const Gap(32),
-                        AddSidesListView(
-                          sideItems: mealModel.sides,
-                        ),
-                        const Gap(110),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: [
+                        //     const Text(
+                        //       'Ingredients',
+                        //       style: TextStyles.black18SemiBold,
+                        //     ),
+                        //     Container(
+                        //       alignment: Alignment.center,
+                        //       padding: const EdgeInsets.symmetric(
+                        //           horizontal: 12, vertical: 8),
+                        //       decoration: BoxDecoration(
+                        //         borderRadius: BorderRadius.circular(20),
+                        //         color: AppColors.darkPrimaryColor,
+                        //       ),
+                        //       child: const Text(
+                        //         'Reset',
+                        //         style: TextStyles.white14Medium,
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
+                        // const Gap(16),
+                        // const Text(
+                        //   'Modify your addition and select what you like',
+                        //   style: TextStyles.grey16Medium,
+                        // ),
+                        // const Gap(10),
+                        // SizedBox(
+                        //   height: 100,
+                        //   child: ListView.separated(
+                        //     scrollDirection: Axis.horizontal,
+                        //     itemBuilder: (context, index) => IngredientListItem(
+                        //       ingredient: mealModel.ingredients[index],
+                        //     ),
+                        //     separatorBuilder: (context, index) => const Gap(16),
+                        //     itemCount: mealModel.ingredients.length,
+                        //   ),
+                        // ),
+                        // const Gap(32),
+                        // const Text(
+                        //   'Add-ons',
+                        //   style: TextStyles.black18SemiBold,
+                        // ),
+                        // const Gap(16),
+                        // SizedBox(
+                        //   height: 100,
+                        //   child: ListView.separated(
+                        //     scrollDirection: Axis.horizontal,
+                        //     itemBuilder: (context, index) => IngredientListItem(
+                        //       ingredient: mealModel.ingredients[index],
+                        //     ),
+                        //     separatorBuilder: (context, index) => const Gap(16),
+                        //     itemCount: mealModel.ingredients.length,
+                        //   ),
+                        // ),
+                        // const Gap(32),
+                        // const AddDrinksListView(),
+                        // const Gap(32),
+                        // AddSidesListView(
+                        //   sideItems: mealModel.sides,
+                        // ),
                       ],
                     ),
+                  ),
+                  const SliverToBoxAdapter(
+                    child: Text(
+                      'Client’s Review',
+                      style: TextStyles.black18SemiBold,
+                    ),
+                  ),
+                  const SliverToBoxAdapter(
+                    child: Gap(24),
+                  ),
+                  const ClientReviewsListView(),
+                  const SliverToBoxAdapter(
+                    child: Gap(110),
                   ),
                 ],
               ),
@@ -288,7 +299,9 @@ class MakeOrderView extends HookWidget {
                 children: context
                     .watch<OrderAnimationCubit>()
                     .orders
-                    .map((e) => const AddToBasketAnimationWidget())
+                    .map(
+                      (e) => const AddToBasketAnimationWidget(),
+                    )
                     .toList(),
               ),
             ],

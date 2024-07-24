@@ -4,8 +4,8 @@ import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/core/widgets/custom_app_bar.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/popular_meal_list_item.dart';
 
-class AllPopularDishesView extends StatelessWidget {
-  const AllPopularDishesView({super.key});
+class AllPopularMealsView extends StatelessWidget {
+  const AllPopularMealsView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class AllPopularDishesView extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: 24,
+            horizontal: 12,
           ),
           child: Column(
             children: [
@@ -21,12 +21,13 @@ class AllPopularDishesView extends StatelessWidget {
               const Gap(36),
               Expanded(
                 child: GridView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: context.height * 0.00065,
+                    childAspectRatio: context.height * 0.00085,
                     crossAxisCount: 2,
-                    crossAxisSpacing: 18,
-                    mainAxisSpacing: 20,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
                   ),
                   itemBuilder: (context, index) => PopularMealListItem(
                     index: index,
@@ -34,7 +35,6 @@ class AllPopularDishesView extends StatelessWidget {
                   itemCount: 9,
                 ),
               ),
-              const Gap(36),
             ],
           ),
         ),
