@@ -118,8 +118,11 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   CustomBottomTextAction(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const SignUpView()));
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const SignUpView(),
+                        ),
+                      );
                     },
                     textOne: "Don't have an Account ? ",
                     textTwo: "Let's Sign Up",

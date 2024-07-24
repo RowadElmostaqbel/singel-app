@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:single_resturant_app/core/utils/assets.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';

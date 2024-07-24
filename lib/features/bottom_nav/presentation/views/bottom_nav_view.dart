@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:single_resturant_app/features/home/presentation/widgets/custom_nav_bar.dart';
+import 'package:single_resturant_app/features/bottom_nav/presentation/widgets/custom_nav_bar.dart';
 
 import '../../../home/presentation/views/home_view.dart';
 
