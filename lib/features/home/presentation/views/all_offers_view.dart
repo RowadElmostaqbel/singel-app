@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/widgets/custom_app_bar.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/offer_list_item.dart';
@@ -17,21 +18,31 @@ class AllOffersView extends StatelessWidget {
           child: Column(
             children: [
               const CustomAppBar(title: 'Offers'),
-              const Gap(36),
               Expanded(
-                child: ListView.separated(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 12,
-                  ),
-                  itemBuilder: (context, index) => Container(
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 24,
+                child: CustomScrollView(
+                  slivers: [
+                    const SliverToBoxAdapter(
+                      child: Gap(
+                        36,
+                      ),
                     ),
-                    height: 250,
-                    child: const OfferListITem(),
-                  ),
-                  separatorBuilder: (context, index) => const Gap(16),
-                  itemCount: 8,
+                    SliverList.separated(
+                      itemBuilder: (context, index) => Container(
+                        height: 300,
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: 24,
+                        ),
+                        child: const OfferListITem(),
+                      ),
+                      separatorBuilder: (context, index) => const Gap(16),
+                      itemCount: 8,
+                    ),
+                    const SliverToBoxAdapter(
+                      child: Gap(
+                        12,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

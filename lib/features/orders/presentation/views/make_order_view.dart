@@ -6,7 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/utils/app_colors.dart';
 import 'package:single_resturant_app/core/utils/assets.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
-import 'package:single_resturant_app/features/place_order/data/models/order_model.dart';
+import 'package:single_resturant_app/features/orders/data/models/order_model.dart';
 
 import '../../../../core/utils/text_styles.dart';
 import '../../../cart/presentation/controllers/cubit/cart_cubit.dart';

@@ -8,7 +8,7 @@ import 'package:single_resturant_app/features/checkout/presentation/views/checko
 import 'package:single_resturant_app/features/on_boarding/presentation/views/on_boarding_view.dart';
 
 import 'features/cart/presentation/controllers/cubit/cart_cubit.dart';
-import 'features/place_order/presentation/controllers/order_animation/cubit/order_animation_cubit.dart';
+import 'features/orders/presentation/controllers/order_animation/cubit/order_animation_cubit.dart';
 
 
 class SingleApp extends StatelessWidget {

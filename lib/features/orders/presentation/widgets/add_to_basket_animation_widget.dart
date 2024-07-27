@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:single_resturant_app/features/place_order/presentation/controllers/order_animation/cubit/order_animation_cubit.dart';
+import 'package:single_resturant_app/features/orders/presentation/controllers/order_animation/cubit/order_animation_cubit.dart';
 
 import '../../../../core/utils/assets.dart';
 

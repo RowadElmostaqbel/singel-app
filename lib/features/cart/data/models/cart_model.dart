@@ -1,5 +1,5 @@
 
-import '../../../place_order/data/models/order_model.dart';
+import '../../../orders/data/models/order_model.dart';
 
 class CartModel {
   final List<OrderModel> orders;

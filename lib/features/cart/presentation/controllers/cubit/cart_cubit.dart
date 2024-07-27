@@ -3,7 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../meal/data/models/meal_model.dart';
-import '../../../../place_order/data/models/order_model.dart';
+import '../../../../orders/data/models/order_model.dart';
 import '../../../data/models/cart_model.dart';
 
 part 'cart_state.dart';

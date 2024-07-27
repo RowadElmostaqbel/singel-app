@@ -3,6 +3,7 @@ import 'package:single_resturant_app/core/utils/extensions.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/text_styles.dart';
+import '../../../checkout/presentation/views/checkout_view.dart';
 
 class CheckoutBtn extends StatelessWidget {
   const CheckoutBtn({
@@ -12,7 +13,9 @@ class CheckoutBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      //  onTap: () => context.navigateTo(const CheckoutView()),
+      onTap: () => context.navigateTo(
+        const CheckoutView(),
+      ),
       child: Container(
         padding: const EdgeInsets.all(4),
         margin: const EdgeInsets.only(bottom: 84, right: 12, left: 12),

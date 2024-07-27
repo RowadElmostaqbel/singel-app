@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
@@ -335,7 +334,13 @@ class CustomTabBar extends HookWidget {
                       child: GestureDetector(
                         onTap: () {
                           index.value = titles.indexOf(title);
-                          pageController.jumpToPage(index.value);
+                          pageController.animateToPage(
+                            index.value,
+                            duration: const Duration(
+                              milliseconds: 250,
+                            ),
+                            curve: Curves.easeInOut,
+                          );
                         },
                         child: UnSelectedTabBarItem(
                           title: title,

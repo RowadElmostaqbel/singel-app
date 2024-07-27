@@ -7,6 +7,7 @@ class CustomBtnWidget extends StatelessWidget {
 
   final Function()? onTap;
   final double? radius;
+  final Border? border;
   const CustomBtnWidget({
     super.key,
     required this.color,
@@ -14,6 +15,7 @@ class CustomBtnWidget extends StatelessWidget {
     required this.titleStyle,
     this.onTap,
     this.radius,
+    this.border,
   });
 
   @override
@@ -24,12 +26,13 @@ class CustomBtnWidget extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 6),
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(
-          horizontal: 36,
-          vertical: 14,
+          horizontal: 24,
+          vertical: 10,
         ),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(radius??50),
+          borderRadius: BorderRadius.circular(radius ?? 50),
           color: color,
+          border: border,
         ),
         child: Text(
           text,

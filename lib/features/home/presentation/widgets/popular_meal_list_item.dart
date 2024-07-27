@@ -6,7 +6,7 @@ import 'package:single_resturant_app/core/utils/text_styles.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/add_to_fav_btn.dart';
 
 import '../../../../core/utils/assets.dart';
-import '../../../place_order/presentation/views/make_order_view.dart';
+import '../../../orders/presentation/views/make_order_view.dart';
 
 class PopularMealListItem extends StatelessWidget {
   final int index;

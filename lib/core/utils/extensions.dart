@@ -14,3 +14,9 @@ extension NavigationHelper on BuildContext {
 
   pop() => Navigator.of(this).pop();
 }
+
+extension StringHelper on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${substring(1)}";
+  }
+}

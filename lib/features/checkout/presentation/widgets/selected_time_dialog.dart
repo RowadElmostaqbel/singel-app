@@ -12,8 +12,6 @@ class SelectedTimeDialog extends StatefulWidget {
 }
 
 class _SelectedTimeDialogState extends State<SelectedTimeDialog> {
-
-
   @override
   Widget build(BuildContext context) {
     String dropDownValue = "am";

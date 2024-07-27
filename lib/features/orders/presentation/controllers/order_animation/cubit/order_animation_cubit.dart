@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:single_resturant_app/features/place_order/data/models/order_model.dart';
+import 'package:single_resturant_app/features/orders/data/models/order_model.dart';
 
 part 'order_animation_state.dart';
 

@@ -3,7 +3,7 @@ import 'package:gap/gap.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/text_styles.dart';
-import '../../../place_order/data/models/order_model.dart';
+import '../../../orders/data/models/order_model.dart';
 
 class CartItem extends StatelessWidget {
   final OrderModel orderModel;

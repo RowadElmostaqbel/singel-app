@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:single_resturant_app/features/place_order/presentation/widgets/add_or_remove_btn.dart';
+import 'package:single_resturant_app/features/orders/presentation/widgets/add_or_remove_btn.dart';
 
 import '../../../../core/utils/text_styles.dart';
 import '../../../meal/data/models/meal_model.dart';

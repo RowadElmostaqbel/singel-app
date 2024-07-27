@@ -1,20 +1,22 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
+import 'package:single_resturant_app/features/orders/presentation/views/orders_history_view.dart';
 
 import '../../../../core/utils/assets.dart';
 import '../../../../core/utils/text_styles.dart';
 import '../../../../core/widgets/custom_app_bar.dart';
 import '../../../home/presentation/views/category_view.dart';
-import 'upcoming_order_view.dart';
+import 'active_order_view.dart';
 
-class MyOrdersView extends StatelessWidget {
+class MyOrdersView extends HookWidget {
   const MyOrdersView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final PageController pageController = usePageController(initialPage: 0);
     return Scaffold(
       bottomSheet: Container(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
@@ -31,15 +33,24 @@ class MyOrdersView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomTabBar(
-              PageController(),
+              pageController,
               titles: const [
-                'Upcoming',
+                'Active',
                 'History',
+                'Canceled',
               ],
             ),
             const Gap(14),
-            const Expanded(
-              child: UpcomingOrdersView(),
+            Expanded(
+              child: PageView(
+                physics: const NeverScrollableScrollPhysics(),
+                controller: pageController,
+                children: const [
+                  ActiveOrdersView(),
+                  OrdersHistoryView(),
+                  OrdersHistoryView(),
+                ],
+              ),
             )
           ],
         ),
@@ -62,7 +73,10 @@ class MyOrdersView extends StatelessWidget {
             ),
             const SafeArea(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 12,
+                ),
                 child: CustomAppBar(
                   title: 'My Orders',
                   style: TextStyles.white18SemiBold,
@@ -75,4 +89,3 @@ class MyOrdersView extends StatelessWidget {
     );
   }
 }
-

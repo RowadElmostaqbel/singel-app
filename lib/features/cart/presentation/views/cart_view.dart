@@ -16,7 +16,9 @@ class CartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomSheet: const CheckoutBtn(),
+      bottomSheet: (context.read<CartCubit>().cartModel == null)
+          ? null
+          : const CheckoutBtn(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -39,18 +41,18 @@ class CartView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CartItemsListView(),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Coupons',
-                            style: TextStyles.black18SemiBold,
-                          ),
-                          Gap(8),
-                          ApplyCouponWidget(),
-                        ],
-                      ),
-                      Gap(24),
+                      // Column(
+                      //   crossAxisAlignment: CrossAxisAlignment.start,
+                      //   children: [
+                      //     Text(
+                      //       'Coupons',
+                      //       style: TextStyles.black18SemiBold,
+                      //     ),
+                      //     Gap(8),
+                      //     ApplyCouponWidget(),
+                      //   ],
+                      // ),
+                      // Gap(24),
                       TotalPriceWidget(),
                     ],
                   ),
