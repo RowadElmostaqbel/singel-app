@@ -51,7 +51,7 @@ class CartItem extends StatelessWidget {
                 RichText(
                   text: TextSpan(
                     text: orderModel.meal.price.toString(),
-                    style: TextStyles.primary24SemiBold,
+                    style: TextStyles.primary20SemiBold,
                     children: const [
                       TextSpan(
                         text: '  SAR',

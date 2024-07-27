@@ -140,6 +140,11 @@ static const primary24Medium = TextStyle(
     fontWeight: FontWeight.w500,
     color: AppColors.primaryColor,
   );
+  static const primary20SemiBold = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
+    color: AppColors.primaryColor,
+  );
  static const primary18SemiBold = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w600,
