@@ -4,20 +4,11 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/text_styles.dart';
 
-class SelectedTimeDialog extends StatefulWidget {
+class SelectedTimeDialog extends StatelessWidget {
   const SelectedTimeDialog({super.key});
 
   @override
-  State<SelectedTimeDialog> createState() => _SelectedTimeDialogState();
-}
-
-class _SelectedTimeDialogState extends State<SelectedTimeDialog> {
-
-
-  @override
   Widget build(BuildContext context) {
-    String dropDownValue = "am";
-    List<String> items = ['am', 'pm'];
     TextEditingController time = TextEditingController();
     return SizedBox(
       height: MediaQuery.sizeOf(context).height,
@@ -43,7 +34,7 @@ class _SelectedTimeDialogState extends State<SelectedTimeDialog> {
                             fontWeight: FontWeight.w600, fontSize: 16),
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           const Text(
                             "10-8-2024",
@@ -52,37 +43,41 @@ class _SelectedTimeDialogState extends State<SelectedTimeDialog> {
                                 fontWeight: FontWeight.w500,
                                 color: AppColors.darkGreyColor),
                           ),
-                          Material(
-                            borderRadius: BorderRadius.circular(6),
-                            elevation: 1.0, // Set here what you wish!
-                            shadowColor: Colors.white,
-                            child: TextFormField(
-                              keyboardType: TextInputType.number,
-                              validator: FormBuilderValidators.compose([
-                                FormBuilderValidators.required(),
-                              ]),
-                              decoration: InputDecoration(
-                                hoverColor: Colors.white,
-                                focusColor: Colors.white,
-                                hintText: "0123456789",
-                                hintStyle: TextStyles.grey14Regular,
-                                fillColor: Colors.white,
-                                border: InputBorder.none,
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  borderSide: const BorderSide(
-                                    color: Colors.white,
+                          SizedBox(
+                            height: 30,
+                            width: 100,
+                            child: Material(
+                              borderRadius: BorderRadius.circular(6),
+                              elevation: 1.0, // Set here what you wish!
+                              shadowColor: Colors.white,
+                              child: TextFormField(
+                                keyboardType: TextInputType.number,
+                                validator: FormBuilderValidators.compose([
+                                  FormBuilderValidators.required(),
+                                ]),
+                                decoration: InputDecoration(
+                                  hoverColor: Colors.white,
+                                  focusColor: Colors.white,
+                                  hintText: "00:00",
+                                  hintStyle: TextStyles.grey14Regular,
+                                  fillColor: Colors.white,
+                                  border: InputBorder.none,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    borderSide: const BorderSide(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    borderSide: const BorderSide(
+                                      color: Colors.white,
+                                      width: 1.5,
+                                    ),
                                   ),
                                 ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  borderSide: const BorderSide(
-                                    color: Colors.white,
-                                    width: 1.5,
-                                  ),
-                                ),
+                                controller: time,
                               ),
-                              controller: time,
                             ),
                           ),
                         ],
