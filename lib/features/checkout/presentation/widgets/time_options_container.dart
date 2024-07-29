@@ -17,9 +17,7 @@ class TimeOptionsContainer extends StatelessWidget {
       ("${iconsPath}clock.png"),
       ("${iconsPath}calendar.png"),
     ];
-    List<Widget> dialogs=[
-      const SelectedTimeDialog()
-    ];
+    List dialogs = [const SelectedTimeDialog()];
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 20),
@@ -41,11 +39,15 @@ class TimeOptionsContainer extends StatelessWidget {
           itemCount: paymentMethods.length,
           itemBuilder: (context, index) {
             return GestureDetector(
-              onTap: index==0?(){}:(){
-                showDialog(context: context, builder: (context){
-                  return const SelectedTimeDialog();
-                });
-              },
+              onTap: index == 0
+                  ? () {}
+                  : () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return dialogs[0];
+                          });
+                    },
               child: Container(
                 margin: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
