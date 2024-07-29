@@ -74,7 +74,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                     FormBuilderValidators.required(),
                   ]),
                   icon: 'assets/icons/phone.png',
-                  keyboardType: TextInputType.phone,
+                  keyboardType: TextInputType.phone, onChanged: (String ) {  },
                 ),
                 CustomNavigatorButton(
                     title: "Send Message",

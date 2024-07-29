@@ -51,7 +51,7 @@ class _LoginViewState extends State<LoginView> {
                       FormBuilderValidators.numeric(),
                     ]),
                     icon: 'assets/icons/phone.png',
-                    keyboardType: TextInputType.phone,
+                    keyboardType: TextInputType.phone, onChanged: (String ) {  },
                   ),
                   CustomTextFormField(
                     label: 'Password',
@@ -62,7 +62,7 @@ class _LoginViewState extends State<LoginView> {
                       FormBuilderValidators.required(),
                     ]),
                     icon: 'assets/icons/lock.png',
-                    keyboardType: TextInputType.name,
+                    keyboardType: TextInputType.name, onChanged: (String ) {  },
                   ),
                   Row(
                     children: [

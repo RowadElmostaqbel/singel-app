@@ -56,7 +56,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                   hintText: "********",
                   validator: FormBuilderValidators.compose([
                     FormBuilderValidators.required(),
-                  ]), icon: 'assets/icons/lock.png', keyboardType: TextInputType.name,
+                  ]), icon: 'assets/icons/lock.png', keyboardType: TextInputType.name, onChanged: (String ) {  },
                 ),
                 CustomTextFormField(
                   controller: confirmPassword,
@@ -70,7 +70,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                       return "Please enter the same password";
                     }
                     return null;
-                  }, icon: 'assets/icons/lock.png', keyboardType: TextInputType.name,
+                  }, icon: 'assets/icons/lock.png', keyboardType: TextInputType.name, onChanged: (String ) {  },
                 ),
                 CustomNavigatorButton(
                   title: 'Save',

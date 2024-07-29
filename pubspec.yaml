@@ -58,6 +58,8 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   get_it: ^7.7.0
+  path:
+  image_picker:
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,16 +1,11 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
 
-
-
-
-
-
-
 class ApiService {
-  final _baseUrl = '';
+  final _baseUrl = 'https://deliback.rowaduae.com/api/';
   late Dio dio;
-  late String token;
+   String token='';
+
   ApiService() {
     dio = Dio(
       BaseOptions(
@@ -18,19 +13,19 @@ class ApiService {
         headers: {
           "CLIENT-TYPE": 'web',
           "Accept": "application/json",
+          "restaurant_id" : "1"
         },
       ),
     );
   }
+
   Future<dynamic> get({
     required String endpoint,
   }) async {
-   
-
     dio.options.headers.addAll(
       {
         'Authorization': 'Bearer $token',
-       // 'lang': LANG,
+        // 'lang': LANG,
       },
     );
 
@@ -40,11 +35,10 @@ class ApiService {
 
   Future<dynamic> post(
       {required String endpoint, required Map<String, dynamic> data}) async {
-   
     dio.options.headers.addAll(
       {
         'Authorization': 'Bearer $token',
-       // 'lang': LANG,
+        // 'lang': LANG,
       },
     );
     var response = await dio.post(
@@ -54,9 +48,7 @@ class ApiService {
     return response.data;
   }
 
-
   Future<dynamic> postFormData({required String endpoint, dynamic data}) async {
-  
     dio.options.headers.addAll(
       {
         'Authorization': 'Bearer $token',
