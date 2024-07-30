@@ -23,7 +23,6 @@ class CustomSearchAndFilterWidget extends StatelessWidget {
             flex: 6,
             child: GestureDetector(
               onTap: () {
-                //showSearch(context: context, delegate: CustomSearchDelegate());
                 context.navigateTo(const SearchView());
               },
               child: Container(

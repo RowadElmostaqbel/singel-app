@@ -98,10 +98,10 @@ class CategorizeMealsView extends StatelessWidget {
                         bottom: 60,
                       ),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        childAspectRatio: context.height * 0.00085,
+                        childAspectRatio: context.height * 0.001,
                         crossAxisCount: 2,
                         crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
+                        mainAxisSpacing: 20,
                       ),
                       itemBuilder: (context, index) => PopularMealListItem(
                         index: index,

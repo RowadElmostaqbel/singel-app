@@ -187,7 +187,7 @@ class MakeOrderView extends HookWidget {
                         RichText(
                           text: const TextSpan(
                             text: '95.00',
-                            style: TextStyles.primary24SemiBold,
+                            style: TextStyles.black24SemiBold,
                             children: [
                               TextSpan(
                                 text: ' SAR',
@@ -196,11 +196,19 @@ class MakeOrderView extends HookWidget {
                             ],
                           ),
                         ),
-                        // const Gap(8),
-                        // const Text(
-                        //   '🔥  62 Calories',
-                        //   style: TextStyles.darkGrey14Regular,
-                        // ),
+                        const Gap(16),
+                        RichText(
+                          text: const TextSpan(
+                            text: 'Category : ',
+                            style: TextStyles.black18Light,
+                            children: [
+                              TextSpan(
+                                text: 'Burger',
+                                style: TextStyles.black18Medium,
+                              ),
+                            ],
+                          ),
+                        ),
                         const Gap(16),
                         const Text(
                           'A popular spice and vegetables mixed favoured rice dish which  is typically prepared',

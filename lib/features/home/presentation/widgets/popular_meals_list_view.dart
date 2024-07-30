@@ -34,7 +34,7 @@ class PopularMealsListView extends StatelessWidget {
         ),
         const Gap(16),
         SizedBox(
-          height: 225,
+          height: 190,
           child: ListView.separated(
             padding: const EdgeInsets.only(
               top: 12,

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -80,13 +79,10 @@ class AddToCartBottomSheet extends HookWidget {
           ),
           GestureDetector(
             onTap: () {
-              
-
               context.read<CartCubit>().addOrderToCart(orderModel: orderModel);
               context
                   .read<OrderAnimationCubit>()
                   .addOrdersToAnimationList(orderModel);
-                 
             },
             child: Container(
               margin: const EdgeInsets.symmetric(vertical: 24),
@@ -97,11 +93,11 @@ class AddToCartBottomSheet extends HookWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
-                color: AppColors.darkPrimaryColor.withOpacity(.2),
+                color: AppColors.darkPrimaryColor,
               ),
               child: const Text(
                 'Add To Cart',
-                style: TextStyles.primary24SemiBold,
+                style: TextStyles.white24SemiBold,
               ),
             ),
           ),

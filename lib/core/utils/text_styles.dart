@@ -24,6 +24,14 @@ static const black18Medium = TextStyle(
     color: AppColors.blackColor,
   );
 
+
+    static const black18Light = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w300,
+    color: AppColors.blackColor,
+  );
+
+
   static const black16SemiBold = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w600,
@@ -95,8 +103,20 @@ static const brightBlack10Regular= TextStyle(
     fontWeight: FontWeight.w600,
     color: AppColors.darkGreyColor,
   );
-static const white18SemiBold = TextStyle(
+static const white24SemiBold = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
+  );
+  static const white18SemiBold = TextStyle(
     fontSize: 18,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
+  );
+
+
+  static const white16SemiBold = TextStyle(
+    fontSize: 16,
     fontWeight: FontWeight.w600,
     color: Colors.white,
   );

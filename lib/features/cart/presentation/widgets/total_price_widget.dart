@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -17,8 +16,8 @@ class TotalPriceWidget extends StatelessWidget {
       padding: const EdgeInsets.only(
         top: 16,
         bottom: 24,
-        right: 12,
-        left: 12,
+        right: 16,
+        left: 16,
       ),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -82,16 +81,16 @@ class TotalPriceWidget extends StatelessWidget {
               ),
             ],
           ),
-          const Gap(16),
+          const Gap(18),
           Divider(
             color: const Color(0xffB7B7B7).withOpacity(.5),
           ),
-          const Gap(16),
+          const Gap(18),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'Total',
+                'Total',  
                 style: TextStyles.black16SemiBold,
               ),
               RichText(
@@ -102,7 +101,7 @@ class TotalPriceWidget extends StatelessWidget {
                   children: const [
                     TextSpan(
                       text: ' SAR',
-                      style: TextStyles.darkPrimary16Medium,
+                      style: TextStyles.black16SemiBold,
                     ),
                   ],
                 ),

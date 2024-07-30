@@ -68,13 +68,13 @@ class SelectedSizeListItem extends StatelessWidget {
           ),
           child: Text(
             title,
-            style: TextStyles.white16Medium,
+            style: TextStyles.white16SemiBold,
           ),
         ),
         const Gap(10),
         const Text(
           '60.00 EL',
-          style: TextStyles.black16Medium,
+          style: TextStyles.black16SemiBold,
         ),
       ],
     );
@@ -112,7 +112,7 @@ class UnSelectedSizeListItem extends StatelessWidget {
           ),
           child: Text(
             title,
-            style: TextStyles.black16Medium,
+            style: TextStyles.black16SemiBold,
           ),
         ),
         const Gap(10),

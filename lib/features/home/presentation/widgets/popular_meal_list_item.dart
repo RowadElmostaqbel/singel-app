@@ -25,7 +25,7 @@ class PopularMealListItem extends StatelessWidget {
             ),
         child: Container(
           clipBehavior: Clip.antiAlias,
-          width: context.width * .6,
+          width: context.width * .55,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(18),
@@ -102,7 +102,7 @@ class PopularMealListItem extends StatelessWidget {
                       //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
@@ -113,9 +113,9 @@ class PopularMealListItem extends StatelessWidget {
                               children: [
                                 const Text(
                                   '75',
-                                  style: TextStyles.primary18SemiBold,
+                                  style: TextStyles.black18SemiBold,
                                 ),
-                                const Gap(6),
+                                const Gap(2),
                                 Text(
                                   'SAR',
                                   style: TextStyles.primary14Regular
@@ -124,25 +124,25 @@ class PopularMealListItem extends StatelessWidget {
                                 const Gap(6),
                               ],
                             ),
-                            Row(
-                              children: [
-                                SizedBox(
-                                  height: 20,
-                                  width: 20,
-                                  child: Image.asset(
-                                    Assets.assetsIconsDeliveryIc,
-                                    color: AppColors.primaryColor,
-                                  ),
-                                ),
-                                const Gap(6),
-                                Text(
-                                  'Fast delivery',
-                                  style: TextStyles.darkGrey14Regular.copyWith(
-                                    fontSize: 16,
-                                  ),
-                                )
-                              ],
-                            ),
+                            // Row(
+                            //   children: [
+                            //     SizedBox(
+                            //       height: 20,
+                            //       width: 20,
+                            //       child: Image.asset(
+                            //         Assets.assetsIconsDeliveryIc,
+                            //         color: AppColors.primaryColor,
+                            //       ),
+                            //     ),
+                            //     const Gap(6),
+                            //     Text(
+                            //       'Fast delivery',
+                            //       style: TextStyles.darkGrey14Regular.copyWith(
+                            //         fontSize: 16,
+                            //       ),
+                            //     )
+                            //   ],
+                            // ),
                           ],
                         ),
                         Expanded(
