@@ -8,9 +8,9 @@ import 'package:single_resturant_app/features/home/presentation/widgets/add_to_f
 import '../../../../core/utils/assets.dart';
 import '../../../orders/presentation/views/make_order_view.dart';
 
-class PopularMealListItem extends StatelessWidget {
+class ResultItem extends StatelessWidget {
   final int index;
-  const PopularMealListItem({
+  const ResultItem({
     super.key,
     required this.index,
   });
@@ -19,13 +19,14 @@ class PopularMealListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () => context.navigateTo(
-              MakeOrderView(
-                heroTag: 'popularDishListItem$index',
-              ),
-            ),
+          MakeOrderView(
+            heroTag: 'popularDishListItem$index',
+          ),
+        ),
         child: Container(
           clipBehavior: Clip.antiAlias,
-          width: context.width * .6,
+          height: context.height*0.23,
+          width: context.width * .43,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(18),
@@ -102,7 +103,7 @@ class PopularMealListItem extends StatelessWidget {
                       //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
@@ -113,9 +114,9 @@ class PopularMealListItem extends StatelessWidget {
                               children: [
                                 const Text(
                                   '75',
-                                  style: TextStyles.primary18SemiBold,
+                                  style: TextStyles.black18SemiBold,
                                 ),
-                                const Gap(6),
+                                const Gap(2),
                                 Text(
                                   'SAR',
                                   style: TextStyles.primary14Regular
@@ -124,25 +125,25 @@ class PopularMealListItem extends StatelessWidget {
                                 const Gap(6),
                               ],
                             ),
-                            Row(
-                              children: [
-                                SizedBox(
-                                  height: 20,
-                                  width: 20,
-                                  child: Image.asset(
-                                    Assets.assetsIconsDeliveryIc,
-                                    color: AppColors.primaryColor,
-                                  ),
-                                ),
-                                const Gap(6),
-                                Text(
-                                  'Fast delivery',
-                                  style: TextStyles.darkGrey14Regular.copyWith(
-                                    fontSize: 16,
-                                  ),
-                                )
-                              ],
-                            ),
+                            // Row(
+                            //   children: [
+                            //     SizedBox(
+                            //       height: 20,
+                            //       width: 20,
+                            //       child: Image.asset(
+                            //         Assets.assetsIconsDeliveryIc,
+                            //         color: AppColors.primaryColor,
+                            //       ),
+                            //     ),
+                            //     const Gap(6),
+                            //     Text(
+                            //       'Fast delivery',
+                            //       style: TextStyles.darkGrey14Regular.copyWith(
+                            //         fontSize: 16,
+                            //       ),
+                            //     )
+                            //   ],
+                            // ),
                           ],
                         ),
                         Expanded(
@@ -158,7 +159,7 @@ class PopularMealListItem extends StatelessWidget {
                                 shape: BoxShape.circle,
                               ),
                               child:
-                                  Image.asset(Assets.assetsIconsAddToCartIcon),
+                              Image.asset(Assets.assetsIconsAddToCartIcon),
                             ),
                           ),
                         ),
