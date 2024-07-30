@@ -245,6 +245,10 @@ class Assets {
   /// assets/icons/profile/theme.png
   static const String assetsIconsProfileTheme = "assets/icons/profile/theme.png";
 
+  /// Assets for assetsIconsQrIc
+  /// assets/icons/qr_ic.png
+  static const String assetsIconsQrIc = "assets/icons/qr_ic.png";
+
   /// Assets for assetsIconsSearch
   /// assets/icons/search.png
   static const String assetsIconsSearch = "assets/icons/search.png";
@@ -329,6 +333,10 @@ class Assets {
   /// assets/images/cheese.png
   static const String assetsImagesCheese = "assets/images/cheese.png";
 
+  /// Assets for assetsImagesChickenBurger
+  /// assets/images/chicken_burger.png
+  static const String assetsImagesChickenBurger = "assets/images/chicken_burger.png";
+
   /// Assets for assetsImagesDialogDecoration
   /// assets/images/dialog_decoration.png
   static const String assetsImagesDialogDecoration = "assets/images/dialog_decoration.png";
@@ -336,6 +344,10 @@ class Assets {
   /// Assets for assetsImagesDish
   /// assets/images/dish.png
   static const String assetsImagesDish = "assets/images/dish.png";
+
+  /// Assets for assetsImagesEmpty
+  /// assets/images/empty.png
+  static const String assetsImagesEmpty = "assets/images/empty.png";
 
   /// Assets for assetsImagesEmptyCart
   /// assets/images/empty_cart.png
@@ -364,6 +376,10 @@ class Assets {
   /// Assets for assetsImagesMashroom
   /// assets/images/mashroom.png
   static const String assetsImagesMashroom = "assets/images/mashroom.png";
+
+  /// Assets for assetsImagesMastercard
+  /// assets/images/mastercard.png
+  static const String assetsImagesMastercard = "assets/images/mastercard.png";
 
   /// Assets for assetsImagesMilkshake
   /// assets/images/milkshake.png

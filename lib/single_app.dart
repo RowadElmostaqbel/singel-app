@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:single_resturant_app/core/utils/app_colors.dart';
+import 'package:single_resturant_app/core/utils/service_locator.dart';
 import 'package:single_resturant_app/features/checkout/presentation/views/checkout_view.dart';
+import 'package:single_resturant_app/features/meal/data/repos/categories_repo.dart';
+import 'package:single_resturant_app/features/meal/presentation/controllers/categories_cubit.dart';
 import 'package:single_resturant_app/features/on_boarding/presentation/views/on_boarding_view.dart';
 
 import 'features/cart/presentation/controllers/cubit/cart_cubit.dart';
@@ -23,6 +26,11 @@ class SingleApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => CartCubit(),
+        ),
+        BlocProvider(
+          create: (context) => CategoriesCubit(
+            ServiceLocatorHelper.getIt.get<CategoriesRepo>(),
+          ),
         ),
       ],
       child: MaterialApp(

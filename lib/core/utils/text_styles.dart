@@ -35,6 +35,12 @@ static const black18Medium = TextStyle(
     color: AppColors.blackColor,
   );
 
+static const black20SemiBold = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
+    color: AppColors.blackColor,
+  );
+
    static const black14Regular = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
