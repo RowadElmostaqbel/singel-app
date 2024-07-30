@@ -11,7 +11,7 @@ class AuthRepo {
       {
       required RegisterDataModel registerData}) async {
     final data = await apiService.postFormData(
-      endpoint: 'client/auth/login',
+      endpoint: 'client/auth/register',
       data: registerData.toJson(),
     );
     return data['status'];

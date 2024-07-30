@@ -75,17 +75,26 @@ class _SignUpViewState extends State<SignUpView> {
                         title: 'Sign Up',
                       ),
                       CustomPhotoContainer(
-                          mainImage:_image == null?
-                      Image.asset("assets/images/person.png"):Image.file(_image!),
-                          onPressedGallery: () async {
-                            var image = await picker.pickImage(
-                                source: ImageSource.gallery);
-                            _image = File(image!.path);
-                          }, onPressedCamera: () async {
-                        var image = await picker.pickImage(
-                            source: ImageSource.camera);
-                        _image = File(image!.path);
-                      },),
+                        mainImage: _image == null
+                            ? Image.asset("assets/images/person.png")
+                            : Image.file(_image!),
+                        onPressedGallery: () async {
+                          var image = await picker.pickImage(
+                              source: ImageSource.gallery);
+                          _image = File(image!.path);
+                          BlocProvider.of<UserCubit>(context).uploadImage(_image!);
+                          // await BlocProvider.of<UserCubit>(context)
+                          //     .addImage(_image!);
+                        },
+                        onPressedCamera: () async {
+                          var image = await picker.pickImage(
+                              source: ImageSource.camera);
+                          _image = File(image!.path);
+                          BlocProvider.of<UserCubit>(context).uploadImage(_image!);
+                          // await BlocProvider.of<UserCubit>(context)
+                          //     .addImage(_image!);
+                        },
+                      ),
                       CustomTextFormField(
                         label: 'User Name',
                         hintText: 'Enter Your Name',
@@ -124,8 +133,8 @@ class _SignUpViewState extends State<SignUpView> {
                         icon: 'assets/icons/phone.png',
                         keyboardType: TextInputType.phone,
                         onChanged: (String phone) {
-                          BlocProvider.of<UserCubit>(context).addPhoneNumber(
-                              phone);
+                          BlocProvider.of<UserCubit>(context)
+                              .addPhoneNumber(phone);
                         },
                       ),
                       CustomTextFormField(
@@ -139,8 +148,8 @@ class _SignUpViewState extends State<SignUpView> {
                         icon: 'assets/icons/lock.png',
                         keyboardType: TextInputType.name,
                         onChanged: (String password) {
-                          BlocProvider.of<UserCubit>(context).addPassword(
-                              password);
+                          BlocProvider.of<UserCubit>(context)
+                              .addPassword(password);
                         },
                       ),
                       CustomTextFormField(
@@ -164,7 +173,6 @@ class _SignUpViewState extends State<SignUpView> {
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             BlocProvider.of<UserCubit>(context).register();
-
                             //context.navigateTo(const BottomNavView());
                           }
                         },

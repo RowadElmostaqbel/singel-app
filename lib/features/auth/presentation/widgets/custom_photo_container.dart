@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class CustomPhotoContainer extends StatelessWidget {
   const CustomPhotoContainer(

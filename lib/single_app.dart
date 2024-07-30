@@ -5,12 +5,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:single_resturant_app/core/utils/api_services.dart';
 import 'package:single_resturant_app/core/utils/app_colors.dart';
 import 'package:single_resturant_app/features/auth/data/repo/auth_repo.dart';
+import 'package:single_resturant_app/features/auth/data/repo/login_repo.dart';
 import 'package:single_resturant_app/features/on_boarding/presentation/views/on_boarding_view.dart';
 
+import 'features/auth/presentation/manager/login_cubit.dart';
 import 'features/auth/presentation/manager/user_cubit.dart';
 import 'features/cart/presentation/controllers/cubit/cart_cubit.dart';
 import 'features/orders/presentation/controllers/order_animation/cubit/order_animation_cubit.dart';
-
 
 class SingleApp extends StatelessWidget {
   const SingleApp({super.key});
@@ -18,13 +19,19 @@ class SingleApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [ 
-         BlocProvider(
+      providers: [
+        BlocProvider(
           create: (context) => OrderAnimationCubit(),
-        ),BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => UserCubit(
-            AuthRepo(ApiService(),),
+            AuthRepo(
+              ApiService(),
+            ),
           ),
+        ),
+        BlocProvider(
+          create: (context) => LoginCubit(LoginRepo(ApiService())),
         ),
         BlocProvider(
           create: (context) => CartCubit(),
