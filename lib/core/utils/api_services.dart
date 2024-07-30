@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 
 class ApiService {
   final _baseUrl = 'https://deliback.rowaduae.com/api/';
-  final _baseUrl = 'https://deliback.rowaduae.com/api/';
   late Dio dio;
    String token='';
   ApiService() {
@@ -13,7 +12,7 @@ class ApiService {
         headers: {
           "CLIENT-TYPE": 'web',
           "Accept": "application/json",
-          'restaurant_id':24,
+          'restaurant_id':'24',
         },
       ),
     );
