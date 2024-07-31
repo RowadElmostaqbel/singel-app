@@ -385,6 +385,10 @@ class Assets {
   /// assets/images/milkshake.png
   static const String assetsImagesMilkshake = "assets/images/milkshake.png";
 
+  /// Assets for assetsImagesNotificationImg
+  /// assets/images/notification_img.png
+  static const String assetsImagesNotificationImg = "assets/images/notification_img.png";
+
   /// Assets for assetsImagesNuggets
   /// assets/images/nuggets.png
   static const String assetsImagesNuggets = "assets/images/nuggets.png";

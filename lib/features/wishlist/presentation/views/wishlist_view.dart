@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
-import 'package:single_resturant_app/features/orders/presentation/views/orders_history_view.dart';
 import '../../../../core/utils/assets.dart';
 import '../../../../core/utils/text_styles.dart';
 import '../../../../core/widgets/custom_app_bar.dart';
-import '../../../home/presentation/views/category_view.dart';
-import 'active_order_view.dart';
+import '../widgets/wish_choice_list.dart';
+import '../widgets/wish_item.dart';
 
-class MyOrdersView extends HookWidget {
-  const MyOrdersView({super.key});
+class WishListView extends StatefulWidget {
+  const WishListView({super.key});
 
   @override
+  State<WishListView> createState() => _WishListViewState();
+}
+
+class _WishListViewState extends State<WishListView> {
+  @override
   Widget build(BuildContext context) {
-    final PageController pageController = usePageController(initialPage: 0);
     return Scaffold(
       bottomSheet: Container(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
@@ -28,30 +28,17 @@ class MyOrdersView extends HookWidget {
             topRight: Radius.circular(50),
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomTabBar(
-              pageController,
-              titles: const [
-                'Active',
-                'History',
-                'Canceled',
-              ],
-            ),
-            const Gap(14),
-            Expanded(
-              child: PageView(
-                physics: const NeverScrollableScrollPhysics(),
-                controller: pageController,
-                children: const [
-                  ActiveOrdersView(),
-                  OrdersHistoryView(),
-                  OrdersHistoryView(),
-                ],
-              ),
-            )
-          ],
+        child: GridView.builder(
+          padding: const EdgeInsets.all(8),
+          itemBuilder: (context, index) => WishItem(
+            index: index,
+          ),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            childAspectRatio: .8,
+            crossAxisCount: 2,
+            crossAxisSpacing: 25,
+            mainAxisSpacing: 20,
+          ),
         ),
       ),
       body: SizedBox(
@@ -77,7 +64,7 @@ class MyOrdersView extends HookWidget {
                   vertical: 12,
                 ),
                 child: CustomAppBar(
-                  title: 'My Orders',
+                  title: 'Wishlist',
                   style: TextStyles.white18SemiBold,
                 ),
               ),

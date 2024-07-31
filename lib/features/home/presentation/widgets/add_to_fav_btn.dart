@@ -14,15 +14,15 @@ class AddToFavBtn extends HookWidget {
       onTap: () => isFavorite.value = !isFavorite.value,
       child: Container(
         margin: const EdgeInsets.only(right: 10, top: 10),
-        height: 40,
-        width: 40,
+        height: 35,
+        width: 35,
         decoration: BoxDecoration(
           color: const Color(0xff898989).withOpacity(.24),
           shape: BoxShape.circle,
         ),
         child: Icon(
           Icons.favorite_rounded,
-          size: 25,
+          size: 20,
           color: isFavorite.value ? AppColors.primaryColor : Colors.white,
         ),
       ),

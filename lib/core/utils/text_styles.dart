@@ -49,6 +49,12 @@ static const black20SemiBold = TextStyle(
     color: AppColors.blackColor,
   );
 
+ static const black16Regular = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    color: AppColors.blackColor,
+  );
+
    static const black14Regular = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,

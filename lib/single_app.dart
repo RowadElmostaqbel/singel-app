@@ -9,6 +9,7 @@ import 'package:single_resturant_app/features/auth/data/repo/auth_repo.dart';
 import 'package:single_resturant_app/features/auth/data/repo/login_repo.dart';
 import 'package:single_resturant_app/features/meal/data/repos/categories_repo.dart';
 import 'package:single_resturant_app/features/meal/presentation/controllers/categories_cubit.dart';
+import 'package:single_resturant_app/features/my_address/presentation/manager/address_cubit.dart';
 import 'package:single_resturant_app/features/on_boarding/presentation/views/on_boarding_view.dart';
 
 import 'features/auth/presentation/manager/login_cubit.dart';
@@ -38,6 +39,9 @@ class SingleApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => CartCubit(),
+        ),
+          BlocProvider(
+          create: (context) => AddressCubit(),
         ),
         BlocProvider(
           create: (context) => CategoriesCubit(
