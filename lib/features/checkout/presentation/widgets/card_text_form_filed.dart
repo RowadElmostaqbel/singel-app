@@ -29,7 +29,7 @@ class CardTextFormFiled extends StatelessWidget {
     return Padding(
       padding: isHaveSize
           ? EdgeInsets.zero
-          : const EdgeInsets.only(left: 24, right: 24, top: 8),
+          : const EdgeInsets.only(left: 24, right: 24, top: 16),
       child: SizedBox(
         height: 78,
         child: Stack(
@@ -66,7 +66,7 @@ class CardTextFormFiled extends StatelessWidget {
               controller: controller,
             ),
             Align(
-              alignment: const Alignment(-0.9, -1.4),
+              alignment: const Alignment(-1, -1.8),
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6),
                 color: Colors.white,

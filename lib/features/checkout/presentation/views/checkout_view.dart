@@ -4,7 +4,7 @@ import 'package:single_resturant_app/features/checkout/presentation/widgets/rese
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/text_styles.dart';
 import '../../../../core/widgets/custom_navigator_button.dart';
-import '../widgets/add_new_address_dialog.dart';
+import '../../../../core/widgets/add_new_address_dialog.dart';
 import '../widgets/custom_price_container.dart';
 import '../widgets/custom_address_container.dart';
 import '../widgets/custom_coupon_row.dart';

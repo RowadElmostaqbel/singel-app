@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/text_styles.dart';
-import 'card_text_form_filed.dart';
+import '../../features/checkout/presentation/widgets/card_text_form_filed.dart';
+
 
 class AddNewAddressDialog extends StatefulWidget {
   const AddNewAddressDialog({super.key});
@@ -26,7 +26,7 @@ class _AddNewAddressDialogState extends State<AddNewAddressDialog> {
       content: ClipRRect(
         borderRadius: BorderRadius.circular(28),
         child: SizedBox(
-          height: context.height * 0.5,
+          height: context.height * 0.76,
           child: Column(
             children: [
               Container(
@@ -72,20 +72,47 @@ class _AddNewAddressDialogState extends State<AddNewAddressDialog> {
                 validator: (value) {
                   return null;
                 },
-                hintText: "El Mansoura-25 srteet",
+                hintText: "El Mansoura-25 street",
                 controller: contactTitle,
                 label: "Contact Title",
                 onChanged: (String) {},
                 inputFormatters: [],
               ),
+              Stack(
+                children: [
+                  CardTextFormFiled(
+                    keyboardType: TextInputType.phone,
+                    validator: (value) {
+                      return null;
+                    },
+                    hintText: "0123456789",
+                    controller: phoneNumber,
+                    label: "Phone Number",
+                    onChanged: (String) {},
+                    inputFormatters: [],
+                  ),
+                  Positioned(
+                    right: 24,
+                    bottom: 23,
+                    child: Container(
+                      height: 54,
+                      width: 54,
+                      decoration: BoxDecoration(
+                          color: AppColors.primaryColor,
+                          borderRadius: BorderRadius.circular(12)),
+                      child: Image.asset("assets/icons/white_add.png"),
+                    ),
+                  )
+                ],
+              ),
               CardTextFormFiled(
-                keyboardType: TextInputType.phone,
+                keyboardType: TextInputType.text,
                 validator: (value) {
                   return null;
                 },
-                hintText: "0123456789",
-                controller: phoneNumber,
-                label: "Phone Number",
+                hintText: "Mansoura",
+                controller: addressLocation,
+                label: "City ",
                 onChanged: (String) {},
                 inputFormatters: [],
               ),
@@ -100,8 +127,9 @@ class _AddNewAddressDialogState extends State<AddNewAddressDialog> {
                 onChanged: (String) {},
                 inputFormatters: [],
               ),
+              Image.asset("assets/images/map_location.png"),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+                padding: const EdgeInsets.only(right: 24 , left: 24 , top: 12),
                 child: Row(
                   children: [
                     InkWell(
@@ -146,7 +174,7 @@ class _AddNewAddressDialogState extends State<AddNewAddressDialog> {
                 ),
               ),
               const SizedBox(
-                height: 16,
+                height: 24,
               ),
               SizedBox(
                 height: 56,
