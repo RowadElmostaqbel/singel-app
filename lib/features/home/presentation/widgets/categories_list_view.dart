@@ -71,7 +71,7 @@ class CategoriesListView extends HookWidget {
             child: CircularProgressIndicator(),
           );
         }
-        return const SizedBox();
+        return Image.asset(Assets.assetsImagesEmpty);
       },
     );
   }

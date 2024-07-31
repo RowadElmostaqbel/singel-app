@@ -8,6 +8,7 @@ import 'package:single_resturant_app/features/home/presentation/widgets/custom_s
 import '../../../../core/utils/app_colors.dart';
 import '../../../home/presentation/widgets/categories_list_view.dart';
 import '../../../home/presentation/widgets/popular_meal_list_item.dart';
+import '../widgets/meals_by_sub_category_grid_view.dart';
 import '../widgets/sub_category_list_view.dart';
 
 class CategorizeMealsView extends StatelessWidget {
@@ -88,26 +89,7 @@ class CategorizeMealsView extends StatelessWidget {
                       child: SubCategoryListView(),
                     ),
                     const Gap(20),
-                    GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      padding: const EdgeInsets.only(
-                        top: 12,
-                        right: 12,
-                        left: 12,
-                        bottom: 60,
-                      ),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        childAspectRatio: context.height * 0.001,
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 20,
-                      ),
-                      itemBuilder: (context, index) => PopularMealListItem(
-                        index: index,
-                      ),
-                      itemCount: 9,
-                    ),
+                    MealsBySubCategoryGridView(),
                   ],
                 ),
               ),
@@ -118,3 +100,4 @@ class CategorizeMealsView extends StatelessWidget {
     );
   }
 }
+

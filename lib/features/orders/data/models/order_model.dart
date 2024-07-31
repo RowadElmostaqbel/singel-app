@@ -1,14 +1,15 @@
 
-import '../../../meal/data/models/meal_model.dart';
+import 'package:single_resturant_app/features/meal/data/models/category_meal_item.dart';
+
 
 class OrderModel {
-  final MealModel meal;
+  final CategoryMealItem meal;
   final int quantity;
 
   OrderModel({required this.meal, required this.quantity});
 
   OrderModel copyWith({
-    MealModel? meal,
+    CategoryMealItem? meal,
     int? quantity,
   }) =>
       OrderModel(

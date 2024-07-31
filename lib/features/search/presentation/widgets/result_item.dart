@@ -4,6 +4,7 @@ import 'package:single_resturant_app/core/utils/app_colors.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/core/utils/text_styles.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/add_to_fav_btn.dart';
+import 'package:single_resturant_app/features/meal/data/models/category_meal_item.dart';
 
 import '../../../../core/utils/assets.dart';
 import '../../../orders/presentation/views/make_order_view.dart';
@@ -19,13 +20,22 @@ class ResultItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () => context.navigateTo(
-          MakeOrderView(
-            heroTag: 'popularDishListItem$index',
-          ),
-        ),
+              MakeOrderView(
+                heroTag: 'popularDishListItem$index',
+                categoryMealItem: CategoryMealItem(
+                  id: 1,
+                  subCategoryId: 1,
+                  restaurantId: 1,
+                  isActive: true,
+                  name: 'name',
+                  desc: 'desc',
+                  img: '',
+                ),
+              ),
+            ),
         child: Container(
           clipBehavior: Clip.antiAlias,
-          height: context.height*0.23,
+          height: context.height * 0.23,
           width: context.width * .43,
           decoration: BoxDecoration(
             color: Colors.white,
@@ -159,7 +169,7 @@ class ResultItem extends StatelessWidget {
                                 shape: BoxShape.circle,
                               ),
                               child:
-                              Image.asset(Assets.assetsIconsAddToCartIcon),
+                                  Image.asset(Assets.assetsIconsAddToCartIcon),
                             ),
                           ),
                         ),

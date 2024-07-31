@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 
 import 'package:meta/meta.dart';
+import 'package:single_resturant_app/features/meal/data/models/category_meal_item.dart';
 
 import '../../../../meal/data/models/meal_model.dart';
 import '../../../../orders/data/models/order_model.dart';
@@ -9,10 +10,16 @@ import '../../../data/models/cart_model.dart';
 part 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
-  CartModel? cartModel;
+ late CartModel cartModel;
 
   OrderModel? orderModel;
-  CartCubit() : super(CartInitial());
+  CartCubit() : super(CartInitial()){
+cartModel = CartModel(
+      orders: [],
+      isCouponApplied: false,
+      couponCode: '',
+    );
+  }
 
   void updateCartModel(CartModel cartModel) {
     this.cartModel = cartModel;
@@ -24,16 +31,13 @@ class CartCubit extends Cubit<CartState> {
   }
 
   addOrderToCart({required OrderModel orderModel}) {
-    cartModel ??= CartModel(
-      orders: [orderModel],
-      isCouponApplied: false,
-      couponCode: '',
-    );
 
-    cartModel = cartModel!.copyWith(orders: [...cartModel!.orders, orderModel]);
+    
+
+    cartModel = cartModel.copyWith(orders: [...cartModel.orders, orderModel]);
     emit(
       CartItemChangedState(
-        cartModel: cartModel!,
+        cartModel: cartModel,
       ),
     );
   }
@@ -43,9 +47,12 @@ class CartCubit extends Cubit<CartState> {
       this.orderModel = orderModel;
     }
     if (sides != null) {
-      MealModel mealModel = this.orderModel!.meal;
-      this.orderModel =
-          this.orderModel!.copyWith(meal: mealModel.copyWith(sides: sides));
+      // CategoryMealItem mealModel = this.orderModel!.meal;
+      // this.orderModel = this.orderModel!.copyWith(
+      //       meal: mealModel.copyWith(
+      //         sides: sides,
+      //       ),
+      //     );
     }
     emit(
       OrderDetailsChangedState(

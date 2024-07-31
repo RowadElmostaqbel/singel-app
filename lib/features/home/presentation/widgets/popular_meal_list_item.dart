@@ -4,15 +4,16 @@ import 'package:single_resturant_app/core/utils/app_colors.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/core/utils/text_styles.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/add_to_fav_btn.dart';
+import 'package:single_resturant_app/features/meal/data/models/category_meal_item.dart';
 
 import '../../../../core/utils/assets.dart';
 import '../../../orders/presentation/views/make_order_view.dart';
 
 class PopularMealListItem extends StatelessWidget {
-  final int index;
+  final CategoryMealItem categoryMealItem;
   const PopularMealListItem({
     super.key,
-    required this.index,
+    required this.categoryMealItem,
   });
 
   @override
@@ -20,7 +21,8 @@ class PopularMealListItem extends StatelessWidget {
     return GestureDetector(
         onTap: () => context.navigateTo(
               MakeOrderView(
-                heroTag: 'popularDishListItem$index',
+                heroTag: categoryMealItem.id.toString(),
+                categoryMealItem: categoryMealItem,
               ),
             ),
         child: Container(
@@ -47,16 +49,16 @@ class PopularMealListItem extends StatelessWidget {
                     clipBehavior: Clip.antiAlias,
                     height: constraints.maxHeight * .6,
                     width: constraints.maxWidth,
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(18),
                         topRight: Radius.circular(18),
                       ),
                       image: DecorationImage(
-                        image: AssetImage(
-                          Assets.assetsImagesSteak,
+                        image: NetworkImage(
+                          categoryMealItem.img ?? '',
                         ),
-                        fit: BoxFit.fill,
+                        fit: BoxFit.fitWidth,
                       ),
                     ),
                     child: Row(
@@ -105,14 +107,14 @@ class PopularMealListItem extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'Burger King',
+                            Text(
+                              categoryMealItem.name ?? '',
                               style: TextStyles.darkGrey16SemiBold,
                             ),
                             Row(
                               children: [
-                                const Text(
-                                  '75',
+                                Text(
+                                  categoryMealItem.price.toString(),
                                   style: TextStyles.black18SemiBold,
                                 ),
                                 const Gap(2),

@@ -9,7 +9,6 @@ class CategoryModel {
   final String? desc;
   final String? img;
 
-  final List<CategoryMealItem> items;
 
   CategoryModel({
     required this.id,
@@ -19,7 +18,6 @@ class CategoryModel {
     required this.name,
     required this.desc,
     required this.img,
-    required this.items,
   });
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) {
@@ -33,11 +31,7 @@ class CategoryModel {
       img: json['image']
           .toString()
           .replaceFirst('https://deliback.rowaduae.com/storage/', ''),
-      items: (json['items'] != null && json['items'].isNotEmpty)
-          ? (json['items'] as List)
-              .map((item) => CategoryMealItem.fromJson(item))
-              .toList()
-          : [],
+     
     );
   }
 }

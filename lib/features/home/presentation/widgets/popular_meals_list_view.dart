@@ -4,6 +4,7 @@ import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/core/utils/text_styles.dart';
 import 'package:single_resturant_app/features/home/presentation/views/all_popular_meals_view.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/popular_meal_list_item.dart';
+import 'package:single_resturant_app/features/meal/data/models/category_meal_item.dart';
 
 class PopularMealsListView extends StatelessWidget {
   const PopularMealsListView({
@@ -43,7 +44,15 @@ class PopularMealsListView extends StatelessWidget {
               left: 4,
             ),
             itemBuilder: (context, index) => PopularMealListItem(
-              index: index,
+              categoryMealItem: CategoryMealItem(
+                id: 1,
+                subCategoryId: 1,
+                restaurantId: 1,
+                isActive: true,
+                name: 'name',
+                desc: 'desc',
+                img: '',
+              ),
             ),
             scrollDirection: Axis.horizontal,
             separatorBuilder: (context, index) => const Gap(16),

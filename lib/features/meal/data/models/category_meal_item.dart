@@ -32,7 +32,7 @@ class CategoryMealItem {
       name: json['name'],
       desc: json['description'],
       img: json['image'].toString().replaceAll(
-          'https://deliback.rowaduae.com/storage/https://images.app.goo.gl/ZUg15YFWTPmd8oRd7',
+          'https://deliback.rowaduae.com/storage/',
           ''),
       price: json['price'],
       preparationTime: json['preparation_time'],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:single_resturant_app/core/widgets/cached_network_image_widget.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/text_styles.dart';
@@ -32,7 +33,9 @@ class CartItem extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Image.asset(orderModel.meal.img),
+            child: CachedNetworkImageWidget(
+              url: orderModel.meal.img ?? '',
+            ),
           ),
           const Gap(8),
           Expanded(
@@ -41,11 +44,11 @@ class CartItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  orderModel.meal.name,
+                  orderModel.meal.name ?? '',
                   style: TextStyles.black16SemiBold,
                 ),
                 Text(
-                  orderModel.meal.desc,
+                  orderModel.meal.details ?? '',
                   style: TextStyles.grey14Regular,
                 ),
                 RichText(

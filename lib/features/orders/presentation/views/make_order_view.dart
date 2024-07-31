@@ -6,6 +6,8 @@ import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/utils/app_colors.dart';
 import 'package:single_resturant_app/core/utils/assets.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
+import 'package:single_resturant_app/core/widgets/cached_network_image_widget.dart';
+import 'package:single_resturant_app/features/meal/data/models/category_meal_item.dart';
 import 'package:single_resturant_app/features/orders/data/models/order_model.dart';
 
 import '../../../../core/utils/text_styles.dart';
@@ -24,48 +26,14 @@ import '../widgets/meal_size_list_view.dart';
 import '../widgets/nutrition_facts_list_view.dart';
 
 class MakeOrderView extends HookWidget {
-  static MealModel mealModel = MealModel(
-    name: 'Beef Burger',
-    desc: 'Classic Beef Burger',
-    img: Assets.assetsImagesBurgerjfif,
-    price: 50,
-    addOns: [
-      AddOnsModel(name: 'Mushroom', img: Assets.assetsImagesMashroom),
-      AddOnsModel(name: 'Tomatoes', img: Assets.assetsImagesTomato),
-      AddOnsModel(name: 'Olives', img: Assets.assetsImagesOlives),
-    ],
-    sides: [
-      const SideItemModel(
-        name: 'Fries',
-        desc: '',
-        img: Assets.assetsImagesFries,
-        price: 15,
-      ),
-      const SideItemModel(
-        name: 'Onion Rings',
-        desc: '',
-        img: Assets.assetsImagesOnionRings,
-        price: 15,
-      ),
-      const SideItemModel(
-        name: 'Nuggets',
-        desc: '',
-        img: Assets.assetsImagesNuggets,
-        price: 15,
-      ),
-    ],
-    ingredients: [
-      IngredientsModel(name: 'Mushroom', img: Assets.assetsImagesMashroom),
-      IngredientsModel(name: 'Tomatoes', img: Assets.assetsImagesTomato),
-      IngredientsModel(name: 'Olives', img: Assets.assetsImagesOlives),
-    ],
-  );
+  final CategoryMealItem categoryMealItem;
 
   final String heroTag;
 
   const MakeOrderView({
     super.key,
     required this.heroTag,
+    required this.categoryMealItem,
   });
 
   @override
@@ -73,19 +41,20 @@ class MakeOrderView extends HookWidget {
     final ScrollController scrollController = useScrollController();
 
     useEffect(() {
-      Future.delayed(Duration.zero, () {
-        context.read<CartCubit>().changeOrderDetails(
-            orderModel: OrderModel(
-              meal: mealModel,
-              quantity: 1,
-            ),
-            sides: null);
-      });
+      // Future.delayed(Duration.zero, () {
+      //   context.read<CartCubit>().changeOrderDetails(
+      //         orderModel: OrderModel(
+      //           meal: categoryMealItem,
+      //           quantity: 1,
+      //         ),
+      //         sides: null,
+      //       );
+      // });
       return null;
     }, []);
     return Scaffold(
       bottomSheet: AddToCartBottomSheet(
-        orderModel: OrderModel(meal: mealModel, quantity: 1),
+        orderModel: OrderModel(meal: categoryMealItem, quantity: 1),
       ),
       body: NestedScrollView(
         controller: scrollController,
@@ -101,9 +70,8 @@ class MakeOrderView extends HookWidget {
                   tag: heroTag,
                   child: SizedBox(
                     width: context.width,
-                    child: Image.asset(
-                      Assets.assetsImagesBurgerjfif,
-                      fit: BoxFit.fill,
+                    child: CachedNetworkImageWidget(
+                      url: categoryMealItem.img ?? '',
                     ),
                   ),
                 ),
@@ -174,7 +142,7 @@ class MakeOrderView extends HookWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              mealModel.name,
+                              categoryMealItem.name ?? '',
                               style: TextStyles.black24SemiBold,
                             ),
                             const Text(
@@ -185,10 +153,10 @@ class MakeOrderView extends HookWidget {
                         ),
                         const Gap(16),
                         RichText(
-                          text: const TextSpan(
-                            text: '95.00',
+                          text: TextSpan(
+                            text: categoryMealItem.price.toString(),
                             style: TextStyles.black24SemiBold,
-                            children: [
+                            children: const [
                               TextSpan(
                                 text: ' SAR',
                                 style: TextStyles.primary14Regular,
@@ -210,8 +178,8 @@ class MakeOrderView extends HookWidget {
                           ),
                         ),
                         const Gap(16),
-                        const Text(
-                          'A popular spice and vegetables mixed favoured rice dish which  is typically prepared',
+                        Text(
+                          categoryMealItem.details ?? '',
                           style: TextStyles.darkGrey16SemiBold,
                         ),
                         const Gap(20),
