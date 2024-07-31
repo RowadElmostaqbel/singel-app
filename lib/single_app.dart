@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:single_resturant_app/core/utils/api_services.dart';
 import 'package:single_resturant_app/core/utils/app_colors.dart';
 import 'package:single_resturant_app/core/utils/service_locator.dart';
+import 'package:single_resturant_app/features/about_us/presentation/views/about_us.dart';
 import 'package:single_resturant_app/features/auth/data/repo/auth_repo.dart';
 import 'package:single_resturant_app/features/auth/data/repo/login_repo.dart';
 import 'package:single_resturant_app/features/meal/data/repos/categories_repo.dart';
@@ -16,6 +17,7 @@ import 'features/auth/presentation/manager/login_cubit.dart';
 import 'features/auth/presentation/manager/user_cubit.dart';
 import 'features/cart/presentation/controllers/cubit/cart_cubit.dart';
 import 'features/orders/presentation/controllers/order_animation/cubit/order_animation_cubit.dart';
+import 'features/profile/presentation/views/profile_view.dart';
 
 class SingleApp extends StatelessWidget {
   const SingleApp({super.key});
@@ -66,7 +68,8 @@ class SingleApp extends StatelessWidget {
             duration: 1500,
             splash: Image.asset('assets/images/logo.png'),
             splashIconSize: 100,
-            nextScreen: const OnBoardingView(),
+            nextScreen: const ProfileView(),
+            //OnBoardingView(),
             backgroundColor: Colors.white,
           )),
     );
