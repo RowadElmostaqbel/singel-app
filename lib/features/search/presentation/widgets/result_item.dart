@@ -8,9 +8,9 @@ import 'package:single_resturant_app/features/home/presentation/widgets/add_to_f
 import '../../../../core/utils/assets.dart';
 import '../../../orders/presentation/views/make_order_view.dart';
 
-class PopularMealListItem extends StatelessWidget {
+class ResultItem extends StatelessWidget {
   final int index;
-  const PopularMealListItem({
+  const ResultItem({
     super.key,
     required this.index,
   });
@@ -19,13 +19,14 @@ class PopularMealListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () => context.navigateTo(
-              MakeOrderView(
-                heroTag: 'popularDishListItem$index',
-              ),
-            ),
+          MakeOrderView(
+            heroTag: 'popularDishListItem$index',
+          ),
+        ),
         child: Container(
           clipBehavior: Clip.antiAlias,
-          width: context.width * .55,
+          height: context.height*0.23,
+          width: context.width * .43,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(18),
@@ -158,7 +159,7 @@ class PopularMealListItem extends StatelessWidget {
                                 shape: BoxShape.circle,
                               ),
                               child:
-                                  Image.asset(Assets.assetsIconsAddToCartIcon),
+                              Image.asset(Assets.assetsIconsAddToCartIcon),
                             ),
                           ),
                         ),

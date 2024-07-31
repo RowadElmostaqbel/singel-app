@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:single_resturant_app/core/utils/app_colors.dart';
+import 'package:single_resturant_app/features/search/presentation/widgets/result_item.dart';
 
 import '../../../../core/utils/text_styles.dart';
 import '../widgets/custom_search_result_item.dart';
@@ -50,8 +51,8 @@ class _SearchResultState extends State<SearchResult> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CustomSearchResultItem(),
-            CustomSearchResultItem(),
+            ResultItem(index: 1),
+            ResultItem(index: 2),
           ],
         ),
       ),
