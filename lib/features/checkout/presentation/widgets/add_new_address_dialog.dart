@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/text_styles.dart';
+import '../../../../core/widgets/custom_navigator_button.dart';
 import 'card_text_form_filed.dart';
 
 class AddNewAddressDialog extends StatefulWidget {
@@ -25,7 +26,7 @@ class _AddNewAddressDialogState extends State<AddNewAddressDialog> {
       content: ClipRRect(
         borderRadius: BorderRadius.circular(28),
         child: SizedBox(
-          height: context.height * 0.75,
+          height: context.height * 0.77,
           child: Column(
             children: [
               Container(
@@ -175,51 +176,9 @@ class _AddNewAddressDialogState extends State<AddNewAddressDialog> {
               const SizedBox(
                 height: 24,
               ),
-              SizedBox(
-                height: 56,
-                width: 280,
-                child: Stack(
-                  children: [
-                    SizedBox(
-                      height: 56,
-                      width: MediaQuery.sizeOf(context).width,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primaryColor,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50),
-                              )),
-                          onPressed: () {},
-                          child: const Text(
-                            "Confirm",
-                            style: TextStyle(
-                              fontFamily: "Montserrat",
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white,
-                              fontSize: 20,
-                            ),
-                          )),
-                    ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 4),
-                        child: Container(
-                          height: 50,
-                          width: 50,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.arrow_forward_outlined,
-                            color: AppColors.primaryColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: CustomNavigatorButton(title: 'Confirm', onPressed: () {}, padding: 0,),
               ),
             ],
           ),
