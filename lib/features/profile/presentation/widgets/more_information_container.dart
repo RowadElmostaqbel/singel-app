@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:single_resturant_app/features/about_us/presentation/views/about_us.dart';
+import 'package:single_resturant_app/features/more_information_details/presentation/views/contact_us.dart';
+import 'package:single_resturant_app/features/more_information_details/presentation/views/privacy.dart';
+import 'package:single_resturant_app/features/more_information_details/presentation/views/terms_and_conditions.dart';
 import 'package:single_resturant_app/features/profile/presentation/widgets/language_dialog.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../checkout/presentation/widgets/custom_on_button.dart';
+import '../../../more_information_details/presentation/views/about_us.dart';
 
 class MoreInformationContainer extends StatelessWidget {
   const MoreInformationContainer({super.key});
@@ -28,9 +31,9 @@ class MoreInformationContainer extends StatelessWidget {
     ];
     List onChanged = [
       const AboutUs(),
-      const AboutUs(),
-      const AboutUs(),
-      const AboutUs(),
+      const TermsAndConditions(),
+      const ContactUs(),
+      const Privacy(),
     ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,7 +85,7 @@ class MoreInformationContainer extends StatelessWidget {
                           ? () {}
                           : () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => onChanged[index - 1]));
+                                  builder: (context) => onChanged[index-1]));
                             },
                   child: Container(
                     margin: const EdgeInsets.all(12),

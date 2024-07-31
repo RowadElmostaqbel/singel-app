@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:single_resturant_app/core/utils/api_services.dart';
 import 'package:single_resturant_app/core/utils/app_colors.dart';
 import 'package:single_resturant_app/core/utils/service_locator.dart';
-import 'package:single_resturant_app/features/about_us/presentation/views/about_us.dart';
 import 'package:single_resturant_app/features/auth/data/repo/auth_repo.dart';
 import 'package:single_resturant_app/features/auth/data/repo/login_repo.dart';
 import 'package:single_resturant_app/features/meal/data/repos/categories_repo.dart';
