@@ -5,6 +5,19 @@ sealed class CartState {}
 
 final class CartInitial extends CartState {}
 
+final class SendCartToServerLoadingState extends CartState {}
+
+final class SendCartToServerLoadedState extends CartState {
+  final bool status;
+
+  SendCartToServerLoadedState({required this.status});
+}
+
+final class SendCartToServerFailureState extends CartState {
+  final String message;
+  SendCartToServerFailureState({required this.message});
+}
+
 final class OrderDetailsChangedState extends CartState {
   final OrderModel? orderModel;
 

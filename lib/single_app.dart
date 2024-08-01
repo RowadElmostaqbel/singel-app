@@ -7,6 +7,7 @@ import 'package:single_resturant_app/core/utils/app_colors.dart';
 import 'package:single_resturant_app/core/utils/service_locator.dart';
 import 'package:single_resturant_app/features/auth/data/repo/auth_repo.dart';
 import 'package:single_resturant_app/features/auth/data/repo/login_repo.dart';
+import 'package:single_resturant_app/features/cart/data/repos/cart_repo.dart';
 import 'package:single_resturant_app/features/meal/data/repos/categories_repo.dart';
 import 'package:single_resturant_app/features/meal/presentation/controllers/categories_cubit.dart';
 import 'package:single_resturant_app/features/my_address/presentation/manager/address_cubit.dart';
@@ -38,7 +39,9 @@ class SingleApp extends StatelessWidget {
           create: (context) => LoginCubit(LoginRepo(ApiService())),
         ),
         BlocProvider(
-          create: (context) => CartCubit(),
+          create: (context) => CartCubit(
+            ServiceLocatorHelper.getIt.get<CartRepo>(),
+          ),
         ),
         BlocProvider(
           create: (context) => AddressCubit(),
