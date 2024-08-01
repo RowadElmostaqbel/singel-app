@@ -29,16 +29,25 @@ class _ContactUsState extends State<ContactUs> {
                 onTap: () {
                   Navigator.of(context).pop();
                 },
-                child: const SizedBox(
-                  height: 40,
-                  width: 40,
-                  child: Card(
-                    elevation: 4,
+                child: Container(
+                  alignment: Alignment.center,
+                  width: 35,
+                  height: 35,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
                     color: Colors.white,
-                    child: Icon(
-                      Icons.arrow_back_ios_new_outlined,
-                      color: AppColors.primaryColor,
-                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(.5),
+                        blurRadius: 10,
+                        offset: const Offset(0, 5),
+                      ),
+                    ],
+                  ),
+                  child: const Icon(
+                    Icons.arrow_back_ios_rounded,
+                    size: 15,
+                    color: AppColors.primaryColor,
                   ),
                 ),
               ),
@@ -48,8 +57,7 @@ class _ContactUsState extends State<ContactUs> {
             floating: false,
             stretch: true,
             title: const Text("Contact Us"),
-            titleTextStyle: const TextStyle(
-                color: Colors.white, fontWeight: FontWeight.w500, fontSize: 16),
+            titleTextStyle: TextStyles.white18SemiBold,
             centerTitle: true,
             flexibleSpace: Stack(
               children: [

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:path/path.dart';
 import 'package:single_resturant_app/core/widgets/custom_navigator_button.dart';
 import 'package:single_resturant_app/features/my_address/presentation/manager/address_cubit.dart';
 
 import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/text_styles.dart';
 import '../../../../core/widgets/add_new_address_dialog.dart';
-
 
 class MyAddressView extends StatefulWidget {
   const MyAddressView({super.key});
@@ -15,7 +16,6 @@ class MyAddressView extends StatefulWidget {
 }
 
 class _MyAddressViewState extends State<MyAddressView> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,16 +28,25 @@ class _MyAddressViewState extends State<MyAddressView> {
                 onTap: () {
                   Navigator.of(context).pop();
                 },
-                child: const SizedBox(
-                  height: 40,
-                  width: 40,
-                  child: Card(
-                    elevation: 4,
+                child: Container(
+                  alignment: Alignment.center,
+                  width: 35,
+                  height: 35,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
                     color: Colors.white,
-                    child: Icon(
-                      Icons.arrow_back_ios_new_outlined,
-                      color: Color(0xffFD784D),
-                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(.5),
+                        blurRadius: 10,
+                        offset: const Offset(0, 5),
+                      ),
+                    ],
+                  ),
+                  child: const Icon(
+                    Icons.arrow_back_ios_rounded,
+                    size: 15,
+                    color: AppColors.primaryColor,
                   ),
                 ),
               ),
@@ -47,10 +56,7 @@ class _MyAddressViewState extends State<MyAddressView> {
             floating: false,
             stretch: true,
             title: const Text("My Address"),
-            titleTextStyle: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
-                fontSize: 16),
+            titleTextStyle: TextStyles.white18SemiBold,
             centerTitle: true,
             flexibleSpace: Stack(
               children: [
@@ -108,11 +114,16 @@ class _MyAddressViewState extends State<MyAddressView> {
                   const SizedBox(
                     height: 32,
                   ),
-                  CustomNavigatorButton(title: "Add Address", onPressed: (){
-                    showDialog(context: context, builder: (context){
-                      return const AddNewAddressDialog();
-                    }) ;
-                  }, padding: 0),
+                  CustomNavigatorButton(
+                      title: "Add Address",
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return const AddNewAddressDialog();
+                            });
+                      },
+                      padding: 0),
                 ],
               ),
             ),
