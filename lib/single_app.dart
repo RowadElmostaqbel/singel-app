@@ -16,6 +16,7 @@ import 'features/auth/presentation/manager/login_cubit.dart';
 import 'features/auth/presentation/manager/user_cubit.dart';
 import 'features/cart/presentation/controllers/cubit/cart_cubit.dart';
 import 'features/orders/presentation/controllers/order_animation/cubit/order_animation_cubit.dart';
+import 'features/profile/presentation/views/profile_view.dart';
 
 class SingleApp extends StatelessWidget {
   const SingleApp({super.key});
@@ -69,7 +70,8 @@ class SingleApp extends StatelessWidget {
             duration: 1500,
             splash: Image.asset('assets/images/logo.png'),
             splashIconSize: 100,
-            nextScreen: const OnBoardingView(),
+            nextScreen: const ProfileView(),
+            //OnBoardingView(),
             backgroundColor: Colors.white,
           )),
     );

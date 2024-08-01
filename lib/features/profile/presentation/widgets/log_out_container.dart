@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:single_resturant_app/features/profile/presentation/widgets/delete_account_dialog.dart';
+import 'package:single_resturant_app/features/profile/presentation/widgets/logout_dialog.dart';
 
 class LogOutContainer extends StatelessWidget {
   const LogOutContainer({super.key});
@@ -35,23 +37,34 @@ class LogOutContainer extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           itemCount: titles.length,
           itemBuilder: (context, index) {
-            return Container(
-              margin: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xffF4F4F4))),
-              child: ListTile(
-                title: Text(
-                  titles[index],
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: index == 0
-                        ? const Color(0xff5C5C5C)
-                        : const Color(0xffDF1818),
+            return GestureDetector(
+              onTap: index==0?(){
+                showDialog(context: context, builder: (context){
+                  return const LogoutDialog();
+                });
+              }:(){
+                showDialog(context: context, builder: (context){
+                  return const DeleteAccountDialog();
+                });
+              },
+              child: Container(
+                margin: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: const Color(0xffF4F4F4))),
+                child: ListTile(
+                  title: Text(
+                    titles[index],
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: index == 0
+                          ? const Color(0xff5C5C5C)
+                          : const Color(0xffDF1818),
+                    ),
                   ),
+                  leading: Image.asset(paymentIcons[index]),
                 ),
-                leading: Image.asset(paymentIcons[index]),
               ),
             );
           }),
