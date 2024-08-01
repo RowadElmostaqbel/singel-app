@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/utils/app_colors.dart';
 
-class LanguageDialog extends StatelessWidget {
-  const LanguageDialog({super.key});
+class LogoutDialog extends StatelessWidget {
+  const LogoutDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class LanguageDialog extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(24),
             child: SizedBox(
-              height: MediaQuery.sizeOf(context).height * 0.22,
+              height: MediaQuery.sizeOf(context).height * 0.15,
               width: MediaQuery.sizeOf(context).width * 0.8,
               child: Container(
                 decoration: const BoxDecoration(color: Colors.white),
@@ -26,29 +26,9 @@ class LanguageDialog extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       const Text(
-                        "Choose your Language",
+                        "Are you want to logout?",
                         style: TextStyle(
                             fontWeight: FontWeight.w600, fontSize: 16),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text("العربية"),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 50.0),
-                            child: Image.asset("assets/icons/selected_red_item.png"),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text("English"),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 50.0),
-                            child: Image.asset("assets/icons/un_selected_item.png"),
-                          )
-                        ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -79,12 +59,12 @@ class LanguageDialog extends StatelessWidget {
                                     )),
                                 onPressed: () {},
                                 child: const Text(
-                                  "Confirm",
+                                  "logout",
                                   style: TextStyle(
                                     fontFamily: "Montserrat",
                                     fontWeight: FontWeight.w400,
                                     color: Colors.white,
-                                    fontSize: 16,
+                                    fontSize: 20,
                                   ),
                                 )),
                           ),
@@ -98,17 +78,17 @@ class LanguageDialog extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 300,
+          top: 315,
           left: 50,
           child: Container(
               height: 60,
               width: 60,
               decoration: const BoxDecoration(
                   color: AppColors.primaryColor, shape: BoxShape.circle),
-              child: Image.asset("assets/icons/translation.png")),
+              child: Image.asset("assets/icons/logout.png")),
         ),
         Positioned(
-          top: 425,
+          top: 405,
           left: 35,
           child: Image.asset("assets/images/dialog_decoration.png"),
         ),

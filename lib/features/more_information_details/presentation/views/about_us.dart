@@ -29,7 +29,7 @@ class _AboutUsState extends State<AboutUs> {
                     color: Colors.white,
                     child: Icon(
                       Icons.arrow_back_ios_new_outlined,
-                      color: Color(0xffFD784D),
+                      color: AppColors.primaryColor,
                     ),
                   ),
                 ),

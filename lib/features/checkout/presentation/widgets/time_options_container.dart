@@ -43,10 +43,11 @@ class TimeOptionsContainer extends StatelessWidget {
                   ? () {}
                   : () {
                       showDialog(
-                          context: context,
-                          builder: (context) {
-                            return dialogs[0];
-                          });
+                        context: context,
+                        builder: (context) {
+                          return dialogs[0];
+                        },
+                      );
                     },
               child: Container(
                 margin: const EdgeInsets.all(12),

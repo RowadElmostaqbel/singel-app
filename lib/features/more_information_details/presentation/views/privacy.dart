@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/app_colors.dart';
@@ -31,7 +30,7 @@ class _PrivacyState extends State<Privacy> {
                     color: Colors.white,
                     child: Icon(
                       Icons.arrow_back_ios_new_outlined,
-                      color: Color(0xffFD784D),
+                      color: AppColors.primaryColor,
                     ),
                   ),
                 ),
