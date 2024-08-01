@@ -40,7 +40,7 @@ class SingleApp extends StatelessWidget {
         BlocProvider(
           create: (context) => CartCubit(),
         ),
-          BlocProvider(
+        BlocProvider(
           create: (context) => AddressCubit(),
         ),
         BlocProvider(
@@ -56,6 +56,9 @@ class SingleApp extends StatelessWidget {
               backgroundColor: Colors.transparent,
             ),
             fontFamily: GoogleFonts.montserrat().fontFamily,
+            appBarTheme: const AppBarTheme(
+              surfaceTintColor: Colors.white,
+            ),
             colorScheme:
                 ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
             primaryColor: AppColors.primaryColor,
