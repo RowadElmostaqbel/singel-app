@@ -1,4 +1,3 @@
-import 'package:single_resturant_app/features/meal/data/models/category_meal_item.dart';
 
 class CategoryModel {
   final int? id;

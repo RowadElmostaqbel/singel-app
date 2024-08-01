@@ -5,13 +5,8 @@ import 'package:single_resturant_app/core/utils/app_colors.dart';
 import 'package:single_resturant_app/core/utils/assets.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/categories_list_view.dart';
-import 'package:single_resturant_app/features/comments/presentation/views/client_reviews_list_view.dart';
-import 'package:single_resturant_app/features/home/presentation/widgets/custom_search_and_filter_widget.dart';
-import 'package:single_resturant_app/features/home/presentation/widgets/fast_delivary_list_view.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/offers_list_view.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/popular_meals_list_view.dart';
-import 'package:single_resturant_app/features/home/presentation/widgets/popular_resturants_list_view.dart';
-
 import '../../../../core/utils/text_styles.dart';
 import '../widgets/banners_view.dart';
 
@@ -153,7 +148,6 @@ class HomeView extends HookWidget {
             const SliverToBoxAdapter(
               child: Gap(24),
             ),
-           
             SliverToBoxAdapter(
               child: Gap(context.height * .06),
             ),

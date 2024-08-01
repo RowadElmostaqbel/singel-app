@@ -1,29 +1,21 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/utils/app_colors.dart';
-import 'package:single_resturant_app/core/utils/assets.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/core/widgets/cached_network_image_widget.dart';
 import 'package:single_resturant_app/features/meal/data/models/category_meal_item.dart';
 import 'package:single_resturant_app/features/orders/data/models/order_model.dart';
 
 import '../../../../core/utils/text_styles.dart';
-import '../../../cart/presentation/controllers/cubit/cart_cubit.dart';
 import '../../../home/presentation/widgets/add_to_fav_btn.dart';
 import '../../../comments/presentation/views/client_reviews_list_view.dart';
-import '../../../meal/data/models/meal_model.dart';
 import '../controllers/order_animation/cubit/order_animation_cubit.dart';
-import '../widgets/add_drinks_list_view.dart';
-import '../widgets/add_sides_list_view.dart';
 import '../widgets/add_to_basket_animation_widget.dart';
 import '../widgets/add_to_cart_bottom_sheet.dart';
 import '../widgets/animated_basket_widget.dart';
-import '../widgets/ingredient_list_item.dart';
 import '../widgets/meal_size_list_view.dart';
-import '../widgets/nutrition_facts_list_view.dart';
 
 class MakeOrderView extends HookWidget {
   final CategoryMealItem categoryMealItem;

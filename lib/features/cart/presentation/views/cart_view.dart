@@ -6,7 +6,6 @@ import 'package:single_resturant_app/features/cart/presentation/widgets/total_pr
 
 import '../../../../core/utils/text_styles.dart';
 import '../controllers/cubit/cart_cubit.dart';
-import '../widgets/apply_coupon_widget.dart';
 import '../widgets/cart_items_list_view.dart';
 import '../widgets/check_out_btn.dart';
 
@@ -16,7 +15,7 @@ class CartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomSheet: (context.read<CartCubit>().cartModel == null)
+      bottomSheet: (context.read<CartCubit>().cartModel.orders.isEmpty)
           ? null
           : const CheckoutBtn(),
       body: SafeArea(
@@ -34,28 +33,27 @@ class CartView extends StatelessWidget {
                     style: TextStyles.black16SemiBold,
                   ),
                 ),
-                if (context.read<CartCubit>().cartModel == null)
-                  const EmptyCartView(),
-                if (context.read<CartCubit>().cartModel != null)
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CartItemsListView(),
-                      // Column(
-                      //   crossAxisAlignment: CrossAxisAlignment.start,
-                      //   children: [
-                      //     Text(
-                      //       'Coupons',
-                      //       style: TextStyles.black18SemiBold,
-                      //     ),
-                      //     Gap(8),
-                      //     ApplyCouponWidget(),
-                      //   ],
-                      // ),
-                      // Gap(24),
-                      TotalPriceWidget(),
-                    ],
-                  ),
+                (context.read<CartCubit>().cartModel.orders.isEmpty)
+                    ? const EmptyCartView()
+                    : const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CartItemsListView(),
+                          // Column(
+                          //   crossAxisAlignment: CrossAxisAlignment.start,
+                          //   children: [
+                          //     Text(
+                          //       'Coupons',
+                          //       style: TextStyles.black18SemiBold,
+                          //     ),
+                          //     Gap(8),
+                          //     ApplyCouponWidget(),
+                          //   ],
+                          // ),
+                          // Gap(24),
+                          TotalPriceWidget(),
+                        ],
+                      ),
               ],
             ),
           ),

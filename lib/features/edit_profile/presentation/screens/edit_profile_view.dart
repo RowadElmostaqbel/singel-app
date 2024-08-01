@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/app_colors.dart';
-import '../../../../core/utils/text_styles.dart';
 import '../../../profile/presentation/widgets/custom_photo_container.dart';
 import '../widgets/edit_profile_text_form_field.dart';
 
@@ -106,9 +105,9 @@ class _EditProfileViewState extends State<EditProfileView> {
                                         borderRadius: BorderRadius.circular(50),
                                       )),
                                   onPressed:(){},
-                                  child: Text(
+                                  child: const Text(
                                     "Save",
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontFamily: "Montserrat",
                                       fontWeight: FontWeight.w500,
                                       color: Colors.white,

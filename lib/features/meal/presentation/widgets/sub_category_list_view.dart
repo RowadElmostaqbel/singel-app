@@ -31,7 +31,8 @@ class SubCategoryListView extends HookWidget {
 
     return BlocListener<CategoriesCubit, CategoriesState>(
       listener: (context, state) {
-        if (state is SubCategoriesLoadedState) {
+        if (state is SubCategoriesLoadedState &&
+            state.subCategories.isNotEmpty) {
           context
               .read<CategoriesCubit>()
               .changeSelectedSubCategoryId(state.subCategories.first.id ?? 0);

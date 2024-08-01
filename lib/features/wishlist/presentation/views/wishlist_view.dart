@@ -3,7 +3,6 @@ import 'package:single_resturant_app/core/utils/extensions.dart';
 import '../../../../core/utils/assets.dart';
 import '../../../../core/utils/text_styles.dart';
 import '../../../../core/widgets/custom_app_bar.dart';
-import '../widgets/wish_choice_list.dart';
 import '../widgets/wish_item.dart';
 
 class WishListView extends StatefulWidget {

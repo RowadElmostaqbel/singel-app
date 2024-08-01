@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/widgets/custom_app_bar.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/offer_list_item.dart';

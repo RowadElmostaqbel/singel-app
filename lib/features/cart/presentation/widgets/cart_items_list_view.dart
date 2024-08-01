@@ -48,11 +48,11 @@ class CartItemsListView extends StatelessWidget {
                 index.toString(),
               ),
               child: CartItem(
-                orderModel: context.read<CartCubit>().cartModel!.orders[index],
+                orderModel: context.read<CartCubit>().cartModel.orders[index],
               ),
             ),
             separatorBuilder: (context, index) => const Gap(16),
-            itemCount: context.read<CartCubit>().cartModel!.orders.length,
+            itemCount: context.read<CartCubit>().cartModel.orders.length,
           ),
         );
       },

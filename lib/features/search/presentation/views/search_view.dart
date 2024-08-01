@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:single_resturant_app/core/utils/app_colors.dart';
 
 import '../../../../core/utils/text_styles.dart';
 import '../widgets/custom_grid_view_elements.dart';

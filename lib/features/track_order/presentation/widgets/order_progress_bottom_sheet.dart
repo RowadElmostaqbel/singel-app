@@ -1,10 +1,8 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/utils/app_colors.dart';
 import 'package:single_resturant_app/core/utils/assets.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
-import 'package:single_resturant_app/features/orders/presentation/widgets/order_status_widget_builder.dart';
 
 import '../../../../core/utils/text_styles.dart';
 

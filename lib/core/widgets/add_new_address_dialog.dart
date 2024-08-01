@@ -76,7 +76,7 @@ class _AddNewAddressDialogState extends State<AddNewAddressDialog> {
                 controller: contactTitle,
                 label: "Contact Title",
                 onChanged: (String) {},
-                inputFormatters: [],
+                inputFormatters: const [],
               ),
               Stack(
                 children: [
@@ -89,7 +89,7 @@ class _AddNewAddressDialogState extends State<AddNewAddressDialog> {
                     controller: phoneNumber,
                     label: "Phone Number",
                     onChanged: (String) {},
-                    inputFormatters: [],
+                    inputFormatters: const [],
                   ),
                   Positioned(
                     right: 24,
@@ -114,7 +114,7 @@ class _AddNewAddressDialogState extends State<AddNewAddressDialog> {
                 controller: addressLocation,
                 label: "City ",
                 onChanged: (String) {},
-                inputFormatters: [],
+                inputFormatters: const [],
               ),
               CardTextFormFiled(
                 keyboardType: TextInputType.text,
@@ -125,7 +125,7 @@ class _AddNewAddressDialogState extends State<AddNewAddressDialog> {
                 controller: addressLocation,
                 label: "Address Location ",
                 onChanged: (String) {},
-                inputFormatters: [],
+                inputFormatters: const [],
               ),
               Image.asset("assets/images/map_location.png"),
               Padding(

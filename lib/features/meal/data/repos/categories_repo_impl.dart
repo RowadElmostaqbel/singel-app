@@ -19,29 +19,13 @@ class CategoriesRepoImpl extends CategoriesRepo {
     try {
       final res = await _apiService.get(endpoint: "client/mainCategories");
       return Right(
-        res['data']
-            .map<CategoryModel>((e) => CategoryModel.fromJson(e))
-            .toList(),
-      );
-    } on DioException catch (exception) {
-      return Left(
-        ServerFailure.fromDioException(exception),
-      );
-    } catch (e) {
-      return Left(
-        ServerFailure(e.toString()),
-      );
-    }
-  }
-  
-  @override
-  Future<Either<Failure, List<CategoryModel>>> fetchSubCategories(String categoryId) async{
-    try {
-      final res = await _apiService.get(endpoint: "client/subCategories/$categoryId");
-      return Right(
-        res['data']
-            .map<CategoryModel>((e) => CategoryModel.fromJson(e))
-            .toList(),
+        res['data'].isNotEmpty
+            ? res['data']
+                .map<CategoryModel>((e) => CategoryModel.fromJson(
+                      e,
+                    ))
+                .toList()
+            : [],
       );
     } on DioException catch (exception) {
       return Left(
@@ -55,13 +39,41 @@ class CategoriesRepoImpl extends CategoriesRepo {
   }
 
   @override
-  Future<Either<Failure, List<CategoryMealItem>>> fetchItemsBySubCategory(String categoryId) async{
-      try {
-      final res = await _apiService.get(endpoint: "client/itemsByCategory/$categoryId");
+  Future<Either<Failure, List<CategoryModel>>> fetchSubCategories(
+      String categoryId) async {
+    try {
+      final res =
+          await _apiService.get(endpoint: "client/subCategories/$categoryId");
       return Right(
-        res['data']
-            .map<CategoryMealItem>((e) => CategoryMealItem.fromJson(e))
-            .toList(),
+        res['data'].isNotEmpty
+            ? res['data']
+                .map<CategoryModel>((e) => CategoryModel.fromJson(e))
+                .toList()
+            : [],
+      );
+    } on DioException catch (exception) {
+      return Left(
+        ServerFailure.fromDioException(exception),
+      );
+    } catch (e) {
+      return Left(
+        ServerFailure(e.toString()),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<CategoryMealItem>>> fetchItemsBySubCategory(
+      String categoryId) async {
+    try {
+      final res =
+          await _apiService.get(endpoint: "client/itemsByCategory/$categoryId");
+      return Right(
+        res['data'].isNotEmpty
+            ? res['data']
+                .map<CategoryMealItem>((e) => CategoryMealItem.fromJson(e))
+                .toList()
+            : [],
       );
     } on DioException catch (exception) {
       return Left(

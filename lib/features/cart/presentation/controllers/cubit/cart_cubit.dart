@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 
 import 'package:meta/meta.dart';
-import 'package:single_resturant_app/features/meal/data/models/category_meal_item.dart';
 
 import '../../../../meal/data/models/meal_model.dart';
 import '../../../../orders/data/models/order_model.dart';
