@@ -6,8 +6,10 @@ import 'package:single_resturant_app/core/utils/api_services.dart';
 import 'package:single_resturant_app/core/utils/app_colors.dart';
 import 'package:single_resturant_app/core/utils/cache_service.dart';
 import 'package:single_resturant_app/core/utils/service_locator.dart';
+import 'package:single_resturant_app/features/auth/data/models/user_model.dart';
 import 'package:single_resturant_app/features/auth/data/repo/auth_repo.dart';
 import 'package:single_resturant_app/features/auth/data/repo/login_repo.dart';
+import 'package:single_resturant_app/features/bottom_nav/presentation/views/bottom_nav_view.dart';
 import 'package:single_resturant_app/features/cart/data/repos/cart_repo.dart';
 import 'package:single_resturant_app/features/meal/data/repos/categories_repo.dart';
 import 'package:single_resturant_app/features/meal/presentation/controllers/categories_cubit.dart';
@@ -37,6 +39,7 @@ class SingleApp extends StatelessWidget {
                 ServiceLocatorHelper.getIt.get<CacheServiceHeper>(),
               ),
             ),
+            CacheServiceHeper(),
           ),
         ),
         BlocProvider(
@@ -82,7 +85,14 @@ class SingleApp extends StatelessWidget {
           duration: 1500,
           splash: Image.asset('assets/images/logo.png'),
           splashIconSize: 100,
-          nextScreen: const OnBoardingView(),
+          nextScreen: (CacheServiceHeper()
+                          .getData<UserModel>(boxName: 'user', key: 'user')
+                          ?.data
+                          ?.token ??
+                      '')
+                  .isNotEmpty
+              ? const BottomNavView()
+              : const OnBoardingView(),
           backgroundColor: Colors.white,
         ),
       ),

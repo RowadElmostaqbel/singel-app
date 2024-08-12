@@ -9,6 +9,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ServiceLocatorHelper.init();
   Bloc.observer = MyBlocObserver();
-  CacheServiceHeper.initCaching();
+  await CacheServiceHeper.initCaching();
   runApp(const SingleApp());
 }
