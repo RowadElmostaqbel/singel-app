@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class ApiService {
   final _baseUrl = 'https://deliback.rowaduae.com/api/';
   late Dio dio;
-   String token='';
+  late String token='';
   ApiService() {
     dio = Dio(
       BaseOptions(
@@ -20,6 +20,7 @@ class ApiService {
   Future<dynamic> get({
     required String endpoint,
   }) async {
+    
     dio.options.headers.addAll(
       {
         'Authorization': 'Bearer $token',
