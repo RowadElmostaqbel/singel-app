@@ -22,7 +22,6 @@ class AddToCartBottomSheet extends HookWidget {
     return BlocListener<CartCubit, CartState>(
       listener: (context, state) {
         if (state is SendCartToServerLoadedState && state.status) {
-          context.read<CartCubit>().addOrderToCart(orderModel: orderModel);
           context
               .read<OrderAnimationCubit>()
               .addOrdersToAnimationList(orderModel);

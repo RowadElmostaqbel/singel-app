@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/widgets/cached_network_image_widget.dart';
+import 'package:single_resturant_app/features/cart/data/models/cart_model.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/text_styles.dart';
 import '../../../orders/data/models/order_model.dart';
 
 class CartItem extends StatelessWidget {
-  final OrderModel orderModel;
+  final CartModel cartModel;
   const CartItem({
     super.key,
-    required this.orderModel,
+    required this.cartModel,
   });
 
   @override
@@ -34,7 +35,7 @@ class CartItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             child: CachedNetworkImageWidget(
-              url: orderModel.meal.img ?? '',
+              url: cartModel.img ?? '',
             ),
           ),
           const Gap(8),
@@ -44,16 +45,16 @@ class CartItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  orderModel.meal.name ?? '',
+                  cartModel.name ?? '',
                   style: TextStyles.black16SemiBold,
                 ),
                 Text(
-                  orderModel.meal.details ?? '',
+                  cartModel.desc ?? '',
                   style: TextStyles.grey14Regular,
                 ),
                 RichText(
                   text: TextSpan(
-                    text: orderModel.meal.price.toString(),
+                    text: cartModel.price.toString(),
                     style: TextStyles.primary20SemiBold,
                     children: const [
                       TextSpan(
@@ -102,7 +103,7 @@ class CartItem extends StatelessWidget {
                         horizontal: 8,
                       ),
                       child: Text(
-                        orderModel.quantity.toString(),
+                        cartModel.quantity.toString(),
                         style: TextStyles.black16SemiBold,
                       ),
                     ),

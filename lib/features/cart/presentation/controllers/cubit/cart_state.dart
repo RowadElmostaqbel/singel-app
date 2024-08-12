@@ -5,7 +5,15 @@ sealed class CartState {}
 
 final class CartInitial extends CartState {}
 
+
+final class FetchCartLoadingState extends CartState {}
+final class FetchCartFailureState extends CartState {
+   final String message;
+  FetchCartFailureState({required this.message});
+}
+
 final class SendCartToServerLoadingState extends CartState {}
+
 
 final class SendCartToServerLoadedState extends CartState {
   final bool status;

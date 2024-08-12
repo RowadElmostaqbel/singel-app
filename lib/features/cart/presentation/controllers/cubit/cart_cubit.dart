@@ -12,27 +12,10 @@ part 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
   final CartRepo cartRepo;
-  late CartModel cartModel;
-
-  OrderModel? orderModel;
+  List<CartModel> cart = [];
   CartCubit(
     this.cartRepo,
-  ) : super(CartInitial()) {
-    cartModel = CartModel(
-      orders: [],
-      isCouponApplied: false,
-      couponCode: '',
-    );
-  }
-
-  void updateCartModel(CartModel cartModel) {
-    this.cartModel = cartModel;
-    emit(
-      CartItemChangedState(
-        cartModel: cartModel,
-      ),
-    );
-  }
+  ) : super(CartInitial());
 
   sendCartDataToServe(AddToCartDataModel addToCartDataModel) async {
     emit(SendCartToServerLoadingState());
@@ -51,23 +34,18 @@ class CartCubit extends Cubit<CartState> {
     );
   }
 
-  addOrderToCart({required OrderModel orderModel}) {
-    cartModel = cartModel.copyWith(orders: [...cartModel.orders, orderModel]);
-    emit(
-      CartItemChangedState(
-        cartModel: cartModel,
-      ),
-    );
-  }
 
-  changeOrderDetails({List<SideItemModel>? sides, OrderModel? orderModel}) {
-    if (orderModel != null) {
-      this.orderModel = orderModel;
-    }
-    emit(
-      OrderDetailsChangedState(
-        orderModel: orderModel,
+
+  fetchCart()async{
+    emit(FetchCartLoadingState());
+    final res = await cartRepo.getCart();
+    res.fold(
+      (error) => emit(
+        FetchCartFailureState(
+          message: error.msg,
+        ),
       ),
+      (cart) => this.cart=cart,
     );
   }
 }

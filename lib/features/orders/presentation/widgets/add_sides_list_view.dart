@@ -40,9 +40,7 @@ class AddSidesListView extends HookWidget {
                   sides.value.add(sideItems[index]);
                 }
                 sides.value = sides.value.toSet().toList();
-                context.read<CartCubit>().changeOrderDetails(
-                      sides: sides.value,
-                    );
+             
               },
               child: AddSideListItem(
                 isSelected: sides.value.contains(sideItems[index]),
