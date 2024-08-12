@@ -45,7 +45,7 @@ class TotalPriceWidget extends StatelessWidget {
                   return RichText(
                     text: TextSpan(
                       text:
-                          '${context.read<CartCubit>().cart.map((model) => model.price).reduce((a, b) => a + b)}',
+                          '${context.read<CartCubit>().cart.map((model) => model.price).reduce((a, b) => a! + b!)}',
                       style: TextStyles.darkGrey16SemiBold,
                       children: const [
                         TextSpan(
@@ -96,7 +96,7 @@ class TotalPriceWidget extends StatelessWidget {
               RichText(
                 text: TextSpan(
                   text:
-                          '${context.read<CartCubit>().cart.map((model) => model.price).reduce((a, b) => a + b)}',
+                          '${context.read<CartCubit>().cart.map((model) => model.price).reduce((a, b) => a! + b!)}',
                   style: TextStyles.darkPrimary16SemiBold,
                   children: const [
                     TextSpan(

@@ -1,5 +1,5 @@
 import 'package:single_resturant_app/core/utils/api_services.dart';
-import 'package:single_resturant_app/features/auth/data/models/person_model.dart';
+import 'package:single_resturant_app/features/auth/data/models/register_data_model.dart';
 
 class AuthRepo {
   final ApiService apiService;

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 
 import 'package:meta/meta.dart';
@@ -34,18 +36,22 @@ class CartCubit extends Cubit<CartState> {
     );
   }
 
-
-
-  fetchCart()async{
+  fetchCart() async {
     emit(FetchCartLoadingState());
     final res = await cartRepo.getCart();
     res.fold(
-      (error) => emit(
-        FetchCartFailureState(
-          message: error.msg,
-        ),
-      ),
-      (cart) => this.cart=cart,
+      (error) {
+        log(error.msg);
+        emit(
+          FetchCartFailureState(
+            message: error.msg,
+          ),
+        );
+      },
+      (cart) {
+        this.cart = cart;
+        emit(FetchCartSuccessState());
+      },
     );
   }
 }

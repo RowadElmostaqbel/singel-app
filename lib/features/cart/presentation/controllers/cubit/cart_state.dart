@@ -12,6 +12,10 @@ final class FetchCartFailureState extends CartState {
   FetchCartFailureState({required this.message});
 }
 
+final class FetchCartSuccessState extends CartState {
+  FetchCartSuccessState();
+}
+
 final class SendCartToServerLoadingState extends CartState {}
 
 

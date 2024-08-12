@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import 'package:single_resturant_app/features/auth/data/models/person_model.dart';
+import 'package:single_resturant_app/features/auth/data/models/register_data_model.dart';
 
 import '../../data/repo/auth_repo.dart';
 

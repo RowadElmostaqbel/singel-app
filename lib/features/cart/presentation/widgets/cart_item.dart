@@ -51,6 +51,8 @@ class CartItem extends StatelessWidget {
                 Text(
                   cartModel.desc ?? '',
                   style: TextStyles.grey14Regular,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 RichText(
                   text: TextSpan(
@@ -60,7 +62,7 @@ class CartItem extends StatelessWidget {
                       TextSpan(
                         text: '  SAR',
                         style: TextStyles.black14Medium,
-                      )
+                      ),
                     ],
                   ),
                 ),
