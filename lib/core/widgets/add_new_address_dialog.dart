@@ -15,6 +15,7 @@ class AddNewAddressDialog extends StatefulWidget {
 class _AddNewAddressDialogState extends State<AddNewAddressDialog> {
   TextEditingController contactTitle = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
+  TextEditingController city = TextEditingController();
   TextEditingController addressLocation = TextEditingController();
   bool isTurnOn = false;
 
@@ -111,7 +112,7 @@ class _AddNewAddressDialogState extends State<AddNewAddressDialog> {
                   return null;
                 },
                 hintText: "Mansoura",
-                controller: addressLocation,
+                controller: city,
                 label: "City ",
                 onChanged: (String) {},
                 inputFormatters: const [],

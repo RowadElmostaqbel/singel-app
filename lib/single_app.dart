@@ -19,6 +19,7 @@ import 'package:single_resturant_app/features/on_boarding/presentation/views/on_
 import 'features/auth/presentation/manager/login_cubit.dart';
 import 'features/auth/presentation/manager/user_cubit.dart';
 import 'features/cart/presentation/controllers/cubit/cart_cubit.dart';
+import 'features/my_address/data/repos/add_address_repo.dart';
 import 'features/orders/presentation/controllers/order_animation/cubit/order_animation_cubit.dart';
 import 'features/profile/presentation/views/profile_view.dart';
 
@@ -58,7 +59,7 @@ class SingleApp extends StatelessWidget {
           ),
         ),
         BlocProvider(
-          create: (context) => AddressCubit(),
+          create: (context) => AddressCubit(AddAddressRepo(apiService: ApiService())),
         ),
         BlocProvider(
           create: (context) => CategoriesCubit(
