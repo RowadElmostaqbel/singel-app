@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:single_resturant_app/core/utils/api_services.dart';
@@ -11,23 +14,27 @@ class AuthRepo {
 
   AuthRepo(this.apiService);
 
-
-
-    Future<Either<Failure, UserModel>> register(
-      RegisterDataModel registerData) async {
+  Future<Either<Failure, bool>> register(
+    RegisterDataModel registerData,
+    File image,
+  ) async {
     try {
-      final data =await apiService.postFormData(
-      endpoint: 'client/auth/register',
-      data: registerData.toJson(),
-    );
+      final data = await apiService.postFormData(
+        endpoint: 'client/auth/register',
+        data: registerData.toJson(),
+        image: image,
+      );
       return Right(
-        UserModel.fromJson(data),
+        data['status'],
       );
     } on DioException catch (e) {
+      log(name: 'error', e.toString());
       return Left(
         ServerFailure.fromDioException(e),
       );
     } catch (e) {
+      log(name: 'error', e.toString());
+
       return Left(
         ServerFailure(e.toString()),
       );

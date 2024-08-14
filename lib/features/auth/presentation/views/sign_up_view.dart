@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/features/auth/presentation/manager/user_cubit.dart';
 import 'package:single_resturant_app/features/auth/presentation/widgets/social_media.dart';
 import 'package:single_resturant_app/features/auth/presentation/widgets/terms_and_conditions_row.dart';
 
 import '../../../../core/utils/app_colors.dart';
+import '../../../../core/widgets/custom_toast_widget.dart';
+import '../../../bottom_nav/presentation/views/bottom_nav_view.dart';
 import '../widgets/custom_bottom_text_action.dart';
 import '../../../../core/widgets/custom_navigator_button.dart';
 import '../widgets/custom_or_spacer.dart';
@@ -46,7 +49,11 @@ class _SignUpViewState extends State<SignUpView> {
               padding: const EdgeInsets.fromLTRB(25, 0, 25, 25),
               child: BlocConsumer<UserCubit, UserState>(
                 listener: (context, state) {
-                  print('state now is $state');
+                  if (state is AuthLoadedState) {
+                    context.navigateTo(const LoginView());
+                  } else if (state is AuthFailureState) {
+                    showTaost(state.error, Colors.redAccent);
+                  }
                 },
                 builder: (context, state) {
                   return Column(
@@ -82,7 +89,9 @@ class _SignUpViewState extends State<SignUpView> {
                           var image = await picker.pickImage(
                               source: ImageSource.gallery);
                           _image = File(image!.path);
-                          BlocProvider.of<UserCubit>(context).uploadImage(_image!);
+                          BlocProvider.of<UserCubit>(context)
+                              .uploadImage(_image!);
+                          setState(() {});
                           // await BlocProvider.of<UserCubit>(context)
                           //     .addImage(_image!);
                         },
@@ -90,7 +99,9 @@ class _SignUpViewState extends State<SignUpView> {
                           var image = await picker.pickImage(
                               source: ImageSource.camera);
                           _image = File(image!.path);
-                          BlocProvider.of<UserCubit>(context).uploadImage(_image!);
+                          setState(() {});
+                          BlocProvider.of<UserCubit>(context)
+                              .uploadImage(_image!);
                           // await BlocProvider.of<UserCubit>(context)
                           //     .addImage(_image!);
                         },

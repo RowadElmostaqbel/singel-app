@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:single_resturant_app/core/utils/cache_service.dart';
 import 'package:single_resturant_app/features/auth/data/models/user_model.dart';
@@ -23,8 +26,12 @@ class ApiService {
   Future<dynamic> get({
     required String endpoint,
   }) async {
-    token =cacheServiceHeper.getData<UserModel>(key: 'user', boxName: 'user')?.data?.token??'';
-     dio.options.headers.addAll(
+    token = cacheServiceHeper
+            .getData<UserModel>(key: 'user', boxName: 'user')
+            ?.data
+            ?.token ??
+        '';
+    dio.options.headers.addAll(
       {
         'Authorization': 'Bearer $token',
         // 'lang': LANG,
@@ -37,7 +44,11 @@ class ApiService {
 
   Future<dynamic> post(
       {required String endpoint, required Map<String, dynamic> data}) async {
-            token =cacheServiceHeper.getData<UserModel>(key: 'user', boxName: 'user')?.data?.token??'';
+    token = cacheServiceHeper
+            .getData<UserModel>(key: 'user', boxName: 'user')
+            ?.data
+            ?.token ??
+        '';
 
     dio.options.headers.addAll(
       {
@@ -52,9 +63,32 @@ class ApiService {
     return response.data;
   }
 
-  Future<dynamic> postFormData({required String endpoint, dynamic data}) async {
-        token =cacheServiceHeper.getData<UserModel>(key: 'user', boxName: 'user')?.data?.token??'';
+  Future<dynamic> postFormData({
+    required String endpoint,
+    required Map<String, dynamic> data,
+    File? image,
+  }) async {
+    token = cacheServiceHeper
+            .getData<UserModel>(key: 'user', boxName: 'user')
+            ?.data
+            ?.token ??
+        '';
 
+    FormData formData = FormData.fromMap(data);
+
+    if (image != null) {
+      String fileName = image.path.split('/').last;
+      formData.files.add(
+        MapEntry(
+          'image', // This key should match the key expected by the server for the image
+          await MultipartFile.fromFile(
+            image.path,
+            filename: fileName,
+          ),
+        ),
+      );
+    }
+   
     dio.options.headers.addAll(
       {
         'Authorization': 'Bearer $token',
@@ -62,7 +96,7 @@ class ApiService {
     );
     var response = await dio.post(
       endpoint,
-      data: data,
+      data: formData,
     );
     return response.data;
   }

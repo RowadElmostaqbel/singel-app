@@ -14,30 +14,33 @@ import '../../data/repo/auth_repo.dart';
 part 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
-   final CacheServiceHeper cacheServiceHeper;
+  final CacheServiceHeper cacheServiceHeper;
   late UserModel userModel;
   final AuthRepo authRepo;
-
+File? image;
   UserCubit(this.authRepo, this.cacheServiceHeper) : super(UserInitial());
   RegisterDataModel registerDataModel = RegisterDataModel();
 
   addUserName(String userName) {
     registerDataModel.name = userName;
+
   }
 
-  addImage(File image) {
-    registerDataModel.image = image.path;
-  }
+  // addImage(File image) {
+  //   registerDataModel.image = image.path;
+  //   this.image = image;
+  // }
 
   addEmail(String email) {
     registerDataModel.email = email;
   }
 
-  Future<FormData> uploadImage(File file) async {
-    String fileName = file.path.split('/').last;
-    return FormData.fromMap({
-      "image": await MultipartFile.fromFile(file.path, filename: fileName),
-    });
+   uploadImage(File file) async {
+    image = file;
+    // String fileName = file.path.split('/').last;
+    // return FormData.fromMap({
+    //   "image": await MultipartFile.fromFile(file.path, filename: fileName),
+    // });
   }
 
   addPhoneNumber(String number) {
@@ -54,7 +57,10 @@ class UserCubit extends Cubit<UserState> {
 
   register() async {
     emit(AuthLoadingState());
-   final res = await authRepo.register(registerDataModel);
+    final res = await authRepo.register(
+      registerDataModel,
+      image!,
+    );
     res.fold((failure) {
       emit(
         AuthFailureState(
@@ -62,8 +68,7 @@ class UserCubit extends Cubit<UserState> {
         ),
       );
     }, (user) {
-      userModel = user;
-      cacheServiceHeper.storeData<UserModel>(data: user, boxName: 'user', key: 'user');
+     
       emit(
         AuthLoadedState(),
       );
