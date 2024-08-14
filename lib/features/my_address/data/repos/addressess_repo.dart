@@ -2,21 +2,23 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:single_resturant_app/core/utils/api_services.dart';
 import 'package:single_resturant_app/features/my_address/data/models/add_address_model.dart';
+import 'package:single_resturant_app/features/my_address/data/models/addresses.dart';
 
 import '../../../../core/errors/failure.dart';
 
-class AddAddressRepo {
+class AddressRepo {
   final ApiService apiService;
 
-  AddAddressRepo({required this.apiService});
-  Future addAddress(AddAddressModel addAddressModel) async {
+  AddressRepo({required this.apiService});
+  Future<Either<Failure, bool>> addAddress(
+      AddAddressModel addAddressModel) async {
     try {
-      final data =await apiService.postFormData(
+      final data = await apiService.postFormData(
         endpoint: 'client/profile/addresses',
         data: addAddressModel.toJson(),
       );
       return Right(
-        AddAddressModel.fromJson(data),
+        data['status'] ?? false,
       );
     } on DioException catch (e) {
       return Left(
@@ -25,6 +27,31 @@ class AddAddressRepo {
     } catch (e) {
       return Left(
         ServerFailure(e.toString()),
+      );
+    }
+  }
+
+  Future<Either<Failure, List<Addresses>>> fetchMyAddressess() async {
+    try {
+      final res = await apiService.get(endpoint: 'client/profile/addresses');
+      return Right(
+        res['data']
+            .map<Addresses>(
+              (e) => Addresses.fromJson(e),
+            )
+            .toList(),
+      );
+    } on DioException catch (exception) {
+      return Left(
+        ServerFailure.fromDioException(
+          exception,
+        ),
+      );
+    } catch (e) {
+      return Left(
+        ServerFailure(
+          e.toString(),
+        ),
       );
     }
   }

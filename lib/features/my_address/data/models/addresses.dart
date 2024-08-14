@@ -1,4 +1,7 @@
+import 'package:single_resturant_app/core/utils/cache_service.dart';
+
 class Addresses {
+  int? id;
   String? name;
   String? phone;
   String? additional_phone;
@@ -8,17 +11,19 @@ class Addresses {
   String? latitude;
   String? longitude;
 
-  Addresses(
-      {required this.name,
-      required this.phone,
-      required this.additional_phone,
-      required this.city_id,
-      required this.client_id,
-      required this.details,
-      required this.latitude,
-      required this.longitude});
+  Addresses({
+    this.name,
+    this.phone,
+    this.additional_phone,
+    this.city_id,
+    this.client_id,
+    this.details,
+    this.latitude,
+    this.longitude,
+  });
 
   Addresses.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     name = json['name'];
     phone = json['phone'];
     additional_phone = json['additional_phone'];
@@ -33,9 +38,9 @@ class Addresses {
     return {
       "name": name,
       "phone": phone,
-      "additional_phone": additional_phone,
+      "additional_phone": phone,
       "city_id": city_id,
-      "client_id": 8,
+      "client_id": client_id,
       "details": details,
       "latitude": latitude,
       "longitude": longitude,

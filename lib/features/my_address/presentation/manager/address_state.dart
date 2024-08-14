@@ -12,7 +12,6 @@ final class FetchAddressFailureState extends AddressState {
 }
 
 final class FetchAddressSuccessState extends AddressState {
-  FetchAddressSuccessState();
 }
 
 final class SendAddressToServerLoadingState extends AddressState {}

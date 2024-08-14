@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
+import 'package:single_resturant_app/core/widgets/custom_toast_widget.dart';
 import 'package:single_resturant_app/features/my_address/presentation/manager/address_cubit.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/text_styles.dart';
 import '../../features/checkout/presentation/widgets/card_text_form_filed.dart';
+import '../../features/my_address/presentation/views/map_view.dart';
 
 class AddNewAddressDialog extends StatefulWidget {
   const AddNewAddressDialog({super.key});
@@ -24,7 +27,14 @@ class _AddNewAddressDialogState extends State<AddNewAddressDialog> {
   Widget build(BuildContext context) {
     return BlocConsumer<AddressCubit, AddressState>(
       listener: (context, state) {
-        print('state now is $state');
+        if (state is SendAddressToServerFailureState) {
+          showTaost(
+            state.message,
+            Colors.redAccent,
+          );
+        } else if (state is SendAddressToServerLoadedState) {
+          context.pop();
+        }
       },
       builder: (context, state) {
         return SingleChildScrollView(
@@ -128,8 +138,7 @@ class _AddNewAddressDialogState extends State<AddNewAddressDialog> {
                       controller: city,
                       label: "City ",
                       onChanged: (String city) {
-                        BlocProvider.of<AddressCubit>(context)
-                            .addAddressName(city);
+                        BlocProvider.of<AddressCubit>(context).addAddressCity();
                       },
                       inputFormatters: const [],
                     ),
@@ -143,11 +152,24 @@ class _AddNewAddressDialogState extends State<AddNewAddressDialog> {
                       label: "Address Location ",
                       onChanged: (String location) {
                         BlocProvider.of<AddressCubit>(context)
-                            .addAddressName(location);
+                            .addAddresDetails(location);
                       },
                       inputFormatters: const [],
                     ),
-                    Image.asset("assets/images/map_location.png"),
+                    GestureDetector(
+                      onTap: () => context
+                          .navigateTo<LatLng>(
+                        const MapView(),
+                      )
+                          .then((value) async {
+                        context.read<AddressCubit>().addAddresLatlng(
+                              value ?? const LatLng(0, 0),
+                            );
+                      }),
+                      child: Image.asset(
+                        "assets/images/map_location.png",
+                      ),
+                    ),
                     Padding(
                       padding:
                           const EdgeInsets.only(right: 24, left: 24, top: 12),
@@ -212,16 +234,23 @@ class _AddNewAddressDialogState extends State<AddNewAddressDialog> {
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(50),
                                     )),
-                                onPressed: () {},
-                                child: const Text(
-                                  "Confirm",
-                                  style: TextStyle(
-                                    fontFamily: "Montserrat",
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                  ),
-                                )),
+                                onPressed: () {
+                                  BlocProvider.of<AddressCubit>(context)
+                                      .addAddress();
+                                },
+                                child: state is SendAddressToServerLoadingState
+                                    ? const CircularProgressIndicator(
+                                        color: Colors.white,
+                                      )
+                                    : const Text(
+                                        "Confirm",
+                                        style: TextStyle(
+                                          fontFamily: "Montserrat",
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                        ),
+                                      )),
                           ),
                           Align(
                             alignment: Alignment.centerRight,

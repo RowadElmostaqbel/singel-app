@@ -7,15 +7,15 @@ class SendCheckoutDataModel {
   String? couponId;
 
   SendCheckoutDataModel({
-     this.clientId,
-     this.phone,
-     this.orderType,
-     this.clientAdrressId,
-     this.paymentMethod,
-     this.couponId,
+    this.clientId,
+    this.phone,
+    this.orderType,
+    this.clientAdrressId,
+    this.paymentMethod,
+    this.couponId,
   });
 
-  toJson() {
+  Map<String, dynamic> toJson() {
     return {
       'client_id': clientId,
       'phone': phone,

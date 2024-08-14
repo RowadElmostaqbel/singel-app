@@ -1,9 +1,9 @@
 import 'addresses.dart';
 
 class AddAddressModel {
-  List<Addresses>? addresses;
+  List<Addresses> addresses=[];
 
-  AddAddressModel({this.addresses});
+  AddAddressModel({required this.addresses});
 
   AddAddressModel.fromJson(Map<String, dynamic> json) {
     addresses = json['addresses'];
@@ -11,7 +11,7 @@ class AddAddressModel {
 
   toJson() {
     return {
-      "addresses": addresses,
+      "addresses": addresses.map((e) => e.toJson()).toList(),
     };
   }
 }

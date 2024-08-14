@@ -12,7 +12,7 @@ extension NavigationHelper on BuildContext {
   Future<T?> navigateToReplacement<T>(Widget widget) => Navigator.of(this)
       .pushReplacement(MaterialPageRoute(builder: (context) => widget));
 
-  pop() => Navigator.of(this).pop();
+  void pop<T>([T? result]) => Navigator.of(this).pop(result);
 }
 
 extension StringHelper on String {
