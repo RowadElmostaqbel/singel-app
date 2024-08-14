@@ -11,6 +11,8 @@ import 'package:single_resturant_app/features/auth/data/repo/auth_repo.dart';
 import 'package:single_resturant_app/features/auth/data/repo/login_repo.dart';
 import 'package:single_resturant_app/features/bottom_nav/presentation/views/bottom_nav_view.dart';
 import 'package:single_resturant_app/features/cart/data/repos/cart_repo.dart';
+import 'package:single_resturant_app/features/checkout/data/repo/checkout_repo.dart';
+import 'package:single_resturant_app/features/checkout/presentation/controllers/checkout_cubit.dart';
 import 'package:single_resturant_app/features/meal/data/repos/categories_repo.dart';
 import 'package:single_resturant_app/features/meal/presentation/controllers/categories_cubit.dart';
 import 'package:single_resturant_app/features/my_address/presentation/manager/address_cubit.dart';
@@ -64,6 +66,11 @@ class SingleApp extends StatelessWidget {
         BlocProvider(
           create: (context) => CategoriesCubit(
             ServiceLocatorHelper.getIt.get<CategoriesRepo>(),
+          ),
+        ),
+          BlocProvider(
+          create: (context) => CheckoutCubit(
+            ServiceLocatorHelper.getIt.get<CheckoutRepo>(),
           ),
         ),
       ],

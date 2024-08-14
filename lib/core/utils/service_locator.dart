@@ -3,6 +3,8 @@ import 'package:single_resturant_app/core/utils/api_services.dart';
 import 'package:single_resturant_app/core/utils/cache_service.dart';
 import 'package:single_resturant_app/features/cart/data/repos/cart_repo.dart';
 import 'package:single_resturant_app/features/cart/data/repos/cart_repo_impl.dart';
+import 'package:single_resturant_app/features/checkout/data/repo/checkout_repo.dart';
+import 'package:single_resturant_app/features/checkout/data/repo/checkout_repo_impl.dart';
 import 'package:single_resturant_app/features/meal/data/repos/categories_repo.dart';
 import 'package:single_resturant_app/features/meal/data/repos/categories_repo_impl.dart';
 
@@ -27,6 +29,12 @@ getIt.get<CacheServiceHeper>(),
     );
       getIt.registerSingleton<CartRepo>(
       CartRepoImpl(
+        apiService: getIt.get<ApiService>(),
+      ),
+    );
+
+       getIt.registerSingleton<CheckoutRepo>(
+      CheckoutRepoImpl(
         apiService: getIt.get<ApiService>(),
       ),
     );

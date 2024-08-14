@@ -90,13 +90,13 @@ class TotalPriceWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'Total',  
+                'Total',
                 style: TextStyles.black16SemiBold,
               ),
               RichText(
                 text: TextSpan(
                   text:
-                          '${context.read<CartCubit>().cart.map((model) => model.price).reduce((a, b) => a! + b!)}',
+                      '${context.watch<CartCubit>().cart.map((model) => model.price).reduce((a, b) => a! + b!)}',
                   style: TextStyles.darkPrimary16SemiBold,
                   children: const [
                     TextSpan(
