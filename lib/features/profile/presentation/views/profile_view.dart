@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/utils/app_colors.dart';
-import '../widgets/custom_photo_container.dart';
+import '../../../auth/presentation/manager/user_cubit.dart';
+import '../widgets/profile_photo_container.dart';
 import '../widgets/log_out_container.dart';
 import '../widgets/more_information_container.dart';
 import '../widgets/my_account_container.dart';
@@ -14,6 +19,9 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
+  File? _image;
+  final picker = ImagePicker();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +42,24 @@ class _ProfileViewState extends State<ProfileView> {
                     fit: BoxFit.cover,
                   ),
                 ),
-                const CustomPhotoContainer(),
+                ProfilePhotoContainer(
+                  onPressedGallery: () async {
+                    var image =
+                        await picker.pickImage(source: ImageSource.gallery);
+                    _image = File(image!.path);
+                    BlocProvider.of<UserCubit>(context).uploadImage(_image!);
+                    // await BlocProvider.of<UserCubit>(context)
+                    //     .addImage(_image!);
+                  },
+                  onPressedCamera: () async {
+                    var image =
+                        await picker.pickImage(source: ImageSource.camera);
+                    _image = File(image!.path);
+                    BlocProvider.of<UserCubit>(context).uploadImage(_image!);
+                    // await BlocProvider.of<UserCubit>(context)
+                    //     .addImage(_image!);
+                  },
+                ),
               ],
             ),
             expandedHeight: 250,

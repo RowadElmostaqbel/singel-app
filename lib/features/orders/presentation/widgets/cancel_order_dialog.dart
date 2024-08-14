@@ -52,6 +52,14 @@ class CancelOrderDialog extends StatelessWidget {
                     children: [
                       Expanded(
                         child: CustomBtnWidget(
+                          onTap: () => context.pop(),
+                          color: const Color(0xffF4F4F4),
+                          text: 'Back',
+                          titleStyle: TextStyles.black16Medium,
+                        ),
+                      ),
+                      Expanded(
+                        child: CustomBtnWidget(
                           onTap: () => showDialog(
                             context: context,
                             builder: (context) =>
@@ -60,14 +68,6 @@ class CancelOrderDialog extends StatelessWidget {
                           color: AppColors.primaryColor,
                           text: 'Cancel',
                           titleStyle: TextStyles.white16Medium,
-                        ),
-                      ),
-                      Expanded(
-                        child: CustomBtnWidget(
-                          onTap: () => context.pop(),
-                          color: const Color(0xffF4F4F4),
-                          text: 'Back',
-                          titleStyle: TextStyles.black16Medium,
                         ),
                       ),
                     ],
