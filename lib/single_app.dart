@@ -59,7 +59,7 @@ class SingleApp extends StatelessWidget {
           ),
         ),
         BlocProvider(
-          create: (context) => AddressCubit(AddAddressRepo(apiService: ApiService())),
+          create: (context) => AddressCubit(),
         ),
         BlocProvider(
           create: (context) => CategoriesCubit(

@@ -8,10 +8,10 @@ import '../../data/models/get_address.dart';
 part 'address_state.dart';
 
 class AddressCubit extends Cubit<AddressState> {
-  final AddAddressRepo addAddressRepo;
+  AddAddressRepo? addAddressRepo;
   late GetAddress getAddress;
 
-  AddressCubit(this.addAddressRepo) : super(AddressInitial());
+  AddressCubit() : super(AddressInitial());
 
   AddAddressModel addAddressModel = AddAddressModel();
 
