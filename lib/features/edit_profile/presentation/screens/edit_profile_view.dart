@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:single_resturant_app/core/utils/cache_service.dart';
+import 'package:single_resturant_app/features/auth/data/models/user_model.dart';
+import 'package:single_resturant_app/features/profile/presentation/widgets/edit_my_photo_widget.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../profile/presentation/widgets/custom_photo_container.dart';
@@ -30,7 +33,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                 onTap: () {
                   Navigator.of(context).pop();
                 },
-                child:Container(
+                child: Container(
                   alignment: Alignment.center,
                   width: 35,
                   height: 35,
@@ -65,7 +68,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                     fit: BoxFit.cover,
                   ),
                 ),
-                const CustomPhotoContainer(),
+                const EditMyPhotoWidget(),
               ],
             ),
             expandedHeight: 250,
@@ -76,28 +79,35 @@ class _EditProfileViewState extends State<EditProfileView> {
                   const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24),
               child: Form(
                 child: Column(
-                  children: [const SizedBox(height: 50,),
+                  children: [
+                    const SizedBox(
+                      height: 50,
+                    ),
                     EditProfileTextFormField(
-                      initialValue: 'Mohamed Ali',
+                      initialValue:
+                          '${CacheServiceHeper().getData<UserModel>(boxName: 'user', key: 'user')?.data?.client?.name}',
                       prefixIcon:
                           Image.asset("assets/icons/profile/person.png"),
                     ),
-                    const SizedBox(height: 16,),
+                    const SizedBox(
+                      height: 16,
+                    ),
                     EditProfileTextFormField(
-                      initialValue: 'Mohamed Ali @gmail.com',
+                      initialValue:
+                          '${CacheServiceHeper().getData<UserModel>(boxName: 'user', key: 'user')?.data?.client?.email}',
                       prefixIcon: Image.asset("assets/icons/profile/email.png"),
                     ),
-                    const SizedBox(height: 16,),
+                    const SizedBox(
+                      height: 16,
+                    ),
                     EditProfileTextFormField(
-                      initialValue: '+96676438754',
+                      initialValue:
+                          '${CacheServiceHeper().getData<UserModel>(boxName: 'user', key: 'user')?.data?.client?.phone}',
                       prefixIcon: Image.asset("assets/icons/profile/phone.png"),
                     ),
-                    const SizedBox(height: 16,),
-                    EditProfileTextFormField(
-                      initialValue: '*************',
-                      prefixIcon: Image.asset("assets/icons/profile/lock.png"),
+                    const SizedBox(
+                      height: 96,
                     ),
-                    const SizedBox(height: 80,),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 20),
                       child: SizedBox(
@@ -113,7 +123,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(50),
                                       )),
-                                  onPressed:(){},
+                                  onPressed: () {},
                                   child: const Text(
                                     "Save",
                                     style: TextStyle(

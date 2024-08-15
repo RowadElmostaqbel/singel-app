@@ -65,7 +65,7 @@ class SingleApp extends StatelessWidget {
             AddressRepo(
               apiService: ServiceLocatorHelper.getIt.get<ApiService>(),
             ),
-          ),
+          )..fetchMyAddresses(),
         ),
         BlocProvider(
           create: (context) => CategoriesCubit(

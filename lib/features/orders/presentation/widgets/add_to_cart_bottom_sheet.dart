@@ -106,7 +106,8 @@ class AddToCartBottomSheet extends HookWidget {
                     );
               },
               child: Container(
-                margin: const EdgeInsets.symmetric(vertical: 24),
+                margin:
+                    const EdgeInsets.symmetric(vertical: 28, horizontal: 16),
                 padding: const EdgeInsets.symmetric(
                   horizontal: 28,
                   vertical: 8,
@@ -118,7 +119,7 @@ class AddToCartBottomSheet extends HookWidget {
                 ),
                 child: const Text(
                   'Add To Cart',
-                  style: TextStyles.white24SemiBold,
+                  style: TextStyles.white18SemiBold,
                 ),
               ),
             ),

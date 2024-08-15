@@ -16,9 +16,11 @@ class CheckoutCubit extends Cubit<CheckoutState> {
     paymentMethod: "cash",
     orderType: "delivery",
     phone: CacheServiceHeper()
-        .getData<UserModel>(key: 'user', boxName: 'user')!
-        .data!
-        .client!.phone, 
+            .getData<UserModel>(key: 'user', boxName: 'user')
+            ?.data
+            ?.client
+            ?.phone ??
+        '',
   );
   checkout() async {
     checkoutDataModel.clientId = CacheServiceHeper()

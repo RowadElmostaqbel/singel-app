@@ -31,7 +31,7 @@ class CustomBottomNavBar extends StatelessWidget {
             (item) => BottomBarItem(
               backgroundColor: AppColors.darkPrimaryColor,
               icon: SizedBox(
-                width: 20,
+                width: 18,
                 child: Image.asset(
                   item['image']!,
                   color: selectedIndex.value == items.indexOf(item)
@@ -40,10 +40,12 @@ class CustomBottomNavBar extends StatelessWidget {
                 ),
               ),
               title: Container(
-                margin: const EdgeInsets.only(right: 12),
+                margin: const EdgeInsets.only(right: 14),
                 child: Text(
                   item['title']!,
-                  style: TextStyles.white14Medium,
+                  style: TextStyles.white12Medium.copyWith(
+                    fontSize: 13,
+                  ),
                 ),
               ),
             ),
