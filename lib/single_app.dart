@@ -23,7 +23,6 @@ import 'features/auth/presentation/manager/user_cubit.dart';
 import 'features/cart/presentation/controllers/cubit/cart_cubit.dart';
 import 'features/my_address/data/repos/addressess_repo.dart';
 import 'features/orders/presentation/controllers/order_animation/cubit/order_animation_cubit.dart';
-import 'features/profile/presentation/views/profile_view.dart';
 
 class SingleApp extends StatelessWidget {
   const SingleApp({super.key});

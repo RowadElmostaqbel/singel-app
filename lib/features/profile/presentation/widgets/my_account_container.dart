@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
+import 'package:single_resturant_app/features/edit_password/presentation/views/edit_password.dart';
 import 'package:single_resturant_app/features/wishlist/presentation/views/wishlist_view.dart';
 
 import '../../../edit_profile/presentation/screens/edit_profile_view.dart';
@@ -51,7 +52,11 @@ class MyAccountContainer extends StatelessWidget {
           const NotificationsView(),
         );
       },
-      () {},
+      () {
+        context.navigateTo(
+          const EditPassword(),
+        );
+      },
       () {
         context.navigateTo(
           const WishListView(),
