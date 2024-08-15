@@ -1,23 +1,30 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:single_resturant_app/core/widgets/cached_network_image_widget.dart';
+import 'package:single_resturant_app/features/cart/presentation/views/cart_view.dart';
+import 'package:single_resturant_app/features/profile/presentation/controllers/profile_cubit.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/cache_service.dart';
 import '../../../auth/data/models/user_model.dart';
 
 class EditMyPhotoWidget extends HookWidget {
-  pickImage(
-      {required ImageSource source,
-      required ValueNotifier<File?> pickedImage}) async {
+  pickImage({
+    required ImageSource source,
+    required ValueNotifier<File?> pickedImage,
+    required BuildContext context,
+  }) async {
     final ImagePicker picker = ImagePicker();
 // Pick an image.
     final XFile? image = await picker.pickImage(source: source);
 
     pickedImage.value = File(image!.path);
+
+    context.read<ProfileCubit>().updateDataMap['image'] = pickedImage.value;
   }
 
   const EditMyPhotoWidget({super.key});
@@ -82,6 +89,7 @@ class EditMyPhotoWidget extends HookWidget {
                                 pickImage(
                                   source: ImageSource.gallery,
                                   pickedImage: pickedImage,
+                                  context: context,
                                 );
                               },
                               child: const Text(
@@ -93,6 +101,7 @@ class EditMyPhotoWidget extends HookWidget {
                                 pickImage(
                                   source: ImageSource.camera,
                                   pickedImage: pickedImage,
+                                  context: context,
                                 );
                               },
                               child: const Text(

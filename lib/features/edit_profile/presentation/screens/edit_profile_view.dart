@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:single_resturant_app/core/utils/cache_service.dart';
 import 'package:single_resturant_app/features/auth/data/models/user_model.dart';
 import 'package:single_resturant_app/features/profile/presentation/widgets/edit_my_photo_widget.dart';
 
 import '../../../../core/utils/app_colors.dart';
+import '../../../../core/widgets/custom_toast_widget.dart';
+import '../../../profile/presentation/controllers/profile_cubit.dart';
 import '../../../profile/presentation/widgets/custom_photo_container.dart';
 import '../widgets/edit_profile_text_form_field.dart';
 
-class EditProfileView extends StatefulWidget {
+class EditProfileView extends HookWidget {
   const EditProfileView({super.key});
 
   @override
-  State<EditProfileView> createState() => _EditProfileViewState();
-}
-
-class _EditProfileViewState extends State<EditProfileView> {
-  TextEditingController userName = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController phone = TextEditingController();
-  TextEditingController password = TextEditingController();
-
-  @override
   Widget build(BuildContext context) {
+    TextEditingController userName = useTextEditingController();
+    TextEditingController email = useTextEditingController();
+    TextEditingController phone = useTextEditingController();
+    TextEditingController password = useTextEditingController();
+    useEffect(() {
+      context.read<ProfileCubit>().resetUpdateDataMap();
+      return null;
+    }, []);
     return Scaffold(
       body: CustomScrollView(
         scrollDirection: Axis.vertical,
@@ -88,6 +90,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                           '${CacheServiceHeper().getData<UserModel>(boxName: 'user', key: 'user')?.data?.client?.name}',
                       prefixIcon:
                           Image.asset("assets/icons/profile/person.png"),
+                      dataKey: 'name',
                     ),
                     const SizedBox(
                       height: 16,
@@ -96,6 +99,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                       initialValue:
                           '${CacheServiceHeper().getData<UserModel>(boxName: 'user', key: 'user')?.data?.client?.email}',
                       prefixIcon: Image.asset("assets/icons/profile/email.png"),
+                      dataKey: 'email',
                     ),
                     const SizedBox(
                       height: 16,
@@ -104,56 +108,80 @@ class _EditProfileViewState extends State<EditProfileView> {
                       initialValue:
                           '${CacheServiceHeper().getData<UserModel>(boxName: 'user', key: 'user')?.data?.client?.phone}',
                       prefixIcon: Image.asset("assets/icons/profile/phone.png"),
+                      dataKey: 'phone',
                     ),
                     const SizedBox(
                       height: 96,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 20),
-                      child: SizedBox(
-                        height: 56,
-                        child: Stack(
-                          children: [
-                            SizedBox(
-                              height: 56,
-                              width: MediaQuery.sizeOf(context).width,
-                              child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: AppColors.primaryColor,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(50),
-                                      )),
-                                  onPressed: () {},
-                                  child: const Text(
-                                    "Save",
-                                    style: TextStyle(
-                                      fontFamily: "Montserrat",
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.white,
-                                      fontSize: 20,
+                      child: BlocConsumer<ProfileCubit, ProfileState>(
+                        listener: (context, state) {
+                          if (state is EditProfileFailureState) {
+                            showTaost(state.error, Colors.redAccent);
+                          } else if (state is EditProfileSuccessState) {
+                            showTaost('Profile Updated', Colors.greenAccent);
+                          }
+                        },
+                        builder: (context, state) {
+                          return SizedBox(
+                            height: 56,
+                            child: Stack(
+                              children: [
+                                SizedBox(
+                                  height: 56,
+                                  width: MediaQuery.sizeOf(context).width,
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              AppColors.primaryColor,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                          )),
+                                      onPressed: () {
+                                        context
+                                            .read<ProfileCubit>()
+                                            .updateProfile();
+                                      },
+                                      child: state is EditProfileLoadingState
+                                          ? const Center(
+                                              child: CircularProgressIndicator(
+                                                color: Colors.white,
+                                              ),
+                                            )
+                                          : const Text(
+                                              "Save",
+                                              style: TextStyle(
+                                                fontFamily: "Montserrat",
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                              ),
+                                            )),
+                                ),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 4),
+                                    child: Container(
+                                      height: 50,
+                                      width: 50,
+                                      decoration: const BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: const Icon(
+                                        Icons.arrow_forward_outlined,
+                                        color: AppColors.primaryColor,
+                                      ),
                                     ),
-                                  )),
-                            ),
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 4),
-                                child: Container(
-                                  height: 50,
-                                  width: 50,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: const Icon(
-                                    Icons.arrow_forward_outlined,
-                                    color: AppColors.primaryColor,
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
-                          ],
-                        ),
+                          );
+                        },
                       ),
                     ),
                   ],
