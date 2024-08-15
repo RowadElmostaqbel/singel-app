@@ -29,7 +29,7 @@ class CategoryModel {
       desc: json['description'],
       img: json['image']
           .toString()
-          .replaceFirst('https://deliback.rowaduae.com/storage/', ''),
+          ,
      
     );
   }

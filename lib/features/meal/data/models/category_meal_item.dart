@@ -31,9 +31,7 @@ class CategoryMealItem {
       isActive: json['isActive'] == 1 ? true : false,
       name: json['name'],
       desc: json['description'],
-      img: json['image'].toString().replaceAll(
-          'https://deliback.rowaduae.com/storage/',
-          ''),
+      img: json['image'].toString(),
       price: json['price'],
       preparationTime: json['preparation_time'],
       details: json['details'],
