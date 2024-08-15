@@ -92,18 +92,25 @@ class CheckoutView extends HookWidget {
                   ),
                   SizedBox(
                     height: 143,
-                    child: BlocBuilder<AddressCubit, AddressState>(
-                      builder: (context, state) {
-                        if (addressess.isNotEmpty) {
-                          return MyAddressesListView(addressess: addressess);
-                        } else if (state is FetchAddressLoadingState &&
-                            addressess.isEmpty) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
+                    child: BlocListener<AddressCubit, AddressState>(
+                      listener: (context, state) {
+                        if (state is SendAddressToServerLoadedState) {
+                          context.read<AddressCubit>().fetchMyAddresses();
                         }
-                        return const SizedBox();
                       },
+                      child: BlocBuilder<AddressCubit, AddressState>(
+                        builder: (context, state) {
+                          if (addressess.isNotEmpty) {
+                            return MyAddressesListView(addressess: addressess);
+                          } else if (state is FetchAddressLoadingState &&
+                              addressess.isEmpty) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          return const SizedBox();
+                        },
+                      ),
                     ),
                   ),
                   const Text(

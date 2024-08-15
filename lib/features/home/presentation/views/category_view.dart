@@ -179,7 +179,10 @@ class MealGridItem extends StatelessWidget {
                             ),
                           ],
                         )),
-                    const AddToFavBtn(),
+                    const AddToFavBtn(
+                      isLiked: false,
+                      mealId: '',
+                    ),
                   ],
                 ),
               ),
@@ -268,7 +271,10 @@ class ResturantCategoryView extends HookWidget {
               Expanded(
                 child: Column(
                   children: [
-                    const AddToFavBtn(),
+                    const AddToFavBtn(
+                      isLiked: false,
+                      mealId: '',
+                    ),
                     const Gap(15),
                     Row(
                       children: [

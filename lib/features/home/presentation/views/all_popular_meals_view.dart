@@ -40,6 +40,7 @@ class AllPopularMealsView extends StatelessWidget {
                 name: 'name',
                 desc: 'desc',
                 img: '',
+                isFavorite: false,
               ),
                   ),
                   itemCount: 9,

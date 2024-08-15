@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:single_resturant_app/core/utils/extensions.dart';
+import 'package:single_resturant_app/features/auth/data/models/user_model.dart';
+import 'package:single_resturant_app/features/auth/presentation/manager/user_cubit.dart';
+import 'package:single_resturant_app/features/auth/presentation/views/login_view.dart';
+import 'package:single_resturant_app/features/cart/presentation/views/cart_view.dart';
 
 import '../../../../core/utils/app_colors.dart';
 
@@ -15,7 +22,7 @@ class LogoutDialog extends StatelessWidget {
             borderRadius: BorderRadius.circular(24),
             child: SizedBox(
               height: MediaQuery.sizeOf(context).height * 0.15,
-              width: MediaQuery.sizeOf(context).width * 0.8,
+              width: MediaQuery.sizeOf(context).width * 0.825,
               child: Container(
                 decoration: const BoxDecoration(color: Colors.white),
                 child: Padding(
@@ -40,7 +47,9 @@ class LogoutDialog extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(12),
                                       side: const BorderSide(
                                           color: AppColors.primaryColor))),
-                              onPressed: () {},
+                              onPressed: () {
+                                context.pop();
+                              },
                               child: const Text(
                                 "Cancel",
                                 style: TextStyle(
@@ -50,23 +59,42 @@ class LogoutDialog extends StatelessWidget {
                                   fontSize: 20,
                                 ),
                               )),
-                          SizedBox(
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: AppColors.primaryColor,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                    )),
-                                onPressed: () {},
-                                child: const Text(
-                                  "logout",
-                                  style: TextStyle(
-                                    fontFamily: "Montserrat",
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                  ),
-                                )),
+                          BlocConsumer<UserCubit, UserState>(
+                            listener: (context, state) {
+                              if (state is AuthLoadedState) {
+                                Hive.box<UserModel>('user').clear();
+                                context.navigateToReplacement(
+                                  const LoginView(),
+                                );
+                              }
+                            },
+                            builder: (context, state) {
+                              return SizedBox(
+                                child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor: AppColors.primaryColor,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        )),
+                                    onPressed: () {
+                                      context.read<UserCubit>().logout();
+                                    },
+                                    child: state is AuthLoadingState
+                                        ? const CircularProgressIndicator(
+                                            color: Colors.white,
+                                          )
+                                        : const Text(
+                                            "logout",
+                                            style: TextStyle(
+                                              fontFamily: "Montserrat",
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                            ),
+                                          )),
+                              );
+                            },
                           ),
                         ],
                       )
@@ -78,7 +106,7 @@ class LogoutDialog extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 315,
+          top: context.height * .365,
           left: 50,
           child: Container(
               height: 60,
@@ -88,7 +116,7 @@ class LogoutDialog extends StatelessWidget {
               child: Image.asset("assets/icons/logout.png")),
         ),
         Positioned(
-          top: 405,
+          top: context.height * .475,
           left: 35,
           child: Image.asset("assets/images/dialog_decoration.png"),
         ),

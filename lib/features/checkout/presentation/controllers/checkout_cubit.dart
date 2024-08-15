@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:single_resturant_app/features/checkout/data/models/send_checkout_data_model.dart';
@@ -29,7 +31,15 @@ class CheckoutCubit extends Cubit<CheckoutState> {
         .client!
         .id
         .toString();
+    checkoutDataModel.phone = CacheServiceHeper()
+        .getData<UserModel>(key: 'user', boxName: 'user')!
+        .data!
+        .client!
+        .phone
+        .toString();
     emit(CheckoutLoading());
+
+    log(name: 'cart', checkoutDataModel.toJson().toString());
     final result = await checkoutRepo.checkout(
       checkoutDataModel,
     );

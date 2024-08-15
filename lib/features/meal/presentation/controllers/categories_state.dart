@@ -64,3 +64,4 @@ final class MealsFailureState extends CategoriesState {
   const MealsFailureState(this.failure);
 }
 
+final class ChangeInMealState extends CategoriesState {}

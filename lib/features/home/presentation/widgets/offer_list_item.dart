@@ -55,7 +55,7 @@ class OfferListITem extends StatelessWidget {
                     alignment: Alignment.center,
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     height: 32,
-                    width: constraints.maxWidth * .3,
+                    width: constraints.maxWidth * .4,
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.centerLeft,
@@ -76,7 +76,10 @@ class OfferListITem extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  const AddToFavBtn(),
+                  const AddToFavBtn(
+                    isLiked: false,
+                    mealId: '12',
+                  ),
                 ],
               ),
             ),

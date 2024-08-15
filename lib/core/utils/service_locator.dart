@@ -7,6 +7,7 @@ import 'package:single_resturant_app/features/checkout/data/repo/checkout_repo.d
 import 'package:single_resturant_app/features/checkout/data/repo/checkout_repo_impl.dart';
 import 'package:single_resturant_app/features/meal/data/repos/categories_repo.dart';
 import 'package:single_resturant_app/features/meal/data/repos/categories_repo_impl.dart';
+import 'package:single_resturant_app/features/meal/presentation/controllers/categories_cubit.dart';
 import 'package:single_resturant_app/features/profile/data/repo/edit_profile_repo.dart';
 import 'package:single_resturant_app/features/profile/data/repo/edit_profile_repo_impl.dart';
 
@@ -38,9 +39,14 @@ abstract class ServiceLocatorHelper {
         apiService: getIt.get<ApiService>(),
       ),
     );
-       getIt.registerSingleton<EditProfileRepo>(
+    getIt.registerSingleton<EditProfileRepo>(
       EditProfileRepoImpl(
         apiService: getIt.get<ApiService>(),
+      ),
+    );
+    getIt.registerSingleton<CategoriesCubit>(
+      CategoriesCubit(
+        getIt.get<CategoriesRepo>(),
       ),
     );
   }

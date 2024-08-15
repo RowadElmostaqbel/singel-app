@@ -52,6 +52,7 @@ class PopularMealsListView extends StatelessWidget {
                 name: 'name',
                 desc: 'desc',
                 img: '',
+                isFavorite: false,
               ),
             ),
             scrollDirection: Axis.horizontal,

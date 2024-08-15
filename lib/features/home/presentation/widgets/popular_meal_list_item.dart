@@ -92,7 +92,10 @@ class PopularMealListItem extends StatelessWidget {
                                 ),
                               ],
                             )),
-                        const AddToFavBtn(),
+                        AddToFavBtn(
+                          mealId: categoryMealItem.id.toString(),
+                          isLiked: categoryMealItem.isFavorite,
+                        ),
                       ],
                     ),
                   ),

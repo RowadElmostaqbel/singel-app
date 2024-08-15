@@ -47,7 +47,7 @@ class CategoriesCubit extends Cubit<CategoriesState> {
     );
   }
 
-   changeSelectedSubCategoryId(int index) {
+  changeSelectedSubCategoryId(int index) {
     selectedSubCategoryId = index;
     emit(
       SelectedSubCategoriesIdChangedState(
@@ -94,5 +94,9 @@ class CategoriesCubit extends Cubit<CategoriesState> {
         mealsByCategory[categoryId] = meals;
       },
     );
+  }
+
+  triggerAChangeInMealState() {
+    emit(ChangeInMealState());
   }
 }

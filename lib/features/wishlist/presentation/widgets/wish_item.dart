@@ -130,7 +130,10 @@ class WishItem extends StatelessWidget {
           const Positioned(
             top: 35,
             right: 0,
-            child: AddToFavBtn(),
+            child: AddToFavBtn(
+              isLiked: false,
+              mealId: '',
+            ),
           )
         ],
       ),

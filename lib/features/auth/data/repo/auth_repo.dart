@@ -16,13 +16,36 @@ class AuthRepo {
 
   Future<Either<Failure, bool>> register(
     RegisterDataModel registerData,
-    File image,
+    File? image,
   ) async {
     try {
       final data = await apiService.postFormData(
         endpoint: 'client/auth/register',
         data: registerData.toJson(),
         image: image,
+      );
+      return Right(
+        data['status'],
+      );
+    } on DioException catch (e) {
+      log(name: 'error', e.toString());
+      return Left(
+        ServerFailure.fromDioException(e),
+      );
+    } catch (e) {
+      log(name: 'error', e.toString());
+
+      return Left(
+        ServerFailure(e.toString()),
+      );
+    }
+  }
+
+  Future<Either<Failure, bool>> logout() async {
+    try {
+      final data = await apiService.post(
+        endpoint: 'client/auth/logout',
+        data: {},
       );
       return Right(
         data['status'],

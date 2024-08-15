@@ -17,13 +17,12 @@ class UserCubit extends Cubit<UserState> {
   final CacheServiceHeper cacheServiceHeper;
   late UserModel userModel;
   final AuthRepo authRepo;
-File? image;
+  File? image;
   UserCubit(this.authRepo, this.cacheServiceHeper) : super(UserInitial());
   RegisterDataModel registerDataModel = RegisterDataModel();
 
   addUserName(String userName) {
     registerDataModel.name = userName;
-
   }
 
   // addImage(File image) {
@@ -35,7 +34,7 @@ File? image;
     registerDataModel.email = email;
   }
 
-   uploadImage(File file) async {
+  uploadImage(File file) async {
     image = file;
     // String fileName = file.path.split('/').last;
     // return FormData.fromMap({
@@ -59,7 +58,7 @@ File? image;
     emit(AuthLoadingState());
     final res = await authRepo.register(
       registerDataModel,
-      image!,
+      image,
     );
     res.fold((failure) {
       emit(
@@ -68,7 +67,22 @@ File? image;
         ),
       );
     }, (user) {
-     
+      emit(
+        AuthLoadedState(),
+      );
+    });
+  }
+
+  logout() async {
+    emit(AuthLoadingState());
+    final res = await authRepo.logout();
+    res.fold((failure) {
+      emit(
+        AuthFailureState(
+          error: failure.msg,
+        ),
+      );
+    }, (user) {
       emit(
         AuthLoadedState(),
       );

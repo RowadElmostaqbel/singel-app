@@ -6,6 +6,7 @@ class CategoryMealItem {
   dynamic details;
   final int? restaurantId;
   final bool? isActive;
+   bool isFavorite;
   final String? name;
   final String? desc;
   final String? img;
@@ -15,6 +16,7 @@ class CategoryMealItem {
     required this.subCategoryId,
     required this.restaurantId,
     required this.isActive,
+    required this.isFavorite,
     required this.name,
     required this.desc,
     required this.img,
@@ -28,7 +30,8 @@ class CategoryMealItem {
       id: json['id'],
       subCategoryId: json['subCategoryId'],
       restaurantId: json['restaurantId'],
-      isActive: json['isActive'] == 1 ? true : false,
+      isActive: json['is_active'] == 1 ? true : false,
+      isFavorite: json['isFavourite']??false ,
       name: json['name'],
       desc: json['description'],
       img: json['image'].toString(),

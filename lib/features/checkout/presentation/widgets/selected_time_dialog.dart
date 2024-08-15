@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:single_resturant_app/core/utils/extensions.dart';
+import 'package:single_resturant_app/features/cart/presentation/views/cart_view.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/text_styles.dart';
@@ -18,7 +20,7 @@ class SelectedTimeDialog extends StatelessWidget {
             borderRadius: BorderRadius.circular(24),
             child: SizedBox(
               height: MediaQuery.sizeOf(context).height * 0.2,
-              width: MediaQuery.sizeOf(context).width * 0.8,
+              width: MediaQuery.sizeOf(context).width * 0.9,
               child: Container(
                 decoration: const BoxDecoration(color: Colors.white),
                 child: Padding(
@@ -92,7 +94,9 @@ class SelectedTimeDialog extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(12),
                                       side: const BorderSide(
                                           color: AppColors.primaryColor))),
-                              onPressed: () {},
+                              onPressed: () {
+                                context.pop();
+                              },
                               child: const Text(
                                 "Cancel",
                                 style: TextStyle(
@@ -109,7 +113,9 @@ class SelectedTimeDialog extends StatelessWidget {
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(12),
                                     )),
-                                onPressed: () {},
+                                onPressed: () {
+                                  context.pop();
+                                },
                                 child: const Text(
                                   "Add New",
                                   style: TextStyle(
@@ -130,8 +136,8 @@ class SelectedTimeDialog extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 300,
-          left: 50,
+          top: context.height * .35,
+          left: 25,
           child: Container(
               height: 60,
               width: 60,
@@ -140,8 +146,8 @@ class SelectedTimeDialog extends StatelessWidget {
               child: Image.asset("assets/icons/white_clock.png")),
         ),
         Positioned(
-          top: 425,
-          left: 35,
+          top: context.height * .5,
+          left: 15,
           child: Image.asset("assets/images/dialog_decoration.png"),
         ),
       ]),

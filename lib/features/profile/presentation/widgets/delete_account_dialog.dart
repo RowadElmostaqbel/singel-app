@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:single_resturant_app/core/utils/extensions.dart';
+import 'package:single_resturant_app/features/cart/presentation/views/cart_view.dart';
 
 import '../../../../core/utils/app_colors.dart';
 
@@ -7,7 +9,7 @@ class DeleteAccountDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  SizedBox(
+    return SizedBox(
       height: MediaQuery.sizeOf(context).height,
       child: Stack(children: [
         Center(
@@ -40,7 +42,9 @@ class DeleteAccountDialog extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(12),
                                       side: const BorderSide(
                                           color: AppColors.primaryColor))),
-                              onPressed: () {},
+                              onPressed: () {
+                                context.pop();
+                              },
                               child: const Text(
                                 "Cancel",
                                 style: TextStyle(
@@ -57,7 +61,9 @@ class DeleteAccountDialog extends StatelessWidget {
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(12),
                                     )),
-                                onPressed: () {},
+                                onPressed: () {
+                                  context.pop();
+                                },
                                 child: const Text(
                                   "Delete",
                                   style: TextStyle(
@@ -78,7 +84,7 @@ class DeleteAccountDialog extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 315,
+          top: context.height * .365,
           left: 50,
           child: Container(
               height: 60,
@@ -88,7 +94,7 @@ class DeleteAccountDialog extends StatelessWidget {
               child: Image.asset("assets/icons/trash.png")),
         ),
         Positioned(
-          top: 405,
+          top: context.height * .475,
           left: 35,
           child: Image.asset("assets/images/dialog_decoration.png"),
         ),

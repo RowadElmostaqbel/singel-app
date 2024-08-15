@@ -44,7 +44,7 @@ class _AddNewAddressDialogState extends State<AddNewAddressDialog> {
             content: ClipRRect(
               borderRadius: BorderRadius.circular(28),
               child: SizedBox(
-                height: context.height * 0.76,
+                height: context.height * 0.8,
                 child: Column(
                   children: [
                     Container(

@@ -7,6 +7,7 @@ import 'package:single_resturant_app/core/utils/assets.dart';
 import 'package:single_resturant_app/core/utils/bloc_observer.dart';
 import 'package:single_resturant_app/core/utils/cache_service.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
+import 'package:single_resturant_app/core/widgets/cached_network_image_widget.dart';
 import 'package:single_resturant_app/features/auth/data/models/user_model.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/categories_list_view.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/offers_list_view.dart';
@@ -71,9 +72,21 @@ class HomeView extends HookWidget {
         leading: Row(
           children: [
             const Gap(10),
-            CircleAvatar(
-              radius: 30,
-              child: Image.asset(Assets.assetsImagesProfile),
+            Container(
+              clipBehavior: Clip.antiAlias,
+              height: 50,
+              width: 50,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+              ),
+              child: CachedNetworkImageWidget(
+                url: CacheServiceHeper()
+                        .getData<UserModel>(boxName: 'user', key: 'user')
+                        ?.data
+                        ?.client
+                        ?.image ??
+                    '',
+              ),
             ),
           ],
         ),
@@ -144,12 +157,12 @@ class HomeView extends HookWidget {
                 child: CategoriesListView(),
               ),
             ),
-            const SliverToBoxAdapter(
-              child: Gap(24),
-            ),
-            const SliverToBoxAdapter(
-              child: PopularMealsListView(),
-            ),
+            // const SliverToBoxAdapter(
+            //   child: Gap(24),
+            // ),
+            // const SliverToBoxAdapter(
+            //   child: PopularMealsListView(),
+            // ),
             const SliverToBoxAdapter(
               child: Gap(24),
             ),
