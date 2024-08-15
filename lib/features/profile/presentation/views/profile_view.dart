@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -35,7 +37,24 @@ class ProfileView extends HookWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                const CustomPhotoContainer(),
+                ProfilePhotoContainer(
+                  onPressedGallery: () async {
+                    var image =
+                        await picker.pickImage(source: ImageSource.gallery);
+                    _image = File(image!.path);
+                    BlocProvider.of<UserCubit>(context).uploadImage(_image!);
+                    // await BlocProvider.of<UserCubit>(context)
+                    //     .addImage(_image!);
+                  },
+                  onPressedCamera: () async {
+                    var image =
+                        await picker.pickImage(source: ImageSource.camera);
+                    _image = File(image!.path);
+                    BlocProvider.of<UserCubit>(context).uploadImage(_image!);
+                    // await BlocProvider.of<UserCubit>(context)
+                    //     .addImage(_image!);
+                  },
+                ),
               ],
             ),
             expandedHeight: 250,

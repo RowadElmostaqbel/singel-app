@@ -16,6 +16,9 @@ class ContactUs extends StatefulWidget {
 class _ContactUsState extends State<ContactUs> {
   List icons = ["snapchat", "facebook", "x", "Instagram", "tiktok"];
   TextEditingController username = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController phone = TextEditingController();
+  TextEditingController textMessage = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -251,7 +254,7 @@ class _ContactUsState extends State<ContactUs> {
                             icon: "assets/icons/red_profile.png",
                             onChanged: (value) {}),
                         CustomTextFormField(
-                            controller: username,
+                            controller: email,
                             label: "Email",
                             hintText: "example@gmail.com",
                             keyboardType: TextInputType.name,
@@ -261,7 +264,7 @@ class _ContactUsState extends State<ContactUs> {
                             icon: "assets/icons/sms.png",
                             onChanged: (value) {}),
                         CustomTextFormField(
-                            controller: username,
+                            controller: phone,
                             label: "Phone Number",
                             hintText: "0123456789",
                             keyboardType: TextInputType.name,
@@ -269,16 +272,6 @@ class _ContactUsState extends State<ContactUs> {
                               return null;
                             },
                             icon: "assets/icons/phone.png",
-                            onChanged: (value) {}),
-                        CustomTextFormField(
-                            controller: username,
-                            label: "Message Type",
-                            hintText: "select one",
-                            keyboardType: TextInputType.name,
-                            validator: (value) {
-                              return null;
-                            },
-                            icon: "assets/icons/message.png",
                             onChanged: (value) {}),
                         const CustomDropDownButtonFormField(
                           dropDownList: [
@@ -298,6 +291,7 @@ class _ContactUsState extends State<ContactUs> {
                               children: [
                                 SizedBox(
                                   child: TextFormField(
+                                    controller: textMessage,
                                     keyboardType: TextInputType.text,
                                     validator: (value) {
                                       return null;

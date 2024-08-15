@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/features/orders/presentation/widgets/cancel_order_reason_radio_widget.dart';
+import 'package:single_resturant_app/features/orders/presentation/widgets/who_canceled_order_widget.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/text_styles.dart';
@@ -22,7 +23,7 @@ class ConfirmCancelOrderDialog extends StatelessWidget {
       insetPadding: EdgeInsets.zero,
       content: Container(
         width: context.width * .75,
-        height: context.height * .375,
+        height: context.height * .66,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: Colors.white,
@@ -68,8 +69,7 @@ class ConfirmCancelOrderDialog extends StatelessWidget {
                 horizontal: 20,
               ),
               child: Column(
-                crossAxisAlignment:
-                    CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
                     'Select some of the reasons that made you cancel the order',
@@ -77,6 +77,20 @@ class ConfirmCancelOrderDialog extends StatelessWidget {
                   ),
                   const Gap(24),
                   const CancelOrderReasonRadioWidget(),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 24),
+                    height: 1,
+                    decoration: BoxDecoration(
+                      color: AppColors.greyColor,
+
+                    ),
+                  ),
+                  const Text(
+                    'Select who cancel the order :',
+                    style: TextStyles.darkGrey14Regular,
+                  ),
+                  const Gap(24),
+                  const WhoCanceledOrderWidget(),
                   CustomBtnWidget(
                     onTap: () {
                       context.pop();
@@ -84,8 +98,7 @@ class ConfirmCancelOrderDialog extends StatelessWidget {
                     },
                     color: AppColors.primaryColor,
                     text: 'Confirm',
-                    titleStyle:
-                        TextStyles.white16Medium,
+                    titleStyle: TextStyles.white16Medium,
                     radius: 12,
                   ),
                 ],
