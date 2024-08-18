@@ -10,6 +10,7 @@ import 'package:single_resturant_app/core/utils/text_styles.dart';
 import 'package:single_resturant_app/core/widgets/cached_network_image_widget.dart';
 import 'package:single_resturant_app/features/meal/data/models/category_model.dart';
 import 'package:single_resturant_app/features/meal/presentation/controllers/categories_cubit.dart';
+import 'package:single_resturant_app/features/wishlist/presentation/controllers/whishlist_cubit.dart';
 
 class CategoriesListView extends HookWidget {
   const CategoriesListView({

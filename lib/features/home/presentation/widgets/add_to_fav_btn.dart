@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:single_resturant_app/core/utils/app_colors.dart';
+import 'package:single_resturant_app/features/meal/data/models/category_meal_item.dart';
 import 'package:single_resturant_app/features/wishlist/presentation/controllers/whishlist_cubit.dart';
 
 class AddToFavBtn extends HookWidget {
   final bool isLiked;
-  final String mealId;
+  final CategoryMealItem? mealItem;
   const AddToFavBtn({
     super.key,
     required this.isLiked,
-    required this.mealId,
+     this.mealItem,
   });
 
   @override
@@ -18,7 +19,8 @@ class AddToFavBtn extends HookWidget {
     ValueNotifier<bool> isFavorite = useState(isLiked);
     return BlocConsumer<WhishlistCubit, WhishlistState>(
       listener: (context, state) {
-        if (state is WhishlistChangedState && state.id==int.tryParse(mealId)) {
+        if (state is WhishlistChangedState &&
+            state.id == mealItem!.id) {
           isFavorite.value = state.status;
         }
       },
@@ -27,7 +29,7 @@ class AddToFavBtn extends HookWidget {
           onTap: () {
             context
                 .read<WhishlistCubit>()
-                .toggleFavoriteLocally(int.tryParse(mealId) ?? 0);
+                .toggleFavorite(mealItem!);
           },
           child: Container(
             margin: const EdgeInsets.only(right: 10, top: 10),

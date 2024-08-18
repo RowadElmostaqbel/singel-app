@@ -6,11 +6,12 @@ class CategoryMealItem {
   dynamic details;
   final int? restaurantId;
   final bool? isActive;
-   bool isFavorite;
+  bool isFavorite;
   final String? name;
   final String? desc;
   final String? img;
-
+  dynamic rate;
+  SubCategoryModel? subCategoryModel;
   CategoryMealItem({
     required this.id,
     required this.subCategoryId,
@@ -23,6 +24,8 @@ class CategoryMealItem {
     this.price,
     this.preparationTime,
     this.details,
+    this.rate,
+    this.subCategoryModel,
   });
 
   factory CategoryMealItem.fromJson(Map<String, dynamic> json) {
@@ -31,13 +34,31 @@ class CategoryMealItem {
       subCategoryId: json['subCategoryId'],
       restaurantId: json['restaurantId'],
       isActive: json['is_active'] == 1 ? true : false,
-      isFavorite: json['isFavourite']??false ,
+      isFavorite: json['isFavourite'] ?? false,
       name: json['name'],
       desc: json['description'],
       img: json['image'].toString(),
       price: json['price'],
       preparationTime: json['preparation_time'],
       details: json['details'],
+      rate: json['rate'],
+      subCategoryModel: SubCategoryModel.fromJson(
+        json['sub_category'] ?? {},
+      ),
+    );
+  }
+}
+
+class SubCategoryModel {
+  final int? id;
+  final String? name;
+
+  SubCategoryModel({required this.id, required this.name});
+
+  factory SubCategoryModel.fromJson(Map<String, dynamic> json) {
+    return SubCategoryModel(
+      id: json['id'],
+      name: json['name'],
     );
   }
 }

@@ -103,7 +103,6 @@ class ResultItem extends StatelessWidget {
                               ],
                             )),
                         const AddToFavBtn(
-                          mealId: '',
                           isLiked: false,
                         ),
                       ],

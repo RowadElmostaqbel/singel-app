@@ -84,7 +84,6 @@ class FastDelivaryListItem extends StatelessWidget {
                           ],
                         )),
                     const AddToFavBtn(
-                      mealId: '1',
                       isLiked: false,
                     ),
                   ],

@@ -63,6 +63,7 @@ class LogoutDialog extends StatelessWidget {
                             listener: (context, state) {
                               if (state is AuthLoadedState) {
                                 Hive.box<UserModel>('user').clear();
+                                Hive.box<UserModel>('remember_me').clear();
                                 context.navigateToReplacement(
                                   const LoginView(),
                                 );

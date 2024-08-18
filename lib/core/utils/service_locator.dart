@@ -10,6 +10,8 @@ import 'package:single_resturant_app/features/meal/data/repos/categories_repo_im
 import 'package:single_resturant_app/features/meal/presentation/controllers/categories_cubit.dart';
 import 'package:single_resturant_app/features/profile/data/repo/edit_profile_repo.dart';
 import 'package:single_resturant_app/features/profile/data/repo/edit_profile_repo_impl.dart';
+import 'package:single_resturant_app/features/wishlist/data/repo/whishlist_repo.dart';
+import 'package:single_resturant_app/features/wishlist/data/repo/whishlist_repo_impl.dart';
 
 abstract class ServiceLocatorHelper {
   static GetIt getIt = GetIt.instance;
@@ -47,6 +49,11 @@ abstract class ServiceLocatorHelper {
     getIt.registerSingleton<CategoriesCubit>(
       CategoriesCubit(
         getIt.get<CategoriesRepo>(),
+      ),
+    );
+    getIt.registerSingleton<WhishlistRepo>(
+      WhishlistRepoImpl(
+      apiService:   getIt.get<ApiService>(),
       ),
     );
   }

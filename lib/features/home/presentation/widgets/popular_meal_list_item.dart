@@ -79,21 +79,21 @@ class PopularMealListItem extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            child: const Row(
+                            child: Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.star,
                                   color: AppColors.yellowColor,
                                 ),
-                                Gap(6),
+                                const Gap(6),
                                 Text(
-                                  '4.2',
+                                  categoryMealItem.rate.toString(),
                                   style: TextStyles.darkGrey14Regular,
                                 ),
                               ],
                             )),
                         AddToFavBtn(
-                          mealId: categoryMealItem.id.toString(),
+                          mealItem: categoryMealItem,
                           isLiked: categoryMealItem.isFavorite,
                         ),
                       ],

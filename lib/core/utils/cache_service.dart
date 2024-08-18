@@ -11,6 +11,7 @@ class CacheServiceHeper {
     Hive.registerAdapter(DataAdapter());
     Hive.registerAdapter(UserModelAdapter());
     await Hive.openBox<UserModel>('user');
+    await Hive.openBox<bool>('remember_me');
   }
 
   storeData<T>(

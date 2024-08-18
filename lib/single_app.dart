@@ -19,6 +19,7 @@ import 'package:single_resturant_app/features/my_address/presentation/manager/ad
 import 'package:single_resturant_app/features/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:single_resturant_app/features/profile/data/repo/edit_profile_repo.dart';
 import 'package:single_resturant_app/features/profile/presentation/controllers/profile_cubit.dart';
+import 'package:single_resturant_app/features/wishlist/data/repo/whishlist_repo.dart';
 import 'package:single_resturant_app/features/wishlist/presentation/controllers/whishlist_cubit.dart';
 
 import 'features/auth/presentation/manager/login_cubit.dart';
@@ -86,7 +87,7 @@ class SingleApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => WhishlistCubit(
-            ServiceLocatorHelper.getIt.get<CategoriesCubit>(),
+            ServiceLocatorHelper.getIt.get<WhishlistRepo>(),
           ),
         ),
       ],
@@ -109,12 +110,15 @@ class SingleApp extends StatelessWidget {
           duration: 1500,
           splash: Image.asset('assets/images/logo.png'),
           splashIconSize: 100,
-          nextScreen: (CacheServiceHeper()
-                          .getData<UserModel>(boxName: 'user', key: 'user')
-                          ?.data
-                          ?.token ??
-                      '')
-                  .isNotEmpty
+          nextScreen: ((CacheServiceHeper()
+                              .getData<UserModel>(boxName: 'user', key: 'user')
+                              ?.data
+                              ?.token ??
+                          '')
+                      .isNotEmpty &&
+                  (CacheServiceHeper().getData<bool>(
+                          boxName: 'remember_me', key: 'remember_me') ??
+                      false))
               ? const BottomNavView()
               : const OnBoardingView(),
           backgroundColor: Colors.white,

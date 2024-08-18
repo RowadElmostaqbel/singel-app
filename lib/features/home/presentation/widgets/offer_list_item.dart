@@ -78,7 +78,6 @@ class OfferListITem extends StatelessWidget {
                   const Spacer(),
                   const AddToFavBtn(
                     isLiked: false,
-                    mealId: '12',
                   ),
                 ],
               ),

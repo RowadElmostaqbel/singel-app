@@ -36,16 +36,24 @@ class LoginCubit extends Cubit<LoginState> {
       );
     }, (user) {
       userModel = user;
-     cacheUser(cacheUser: rememberUser, user: user);
+      cacheUser(user: user);
+
+      if (rememberUser) {
+        cacheRememberMeStatus();
+      }
       emit(
         LoginSuccessState(),
       );
     });
   }
-  cacheUser({bool cacheUser = false,required UserModel user}) {
-    if(cacheUser){
- cacheServiceHeper.storeData<UserModel>(
-          data: user, boxName: 'user', key: 'user');
-    }
+
+  cacheRememberMeStatus() {
+    cacheServiceHeper.storeData(
+        data: true, boxName: 'remember_me', key: 'remember_me');
+  }
+
+  cacheUser({required UserModel user}) {
+    cacheServiceHeper.storeData<UserModel>(
+        data: user, boxName: 'user', key: 'user');
   }
 }

@@ -98,8 +98,8 @@ class MakeOrderView extends HookWidget {
                           ),
                         ),
                         AddToFavBtn(
-                          mealId: categoryMealItem.id.toString(),
-                          isLiked: categoryMealItem.isFavorite ,
+                          mealItem: categoryMealItem,
+                          isLiked: categoryMealItem.isFavorite,
                         ),
                       ],
                     ),
@@ -140,8 +140,8 @@ class MakeOrderView extends HookWidget {
                               categoryMealItem.name ?? '',
                               style: TextStyles.black24SemiBold,
                             ),
-                            const Text(
-                              '⭐ 4.9',
+                            Text(
+                              '⭐${categoryMealItem.rate.toString()}',
                               style: TextStyles.black16SemiBold,
                             )
                           ],
@@ -161,12 +161,13 @@ class MakeOrderView extends HookWidget {
                         ),
                         const Gap(16),
                         RichText(
-                          text: const TextSpan(
+                          text: TextSpan(
                             text: 'Category : ',
                             style: TextStyles.black18Light,
                             children: [
                               TextSpan(
-                                text: 'Burger',
+                                text: categoryMealItem.subCategoryModel?.name ??
+                                    '',
                                 style: TextStyles.black18Medium,
                               ),
                             ],
