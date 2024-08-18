@@ -31,7 +31,6 @@ class _LoginViewState extends State<LoginView> {
   TextEditingController password = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool isChecked = false;
- 
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +97,7 @@ class _LoginViewState extends State<LoginView> {
                                 side: const BorderSide(
                                   color: Color(0xffB7B7B7),
                                 ),
-                                activeColor: const Color(0xffB7B7B7),
+                                activeColor: AppColors.primaryColor,
                                 value: isChecked,
                                 onChanged: (bool? value) {
                                   setState(() {
@@ -114,12 +113,17 @@ class _LoginViewState extends State<LoginView> {
                                 fontSize: 17,
                               ),
                             ),
-                            const Expanded(child: SizedBox()),
+                            const Expanded(
+                              child: SizedBox(),
+                            ),
                             InkWell(
                               onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
                                     builder: (context) =>
-                                        const ForgetPasswordView()));
+                                        const ForgetPasswordView(),
+                                  ),
+                                );
                               },
                               child: const Text(
                                 "Forgot Your Password?",
@@ -140,7 +144,9 @@ class _LoginViewState extends State<LoginView> {
                           title: "Login",
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
-                              context.read<LoginCubit>().login();
+                              context
+                                  .read<LoginCubit>()
+                                  .login(rememberUser: isChecked);
                               // BlocProvider.of<LoginCubit>(context).login();
                             }
                           },

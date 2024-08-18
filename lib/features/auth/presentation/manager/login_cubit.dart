@@ -25,7 +25,7 @@ class LoginCubit extends Cubit<LoginState> {
     loginDataModel.password = password;
   }
 
-  login() async {
+  login({bool rememberUser = false}) async {
     emit(LoginLoadingState());
     final res = await loginRepo.login(loginDataModel);
     res.fold((failure) {
@@ -36,10 +36,16 @@ class LoginCubit extends Cubit<LoginState> {
       );
     }, (user) {
       userModel = user;
-      cacheServiceHeper.storeData<UserModel>(data: user, boxName: 'user', key: 'user');
+     cacheUser(cacheUser: rememberUser, user: user);
       emit(
         LoginSuccessState(),
       );
     });
+  }
+  cacheUser({bool cacheUser = false,required UserModel user}) {
+    if(cacheUser){
+ cacheServiceHeper.storeData<UserModel>(
+          data: user, boxName: 'user', key: 'user');
+    }
   }
 }
