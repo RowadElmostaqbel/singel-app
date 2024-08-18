@@ -26,8 +26,8 @@ final class SendCartToServerLoadedState extends CartState {
 }
 
 final class SendCartToServerFailureState extends CartState {
-  final String message;
-  SendCartToServerFailureState({required this.message});
+  final Failure failure;
+  SendCartToServerFailureState({required this.failure});
 }
 
 final class OrderDetailsChangedState extends CartState {

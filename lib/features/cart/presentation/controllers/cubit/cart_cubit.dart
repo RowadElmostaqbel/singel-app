@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 
 import 'package:meta/meta.dart';
+import 'package:single_resturant_app/core/errors/failure.dart';
 import 'package:single_resturant_app/features/cart/data/models/add_to_cart_data_model.dart';
 import 'package:single_resturant_app/features/cart/data/repos/cart_repo.dart';
 
@@ -25,7 +26,7 @@ class CartCubit extends Cubit<CartState> {
     res.fold(
       (error) => emit(
         SendCartToServerFailureState(
-          message: error.msg,
+          failure: error,
         ),
       ),
       (status) => emit(

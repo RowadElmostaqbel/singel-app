@@ -1,9 +1,13 @@
-
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
+import 'package:single_resturant_app/core/errors/error_handler.dart';
+import 'package:single_resturant_app/core/errors/failure.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/features/edit_password/presentation/views/edit_password.dart';
 import 'package:single_resturant_app/features/wishlist/presentation/views/wishlist_view.dart';
 
+import '../../../../core/utils/cache_service.dart';
+import '../../../auth/data/models/user_model.dart';
 import '../../../edit_profile/presentation/screens/edit_profile_view.dart';
 import '../../../my_address/presentation/views/my_address_view.dart';
 import '../../../notifications/presentation/views/notifications_view.dart';
@@ -11,6 +15,23 @@ import '../../../orders/presentation/views/my_orders_view.dart';
 
 class MyAccountContainer extends StatelessWidget {
   const MyAccountContainer({super.key});
+
+  navigateIfLoggedIn(Widget screen, BuildContext context) {
+    if (checkIfUserISLoggedIn()) {
+      context.navigateTo(
+        screen,
+      );
+    } else {
+      ErrorHandler.handleError(
+          failure: ServerFailure('', statusCode: 401), context: context);
+    }
+  }
+
+  bool checkIfUserISLoggedIn() {
+    return CacheServiceHeper()
+            .getData<UserModel>(boxName: 'user', key: 'user') !=
+        null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,34 +54,22 @@ class MyAccountContainer extends StatelessWidget {
 
     List<Function> functions = [
       () {
-        context.navigateTo(
-          const EditProfileView(),
-        );
+        navigateIfLoggedIn(const EditProfileView(), context);
       },
       () {
-        context.navigateTo(
-          const MyOrdersView(),
-        );
+        navigateIfLoggedIn(const MyOrdersView(), context);
       },
       () {
-        context.navigateTo(
-          const MyAddressView(),
-        );
+        navigateIfLoggedIn(const MyAddressView(), context);
       },
       () {
-        context.navigateTo(
-          const NotificationsView(),
-        );
+        navigateIfLoggedIn(const NotificationsView(), context);
       },
       () {
-        context.navigateTo(
-          const EditPassword(),
-        );
+        navigateIfLoggedIn(const EditPassword(), context);
       },
       () {
-        context.navigateTo(
-          const WishListView(),
-        );
+        navigateIfLoggedIn(const WishListView(), context);
       },
     ];
 

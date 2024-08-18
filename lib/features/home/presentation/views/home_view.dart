@@ -48,7 +48,7 @@ class HomeView extends HookWidget {
               ],
             ),
             child: Text(
-              'AR',
+              'EN',
               style: TextStyles.primary18SemiBold.copyWith(fontSize: 14),
             ),
           ),
@@ -100,7 +100,7 @@ class HomeView extends HookWidget {
                       ?.data
                       ?.client
                       ?.name ??
-                  '',
+                  'Guest',
               style: TextStyles.black16SemiBold,
             ),
             const Gap(2),
@@ -126,7 +126,7 @@ class HomeView extends HookWidget {
                   const Gap(8),
                   Expanded(
                     child: Text(
-                      '${(context.watch<AddressCubit>().addresses.isNotEmpty) ? context.watch<AddressCubit>().addresses.first.details : ''}',
+                      '${(context.watch<AddressCubit>().addresses.isNotEmpty) ? context.watch<AddressCubit>().addresses.first.details : 'No Address '}',
                       style: TextStyles.darkGrey14Regular,
                     ),
                   ),

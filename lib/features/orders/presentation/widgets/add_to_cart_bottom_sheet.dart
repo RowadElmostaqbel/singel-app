@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:single_resturant_app/core/errors/error_handler.dart';
 import 'package:single_resturant_app/features/cart/data/models/add_to_cart_data_model.dart';
 import 'package:single_resturant_app/features/orders/presentation/controllers/order_animation/cubit/order_animation_cubit.dart';
 
@@ -26,17 +27,12 @@ class AddToCartBottomSheet extends HookWidget {
               .read<OrderAnimationCubit>()
               .addOrdersToAnimationList(orderModel);
         } else if (state is SendCartToServerFailureState) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                state.message,
-                style: TextStyles.white18SemiBold,
-              ),
-              backgroundColor: Colors.redAccent,
-            ),
+          ErrorHandler.handleError(
+            failure: state.failure,
+            context: context,
           );
         }
-      },
+      }, 
       child: Container(
         height: 100,
         decoration: const BoxDecoration(

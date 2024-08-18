@@ -97,10 +97,10 @@ class MakeOrderView extends HookWidget {
                             ),
                           ),
                         ),
-                         AddToFavBtn(
+                        AddToFavBtn(
                           mealId: categoryMealItem.id.toString(),
-                          isLiked: categoryMealItem.isFavorite ?? false,
-                         ),
+                          isLiked: categoryMealItem.isFavorite ,
+                        ),
                       ],
                     ),
                   ),
