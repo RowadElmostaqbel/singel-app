@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:single_resturant_app/core/errors/error_handler.dart';
 import 'package:single_resturant_app/core/errors/failure.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';

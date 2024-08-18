@@ -7,7 +7,6 @@ import 'package:single_resturant_app/core/utils/api_services.dart';
 import 'package:single_resturant_app/features/auth/data/models/register_data_model.dart';
 
 import '../../../../core/errors/failure.dart';
-import '../models/user_model.dart';
 
 class AuthRepo {
   final ApiService apiService;

@@ -7,7 +7,6 @@ import 'package:single_resturant_app/core/errors/failure.dart';
 import 'package:single_resturant_app/features/cart/data/models/add_to_cart_data_model.dart';
 import 'package:single_resturant_app/features/cart/data/repos/cart_repo.dart';
 
-import '../../../../meal/data/models/meal_model.dart';
 import '../../../../orders/data/models/order_model.dart';
 import '../../../data/models/cart_model.dart';
 

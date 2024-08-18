@@ -6,7 +6,6 @@ import 'package:single_resturant_app/features/home/presentation/widgets/add_to_f
 import 'package:single_resturant_app/features/meal/data/models/category_meal_item.dart';
 
 import '../../../../core/utils/app_colors.dart';
-import '../../../../core/utils/assets.dart';
 import '../../../../core/utils/text_styles.dart';
 
 class WishItem extends StatelessWidget {

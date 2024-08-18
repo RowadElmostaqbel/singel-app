@@ -78,9 +78,9 @@ class ConfirmCancelOrderDialog extends StatelessWidget {
                   const Gap(24),
                   const CancelOrderReasonRadioWidget(),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 24),
+                    margin: const EdgeInsets.symmetric(vertical: 24),
                     height: 1,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: AppColors.greyColor,
 
                     ),

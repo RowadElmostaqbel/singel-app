@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AllReivewView extends StatelessWidget {
-const AllReivewView({ Key? key }) : super(key: key);
+const AllReivewView({ super.key });
 
   @override
   Widget build(BuildContext context){
-    return Scaffold();
+    return const Scaffold();
   }
 }

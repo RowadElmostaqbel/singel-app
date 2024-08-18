@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
-import 'package:path/path.dart';
-import 'package:single_resturant_app/core/widgets/custom_navigator_button.dart';
 import 'package:single_resturant_app/features/checkout/presentation/widgets/custom_address_container.dart';
 import 'package:single_resturant_app/features/my_address/data/models/addresses.dart';
 import 'package:single_resturant_app/features/my_address/presentation/manager/address_cubit.dart';
@@ -11,7 +9,6 @@ import 'package:single_resturant_app/features/my_address/presentation/views/no_a
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/text_styles.dart';
-import '../../../../core/widgets/add_new_address_dialog.dart';
 
 class MyAddressView extends HookWidget {
   const MyAddressView({super.key});

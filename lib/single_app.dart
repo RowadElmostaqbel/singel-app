@@ -13,7 +13,6 @@ import 'package:single_resturant_app/features/bottom_nav/presentation/views/bott
 import 'package:single_resturant_app/features/cart/data/repos/cart_repo.dart';
 import 'package:single_resturant_app/features/checkout/data/repo/checkout_repo.dart';
 import 'package:single_resturant_app/features/checkout/presentation/controllers/checkout_cubit.dart';
-import 'package:single_resturant_app/features/meal/data/repos/categories_repo.dart';
 import 'package:single_resturant_app/features/meal/presentation/controllers/categories_cubit.dart';
 import 'package:single_resturant_app/features/my_address/presentation/manager/address_cubit.dart';
 import 'package:single_resturant_app/features/on_boarding/presentation/views/on_boarding_view.dart';

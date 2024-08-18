@@ -5,7 +5,6 @@ import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/features/auth/data/models/user_model.dart';
 import 'package:single_resturant_app/features/auth/presentation/manager/user_cubit.dart';
 import 'package:single_resturant_app/features/auth/presentation/views/login_view.dart';
-import 'package:single_resturant_app/features/cart/presentation/views/cart_view.dart';
 
 import '../../../../core/utils/app_colors.dart';
 

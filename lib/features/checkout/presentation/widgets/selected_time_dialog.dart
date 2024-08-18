@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
-import 'package:single_resturant_app/features/cart/presentation/views/cart_view.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/text_styles.dart';

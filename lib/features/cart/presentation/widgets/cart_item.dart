@@ -7,7 +7,6 @@ import 'package:single_resturant_app/features/cart/data/models/cart_model.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/text_styles.dart';
-import '../../../orders/data/models/order_model.dart';
 import '../../data/models/add_to_cart_data_model.dart';
 import '../controllers/cubit/cart_cubit.dart';
 

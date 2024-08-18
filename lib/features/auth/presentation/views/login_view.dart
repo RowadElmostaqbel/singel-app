@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:single_resturant_app/core/utils/api_services.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/core/widgets/custom_toast_widget.dart';
 import 'package:single_resturant_app/features/auth/presentation/manager/login_cubit.dart';
@@ -9,7 +8,6 @@ import 'package:single_resturant_app/features/auth/presentation/views/sign_up_vi
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../bottom_nav/presentation/views/bottom_nav_view.dart';
-import '../../data/repo/login_repo.dart';
 import '../widgets/custom_bottom_text_action.dart';
 import '../../../../core/widgets/custom_navigator_button.dart';
 import '../widgets/custom_or_spacer.dart';

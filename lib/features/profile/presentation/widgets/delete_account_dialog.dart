@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
-import 'package:single_resturant_app/features/cart/presentation/views/cart_view.dart';
 
 import '../../../../core/utils/app_colors.dart';
 

@@ -11,7 +11,6 @@ import 'package:single_resturant_app/features/auth/presentation/widgets/terms_an
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/widgets/custom_toast_widget.dart';
-import '../../../bottom_nav/presentation/views/bottom_nav_view.dart';
 import '../widgets/custom_bottom_text_action.dart';
 import '../../../../core/widgets/custom_navigator_button.dart';
 import '../widgets/custom_or_spacer.dart';

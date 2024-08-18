@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +9,6 @@ import 'package:single_resturant_app/features/profile/presentation/widgets/edit_
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/widgets/custom_toast_widget.dart';
 import '../../../profile/presentation/controllers/profile_cubit.dart';
-import '../../../profile/presentation/widgets/custom_photo_container.dart';
 import '../widgets/edit_profile_text_form_field.dart';
 
 class EditProfileView extends HookWidget {

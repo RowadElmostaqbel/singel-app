@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:single_resturant_app/features/cart/presentation/views/cart_view.dart';
 import 'package:single_resturant_app/features/profile/presentation/controllers/profile_cubit.dart';
 
 class EditProfileTextFormField extends StatelessWidget {

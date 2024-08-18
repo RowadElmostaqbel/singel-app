@@ -14,7 +14,6 @@ import '../../../my_address/data/models/addresses.dart';
 import '../../../my_address/presentation/manager/address_cubit.dart';
 import '../widgets/custom_price_container.dart';
 import '../widgets/custom_address_container.dart';
-import '../widgets/custom_coupon_row.dart';
 import '../widgets/custom_main_row.dart';
 import '../widgets/order_done_dialog.dart';
 import '../widgets/payment_method_container.dart';

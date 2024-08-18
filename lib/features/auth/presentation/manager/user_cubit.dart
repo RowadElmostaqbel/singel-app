@@ -1,11 +1,9 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:single_resturant_app/features/auth/data/models/register_data_model.dart';
-import 'package:single_resturant_app/features/auth/presentation/manager/login_cubit.dart';
 
 import '../../../../core/utils/cache_service.dart';
 import '../../data/models/user_model.dart';
