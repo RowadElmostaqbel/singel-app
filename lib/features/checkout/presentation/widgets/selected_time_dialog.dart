@@ -88,24 +88,28 @@ class SelectedTimeDialog extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                      side: const BorderSide(
-                                          color: AppColors.primaryColor))),
-                              onPressed: () {
-                                context.pop();
-                              },
-                              child: const Text(
-                                "Cancel",
-                                style: TextStyle(
-                                  fontFamily: "Montserrat",
-                                  fontWeight: FontWeight.w400,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                side: const BorderSide(
                                   color: AppColors.primaryColor,
-                                  fontSize: 20,
                                 ),
-                              )),
+                              ),
+                            ),
+                            onPressed: () {
+                              context.pop();
+                            },
+                            child: const Text(
+                              "Cancel",
+                              style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.primaryColor,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
                           SizedBox(
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
