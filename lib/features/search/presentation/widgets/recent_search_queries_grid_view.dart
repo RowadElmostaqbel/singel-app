@@ -4,14 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:single_resturant_app/core/utils/app_colors.dart';
-import 'package:single_resturant_app/core/utils/cache_service.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
-import 'package:single_resturant_app/core/utils/service_locator.dart';
 import 'package:single_resturant_app/core/utils/text_styles.dart';
-import 'package:single_resturant_app/features/search/data/repo/search_repo.dart';
 import 'package:single_resturant_app/features/search/presentation/controllers/search_cubit.dart';
 
-import '../views/search_result.dart';
 import 'custom_spacer.dart';
 
 class RecentSearchQueriesGridView extends HookWidget {

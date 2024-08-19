@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
-import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/features/search/presentation/widgets/search_results_grid_view.dart';
 
 import '../../../../core/utils/cache_service.dart';
 import '../../../../core/utils/service_locator.dart';
-import '../../../../core/utils/text_styles.dart';
-import '../../../home/presentation/widgets/popular_meal_list_item.dart';
 import '../../data/repo/search_repo.dart';
 import '../controllers/search_cubit.dart';
 import '../widgets/recent_search_queries_grid_view.dart';
 import '../widgets/custom_search_bar.dart';
-import '../widgets/custom_spacer.dart';
 
-class SearchView extends StatelessWidget {
+class SearchView extends HookWidget {
   const SearchView({super.key});
 
   static SearchCubit searchCubit = SearchCubit(
@@ -22,6 +20,10 @@ class SearchView extends StatelessWidget {
   );
   @override
   Widget build(BuildContext context) {
+    useEffect(() {
+      context.read<SearchCubit>().search('');
+      return null;
+    },[]);
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     return Scaffold(
       resizeToAvoidBottomInset: false,

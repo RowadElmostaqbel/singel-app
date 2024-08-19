@@ -3,7 +3,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/core/utils/text_styles.dart';
 import 'package:single_resturant_app/core/widgets/custom_btn_widget.dart';
-import 'package:single_resturant_app/features/more_information_details/presentation/views/about_us_view.dart';
 
 import '../../../../core/utils/app_colors.dart';
 
