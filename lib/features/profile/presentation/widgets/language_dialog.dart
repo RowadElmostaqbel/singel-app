@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:single_resturant_app/core/utils/extensions.dart';
+import 'package:single_resturant_app/core/utils/text_styles.dart';
+import 'package:single_resturant_app/core/widgets/custom_btn_widget.dart';
+import 'package:single_resturant_app/features/more_information_details/presentation/views/about_us_view.dart';
 
 import '../../../../core/utils/app_colors.dart';
 
-class LanguageDialog extends StatelessWidget {
+class LanguageDialog extends HookWidget {
   const LanguageDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
+    List<String> langList = ["EN", "AR"];
+    ValueNotifier<String> lang = useState('EN');
     return SizedBox(
       height: MediaQuery.sizeOf(context).height,
       child: Stack(children: [
@@ -15,7 +22,7 @@ class LanguageDialog extends StatelessWidget {
             borderRadius: BorderRadius.circular(24),
             child: SizedBox(
               height: MediaQuery.sizeOf(context).height * 0.22,
-              width: MediaQuery.sizeOf(context).width * 0.8,
+              width: MediaQuery.sizeOf(context).width * 0.85,
               child: Container(
                 decoration: const BoxDecoration(color: Colors.white),
                 child: Padding(
@@ -28,65 +35,46 @@ class LanguageDialog extends StatelessWidget {
                       const Text(
                         "Choose your Language",
                         style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 16),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
                       ),
-                      Row(
+                      RadioListTile<String>(
+                        title: const Text(
+                          'العربيه',
+                          style: TextStyles.black16Medium,
+                        ),
+                        value: langList[0],
+                        groupValue: lang.value,
+                        onChanged: (val) {
+                          lang.value = val!;
+                        },
+                      ),
+                      RadioListTile<String>(
+                        title: const Text(
+                          'English',
+                          style: TextStyles.black16Medium,
+                        ),
+                        value: langList[1],
+                        groupValue: lang.value,
+                        onChanged: (val) {
+                          lang.value = val!;
+                        },
+                      ),
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text("العربية"),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 50.0),
-                            child: Image.asset("assets/icons/selected_red_item.png"),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text("English"),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 50.0),
-                            child: Image.asset("assets/icons/un_selected_item.png"),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                      side: const BorderSide(
-                                          color: AppColors.primaryColor))),
-                              onPressed: () {},
-                              child: const Text(
-                                "Cancel",
-                                style: TextStyle(
-                                  fontFamily: "Montserrat",
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColors.primaryColor,
-                                  fontSize: 20,
-                                ),
-                              )),
-                          SizedBox(
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: AppColors.primaryColor,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                    )),
-                                onPressed: () {},
-                                child: const Text(
-                                  "Confirm",
-                                  style: TextStyle(
-                                    fontFamily: "Montserrat",
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                  ),
-                                )),
+                          CustomBtnWidget(
+                            color: AppColors.brightGreyColor,
+                            text: 'Cancel',
+                            titleStyle: TextStyles.black16SemiBold,
+                            radius: 12,
+                          ),
+                          CustomBtnWidget(
+                            color: AppColors.primaryColor,
+                            text: 'Submit',
+                            titleStyle: TextStyles.white16SemiBold,
+                            radius: 12,
                           ),
                         ],
                       )
@@ -98,8 +86,8 @@ class LanguageDialog extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 300,
-          left: 50,
+          top: context.height * .325,
+          left: 40,
           child: Container(
               height: 60,
               width: 60,
@@ -108,7 +96,7 @@ class LanguageDialog extends StatelessWidget {
               child: Image.asset("assets/icons/translation.png")),
         ),
         Positioned(
-          top: 425,
+          top: context.height * .515,
           left: 35,
           child: Image.asset("assets/images/dialog_decoration.png"),
         ),

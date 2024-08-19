@@ -6,7 +6,7 @@ import 'package:single_resturant_app/features/profile/presentation/widgets/langu
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../checkout/presentation/widgets/custom_on_button.dart';
-import '../../../more_information_details/presentation/views/about_us.dart';
+import '../../../more_information_details/presentation/views/about_us_view.dart';
 
 class MoreInformationContainer extends StatelessWidget {
   const MoreInformationContainer({super.key});
@@ -30,7 +30,7 @@ class MoreInformationContainer extends StatelessWidget {
       "theme",
     ];
     List onChanged = [
-      const AboutUs(),
+      const AboutUsView(),
       const TermsAndConditions(),
       const ContactUs(),
       const Privacy(),
@@ -75,17 +75,17 @@ class MoreInformationContainer extends StatelessWidget {
                 return GestureDetector(
                   onTap: index == 0
                       ? () {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return const LanguageDialog();
-                              });
+                          // showDialog(
+                          //     context: context,
+                          //     builder: (context) {
+                          //       return const LanguageDialog();
+                          //     });
                         }
                       : index == 5
                           ? () {}
                           : () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => onChanged[index-1]));
+                                  builder: (context) => onChanged[index - 1]));
                             },
                   child: Container(
                     margin: const EdgeInsets.all(12),

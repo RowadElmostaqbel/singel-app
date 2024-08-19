@@ -12,18 +12,17 @@ class CustomGridViewElements extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(top: 12),
       width: MediaQuery.sizeOf(context).width,
-      height: MediaQuery.sizeOf(context).height * 0.2,
+      height: 120,
       child: LayoutBuilder(
-        builder:
-            (BuildContext context, BoxConstraints constraints) {
+        builder: (BuildContext context, BoxConstraints constraints) {
           return GridView.builder(
             physics: const NeverScrollableScrollPhysics(),
             scrollDirection: Axis.vertical,
             itemCount: searchTerms.length,
             itemBuilder: (context, index) {
               return GestureDetector(
-                onTap: (){
-                  index==0? context.navigateTo(const SearchResult()):null;
+                onTap: () {
+                  index == 0 ? context.navigateTo(const SearchResult()) : null;
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -34,8 +33,7 @@ class CustomGridViewElements extends StatelessWidget {
                 ),
               );
             },
-            gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
               mainAxisSpacing: 12,
               crossAxisSpacing: 12,

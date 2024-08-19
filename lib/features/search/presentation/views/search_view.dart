@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/text_styles.dart';
@@ -54,12 +53,12 @@ class _SearchViewState extends State<SearchView> {
                   ),
                   const CustomSpacer(),
                   const CustomGridViewElements(),
-                  const CustomSpacer(),
-                  const Text(
-                    "Suggest",
-                    style: TextStyles.black18Medium,
-                  ),
-                  const CustomGridViewElements(),
+                  // const CustomSpacer(),
+                  // const Text(
+                  //   "Suggest",
+                  //   style: TextStyles.black18Medium,
+                  // ),
+                  // const CustomGridViewElements(),
                 ],
               ),
             ),
