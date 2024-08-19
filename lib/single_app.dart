@@ -18,6 +18,8 @@ import 'package:single_resturant_app/features/my_address/presentation/manager/ad
 import 'package:single_resturant_app/features/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:single_resturant_app/features/profile/data/repo/edit_profile_repo.dart';
 import 'package:single_resturant_app/features/profile/presentation/controllers/profile_cubit.dart';
+import 'package:single_resturant_app/features/search/data/repo/search_repo.dart';
+import 'package:single_resturant_app/features/search/presentation/controllers/search_cubit.dart';
 import 'package:single_resturant_app/features/wishlist/data/repo/whishlist_repo.dart';
 import 'package:single_resturant_app/features/wishlist/presentation/controllers/whishlist_cubit.dart';
 
@@ -87,6 +89,13 @@ class SingleApp extends StatelessWidget {
         BlocProvider(
           create: (context) => WhishlistCubit(
             ServiceLocatorHelper.getIt.get<WhishlistRepo>(),
+          ),
+        ),
+         BlocProvider(
+          create: (context) => SearchCubit(
+                        ServiceLocatorHelper.getIt.get<CacheServiceHeper>(),
+
+            ServiceLocatorHelper.getIt.get<SearchRepo>(),
           ),
         ),
       ],

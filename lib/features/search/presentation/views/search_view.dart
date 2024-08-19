@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:single_resturant_app/core/utils/extensions.dart';
+import 'package:single_resturant_app/features/search/presentation/widgets/search_results_grid_view.dart';
 
+import '../../../../core/utils/cache_service.dart';
+import '../../../../core/utils/service_locator.dart';
 import '../../../../core/utils/text_styles.dart';
-import '../widgets/custom_grid_view_elements.dart';
+import '../../../home/presentation/widgets/popular_meal_list_item.dart';
+import '../../data/repo/search_repo.dart';
+import '../controllers/search_cubit.dart';
+import '../widgets/recent_search_queries_grid_view.dart';
 import '../widgets/custom_search_bar.dart';
 import '../widgets/custom_spacer.dart';
 
-class SearchView extends StatefulWidget {
+class SearchView extends StatelessWidget {
   const SearchView({super.key});
 
-  @override
-  State<SearchView> createState() => _SearchViewState();
-}
-
-class _SearchViewState extends State<SearchView> {
+  static SearchCubit searchCubit = SearchCubit(
+    ServiceLocatorHelper.getIt<CacheServiceHeper>(),
+    ServiceLocatorHelper.getIt<SearchRepo>(),
+  );
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -20,47 +27,37 @@ class _SearchViewState extends State<SearchView> {
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Form(
-            key: formKey,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const SizedBox(
-                    height: 34,
+        child: Form(
+          key: formKey,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const SizedBox(
+                  height: 34,
+                ),
+                const CustomSearchBar(),
+                const SizedBox(
+                  height: 8,
+                ),
+
+                RecentSearchQueriesGridView(
+                  searchCubit,
+                ),
+                const Gap(12),
+                Expanded(
+                  child: SearchResultsGridView(
+                    searchCubit: searchCubit,
                   ),
-                  const CustomSearchBar(),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        "Recent",
-                        style: TextStyles.black18Medium,
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: const Text(
-                          "Delete all",
-                          style: TextStyles.black18Medium,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const CustomSpacer(),
-                  const CustomGridViewElements(),
-                  // const CustomSpacer(),
-                  // const Text(
-                  //   "Suggest",
-                  //   style: TextStyles.black18Medium,
-                  // ),
-                  // const CustomGridViewElements(),
-                ],
-              ),
+                ),
+                // const CustomSpacer(),
+                // const Text(
+                //   "Suggest",
+                //   style: TextStyles.black18Medium,
+                // ),
+                // const CustomGridViewElements(),
+              ],
             ),
           ),
         ),

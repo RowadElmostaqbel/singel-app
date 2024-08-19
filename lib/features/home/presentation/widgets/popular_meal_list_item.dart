@@ -5,26 +5,36 @@ import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/core/utils/text_styles.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/add_to_fav_btn.dart';
 import 'package:single_resturant_app/features/meal/data/models/category_meal_item.dart';
+import 'package:single_resturant_app/features/search/presentation/controllers/search_cubit.dart';
 
 import '../../../../core/utils/assets.dart';
 import '../../../orders/presentation/views/make_order_view.dart';
 
 class PopularMealListItem extends StatelessWidget {
+  final SearchCubit? searchCubit;
   final CategoryMealItem categoryMealItem;
+  final bool fromSearch;
   const PopularMealListItem({
     super.key,
     required this.categoryMealItem,
+    this.fromSearch = false,
+    this.searchCubit,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () => context.navigateTo(
-              MakeOrderView(
-                heroTag: categoryMealItem.id.toString(),
-                categoryMealItem: categoryMealItem,
-              ),
+        onTap: () {
+          if (searchCubit != null) {
+            searchCubit!.modifyRecentSearchQueries(categoryMealItem.name ?? '');
+          }
+          context.navigateTo(
+            MakeOrderView(
+              heroTag: categoryMealItem.id.toString(),
+              categoryMealItem: categoryMealItem,
             ),
+          );
+        },
         child: Container(
           clipBehavior: Clip.antiAlias,
           width: context.width * .55,

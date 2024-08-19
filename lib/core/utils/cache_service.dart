@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:single_resturant_app/core/utils/constants.dart';
 import 'package:single_resturant_app/features/auth/data/models/client.dart';
 import 'package:single_resturant_app/features/auth/data/models/data.dart';
 import 'package:single_resturant_app/features/auth/data/models/user_model.dart';
@@ -12,6 +13,7 @@ class CacheServiceHeper {
     Hive.registerAdapter(UserModelAdapter());
     await Hive.openBox<UserModel>('user');
     await Hive.openBox<bool>('remember_me');
+    await Hive.openBox<List<String>>(Constants.recentQueryBox);
   }
 
   storeData<T>(
