@@ -23,9 +23,9 @@ class CartModel {
       itemId: json['item_id'],
       quantity: json['qty'],
       price: double.tryParse(json['sale_price']) ?? 0.0,
-      name: json['itemable']['name'],
-      img: json['itemable']['image'],
-      desc: json['itemable']['details'],
+      name: json['itemable']?['name'] ?? '',
+      img: json['itemable']?['image'] ?? '',
+      desc: json['itemable']?['details'] ?? "",
     );
   }
 }

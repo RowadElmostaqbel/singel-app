@@ -20,10 +20,13 @@ class SearchView extends HookWidget {
   );
   @override
   Widget build(BuildContext context) {
-    useEffect(() {
-      context.read<SearchCubit>().search('');
-      return null;
-    },[]);
+    useEffect(
+      () {
+        context.read<SearchCubit>().search('');
+        context.read<SearchCubit>().searchController.clear();
+        return null;
+      },
+    );
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     return Scaffold(
       resizeToAvoidBottomInset: false,
