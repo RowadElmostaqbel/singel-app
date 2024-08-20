@@ -28,7 +28,8 @@ class CheckoutView extends HookWidget {
       context.read<AddressCubit>().fetchMyAddresses();
       return null;
     }, []);
-    final List<Addresses> addressess = context.watch<AddressCubit>().addresses;
+    final List<AddressModel> addressess =
+        context.watch<AddressCubit>().addresses;
     return BlocConsumer<CheckoutCubit, CheckoutState>(
       listener: (context, state) {
         if (state is CheckoutSuccess) {
@@ -159,7 +160,7 @@ class MyAddressesListView extends HookWidget {
     required this.addressess,
   });
 
-  final List<Addresses> addressess;
+  final List<AddressModel> addressess;
 
   @override
   Widget build(BuildContext context) {

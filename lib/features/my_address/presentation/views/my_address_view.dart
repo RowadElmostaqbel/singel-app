@@ -19,7 +19,8 @@ class MyAddressView extends HookWidget {
       context.read<AddressCubit>().fetchMyAddresses();
       return null;
     }, []);
-    final List<Addresses> addressess = context.watch<AddressCubit>().addresses;
+    final List<AddressModel> addressess =
+        context.watch<AddressCubit>().addresses;
     return Scaffold(
       body: BlocConsumer<AddressCubit, AddressState>(
         listener: (context, state) {

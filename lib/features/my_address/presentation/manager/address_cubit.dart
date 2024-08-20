@@ -15,14 +15,14 @@ part 'address_state.dart';
 
 class AddressCubit extends Cubit<AddressState> {
   AddressRepo addressRepo;
-  List<Addresses> addresses = [];
+  List<AddressModel> addresses = [];
   late GetAddress getAddress;
 
   AddressCubit(this.addressRepo) : super(AddressInitial());
 
   AddAddressModel addAddressModel = AddAddressModel(
     addresses: [
-      Addresses(),
+      AddressModel(),
     ],
   );
 

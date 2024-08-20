@@ -31,13 +31,13 @@ class AddressRepo {
     }
   }
 
-  Future<Either<Failure, List<Addresses>>> fetchMyAddressess() async {
+  Future<Either<Failure, List<AddressModel>>> fetchMyAddressess() async {
     try {
       final res = await apiService.get(endpoint: 'client/profile/addresses');
       return Right(
         res['data']
-            .map<Addresses>(
-              (e) => Addresses.fromJson(e),
+            .map<AddressModel>(
+              (e) => AddressModel.fromJson(e),
             )
             .toList(),
       );

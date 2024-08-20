@@ -1,7 +1,7 @@
 import 'addresses.dart';
 
 class AddAddressModel {
-  List<Addresses> addresses=[];
+  List<AddressModel> addresses = [];
 
   AddAddressModel({required this.addresses});
 

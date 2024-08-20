@@ -5,7 +5,7 @@ import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/text_styles.dart';
 
 class CustomAddressContainer extends StatelessWidget {
-  final Addresses address;
+  final AddressModel address;
   const CustomAddressContainer({
     super.key,
     required this.containerBorderColor,

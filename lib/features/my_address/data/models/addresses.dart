@@ -1,5 +1,4 @@
-
-class Addresses {
+class AddressModel {
   int? id;
   String? name;
   String? phone;
@@ -10,7 +9,7 @@ class Addresses {
   String? latitude;
   String? longitude;
 
-  Addresses({
+  AddressModel({
     this.name,
     this.phone,
     this.additional_phone,
@@ -21,7 +20,7 @@ class Addresses {
     this.longitude,
   });
 
-  Addresses.fromJson(Map<String, dynamic> json) {
+  AddressModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     phone = json['phone'];
