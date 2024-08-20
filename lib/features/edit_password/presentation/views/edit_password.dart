@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:single_resturant_app/features/auth/presentation/widgets/custom_text_form_field.dart';
+import 'package:single_resturant_app/features/edit_password/presentation/controllers/password_cubit.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/text_styles.dart';
@@ -16,6 +19,8 @@ class _EditPasswordState extends State<EditPassword> {
   TextEditingController oldPassword = TextEditingController();
   TextEditingController newPassword = TextEditingController();
   TextEditingController confirmPassword = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,43 +89,67 @@ class _EditPasswordState extends State<EditPassword> {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 0, horizontal: 36),
-              child: Column(
-                children: [
-                  CustomTextFormField(
-                      controller: oldPassword,
-                      label: "Old Password",
-                      hintText: "************",
-                      keyboardType: TextInputType.text,
-                      validator: (value) {
-                        return null;
-                      },
-                      icon: "assets/icons/lock.png",
-                      onChanged: (String value) {}),
-                  CustomTextFormField(
-                      controller: newPassword,
-                      label: " New Password",
-                      hintText: "************",
-                      keyboardType: TextInputType.text,
-                      validator: (value) {
-                        return null;
-                      },
-                      icon: "assets/icons/new_lock.png",
-                      onChanged: (String value) {}),
-                  CustomTextFormField(
-                      controller: confirmPassword,
-                      label: "Confirm Password",
-                      hintText: "************",
-                      keyboardType: TextInputType.text,
-                      validator: (value) {
-                        return null;
-                      },
-                      icon: "assets/icons/new_lock.png",
-                      onChanged: (String value) {}),
-                  CustomNavigatorButton(
-                      title: "Save", onPressed: () {}, padding: 50),
-                ],
+              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 36),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    CustomTextFormField(
+                        controller: oldPassword,
+                        label: "Old Password",
+                        hintText: "************",
+                        keyboardType: TextInputType.text,
+                        validator: FormBuilderValidators.compose([
+                          FormBuilderValidators.required(),
+                        ]),
+                        icon: "assets/icons/lock.png",
+                        onChanged: (String oldPassword) {
+                          BlocProvider.of<PasswordCubit>(context)
+                              .oldPassword(oldPassword);
+                        }),
+                    CustomTextFormField(
+                        controller: newPassword,
+                        label: " New Password",
+                        hintText: "************",
+                        keyboardType: TextInputType.text,
+                        validator: FormBuilderValidators.compose([
+                          FormBuilderValidators.required(),
+                        ]),
+                        icon: "assets/icons/new_lock.png",
+                        onChanged: (String newPassword) {
+                          BlocProvider.of<PasswordCubit>(context)
+                              .newPassword(newPassword);
+                        }),
+                    CustomTextFormField(
+                        controller: confirmPassword,
+                        label: "Confirm Password",
+                        hintText: "************",
+                        keyboardType: TextInputType.text,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "This field cannot be empty";
+                          } else if (newPassword.text != confirmPassword.text) {
+                            return "Please enter the same password";
+                          }
+                          return null;
+                        },
+                        icon: "assets/icons/new_lock.png",
+                        onChanged: (String confirmPassword) {
+                          BlocProvider.of<PasswordCubit>(context)
+                              .confirmPassword(confirmPassword);
+                        }),
+                    CustomNavigatorButton(
+                        title: "Save",
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            BlocProvider.of<PasswordCubit>(context)
+                                .updatePassword();
+                            Navigator.of(context).pop();
+                          }
+                        },
+                        padding: 50),
+                  ],
+                ),
               ),
             ),
           )
