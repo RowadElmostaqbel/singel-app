@@ -1,10 +1,10 @@
-import 'dart:developer';
 
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/assets.dart';
+import '../controllers/search_cubit.dart';
 
 class CustomSearchBar extends StatefulWidget {
   const CustomSearchBar({super.key});
@@ -16,7 +16,13 @@ class CustomSearchBar extends StatefulWidget {
 class _CustomSearchBarState extends State<CustomSearchBar> {
   Color iconColor = const Color(0xff9899A7);
   Color textColor = const Color(0xff9899A7);
-  TextEditingController search = TextEditingController();
+
+  @override
+  void dispose() {
+    EasyDebounce.cancel('my-debouncer');
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,12 +31,14 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
         color: AppColors.brightGreyColor,
       ),
       child: TextFormField(
-          controller: search,
+          controller: context.read<SearchCubit>().searchController,
           onChanged: (value) {
             EasyDebounce.debounce(
               'my-debouncer', // <-- An ID for this particular debouncer
               const Duration(milliseconds: 500), // <-- The debounce duration
-              () => log(name: 'debounce', value), // <-- The target method
+              () => context
+                  .read<SearchCubit>()
+                  .search(value), // <-- The target method
             );
           },
           onEditingComplete: () {

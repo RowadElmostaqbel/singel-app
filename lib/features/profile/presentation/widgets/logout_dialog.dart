@@ -7,6 +7,7 @@ import 'package:single_resturant_app/features/auth/presentation/manager/user_cub
 import 'package:single_resturant_app/features/auth/presentation/views/login_view.dart';
 
 import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/constants.dart';
 
 class LogoutDialog extends StatelessWidget {
   const LogoutDialog({super.key});
@@ -63,6 +64,8 @@ class LogoutDialog extends StatelessWidget {
                               if (state is AuthLoadedState) {
                                 Hive.box<UserModel>('user').clear();
                                 Hive.box<UserModel>('remember_me').clear();
+                                Hive.box<UserModel>(Constants.recentQueryBox)
+                                    .clear();
                                 context.navigateToReplacement(
                                   const LoginView(),
                                 );

@@ -39,17 +39,20 @@ class CartItem extends HookWidget {
         ),
         child: Row(
           children: [
-            Container(
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: CachedNetworkImageWidget(
-                url: cartModel.img ?? '',
+            Expanded(
+              child: Container(
+                clipBehavior: Clip.antiAlias,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: CachedNetworkImageWidget(
+                  url: cartModel.img ?? '',
+                ),
               ),
             ),
             const Gap(8),
             Expanded(
+              flex: 2,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
