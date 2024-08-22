@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
+import 'package:single_resturant_app/core/widgets/cached_network_image_widget.dart';
+import 'package:single_resturant_app/features/orders/data/models/my_order_model.dart';
+import 'package:single_resturant_app/features/orders/presentation/controllers/order/cancel_order_cubit.dart';
+import 'package:single_resturant_app/features/orders/presentation/controllers/order/orders_cubit.dart';
 import 'package:single_resturant_app/features/orders/presentation/views/order_details.dart';
 import 'package:single_resturant_app/features/orders/presentation/widgets/order_status_widget_builder.dart';
 import 'package:single_resturant_app/features/track_order/presentation/views/track_order_view.dart';
@@ -18,30 +24,66 @@ class ActiveOrdersView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      padding: const EdgeInsets.only(
-        left: 4,
-        right: 4,
-        top: 12,
-        bottom: 64,
+    return BlocListener<CancelOrderCubit, CancelOrderState>(
+      listener: (context, state) {
+        if (state is CancelOrderStatus && state.status) {
+          context.read<OrdersCubit>().fetchMyOrders();
+        }
+      },
+      child: BlocBuilder<OrdersCubit, OrderState>(
+        builder: (context, state) {
+          List<MyOrderModel> myOrders = context
+              .watch<OrdersCubit>()
+              .myOrders
+              .where((order) => order.orderStatus != 'cancelled')
+              .toList();
+          if (myOrders.isNotEmpty) {
+            return ListView.separated(
+              padding: const EdgeInsets.only(
+                left: 4,
+                right: 4,
+                top: 12,
+                bottom: 64,
+              ),
+              itemBuilder: (context, index) => ActiveOrderListItem(
+                orderModel: myOrders[index],
+              ),
+              separatorBuilder: (context, index) => const Gap(20),
+              itemCount: myOrders.length,
+            );
+          } else if (state is OrdersLoadingState && myOrders.isEmpty) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return Center(
+            child: Image.asset(
+              Assets.assetsImagesEmpty,
+              width: context.width * .5,
+            ),
+          );
+        },
       ),
-      itemBuilder: (context, index) => const ActiveOrderListItem(),
-      separatorBuilder: (context, index) => const Gap(20),
-      itemCount: 5,
     );
   }
 }
 
 class ActiveOrderListItem extends StatelessWidget {
+  final MyOrderModel orderModel;
   const ActiveOrderListItem({
     super.key,
+    required this.orderModel,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        context.navigateTo(const OrderDetails());
+      onTap: () {
+        context.navigateTo(
+          OrderDetails(
+            orderModel: orderModel,
+          ),
+        );
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
@@ -70,11 +112,9 @@ class ActiveOrderListItem extends StatelessWidget {
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.redAccent,
                     ),
-                    child: Image.asset(
-                      Assets.assetsImagesBurgerjfif,
-                      fit: BoxFit.fill,
+                    child: CachedNetworkImageWidget(
+                      url: orderModel.orderItems.first.image ?? '',
                     ),
                   ),
                   const Gap(10),
@@ -83,16 +123,16 @@ class ActiveOrderListItem extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Beef Burger',
+                        Text(
+                          orderModel.orderItems.first.name ?? '',
                           style: TextStyles.black18SemiBold,
                         ),
                         const Gap(8),
                         RichText(
-                          text: const TextSpan(
-                            text: '2',
+                          text: TextSpan(
+                            text: orderModel.orderItems.length.toString(),
                             style: TextStyles.primary14Medium,
-                            children: [
+                            children: const [
                               TextSpan(
                                 text: ' Items',
                                 style: TextStyles.black14Regular,
@@ -109,12 +149,12 @@ class ActiveOrderListItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         RichText(
-                          text: const TextSpan(
+                          text: TextSpan(
                             text: '#',
                             style: TextStyles.primary14Medium,
                             children: [
                               TextSpan(
-                                text: ' 1234',
+                                text: orderModel.id.toString(),
                                 style: TextStyles.black14Medium,
                               ),
                             ],
@@ -148,8 +188,12 @@ class ActiveOrderListItem extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Text(
-                  '10-7-2024',
+                Text(
+                  DateFormat('dd-M-yyyy').format(
+                    DateTime.parse(
+                      orderModel.date,
+                    ),
+                  ),
                   style: TextStyles.black16Medium,
                 ),
               ],
@@ -173,10 +217,10 @@ class ActiveOrderListItem extends StatelessWidget {
                   ],
                 ),
                 RichText(
-                  text: const TextSpan(
-                    text: '75',
+                  text: TextSpan(
+                    text: orderModel.price,
                     style: TextStyles.black16SemiBold,
-                    children: [
+                    children: const [
                       TextSpan(
                         text: ' SAR',
                         style: TextStyles.primary14Medium,
@@ -204,8 +248,8 @@ class ActiveOrderListItem extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Text(
-                  'Delivery',
+                Text(
+                  orderModel.orderType,
                   style: TextStyles.primary12SemiBold,
                 ),
               ],
@@ -221,7 +265,9 @@ class ActiveOrderListItem extends StatelessWidget {
                     onTap: () {
                       showDialog(
                         context: context,
-                        builder: (context) => const CancelOrderDialog(),
+                        builder: (context) => CancelOrderDialog(
+                          orderId: orderModel.id.toString(),
+                        ),
                       );
                     },
                     color: Colors.white,

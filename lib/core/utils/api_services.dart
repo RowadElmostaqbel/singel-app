@@ -62,6 +62,27 @@ class ApiService {
     return response.data;
   }
 
+  Future<dynamic> patch(
+      {required String endpoint, required Map<String, dynamic> data}) async {
+    token = cacheServiceHeper
+            .getData<UserModel>(key: 'user', boxName: 'user')
+            ?.data
+            ?.token ??
+        '';
+
+    dio.options.headers.addAll(
+      {
+        'Authorization': 'Bearer $token',
+        // 'lang': LANG,
+      },
+    );
+    var response = await dio.patch(
+      endpoint,
+      queryParameters: data,
+    );
+    return response.data;
+  }
+
   Future<dynamic> postFormData({
     required String endpoint,
     required Map<String, dynamic> data,
@@ -87,7 +108,7 @@ class ApiService {
         ),
       );
     }
-   
+
     dio.options.headers.addAll(
       {
         'Authorization': 'Bearer $token',

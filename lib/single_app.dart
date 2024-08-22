@@ -17,7 +17,8 @@ import 'package:single_resturant_app/features/meal/presentation/controllers/cate
 import 'package:single_resturant_app/features/my_address/presentation/manager/address_cubit.dart';
 import 'package:single_resturant_app/features/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:single_resturant_app/features/orders/data/repo/order_repo.dart';
-import 'package:single_resturant_app/features/orders/presentation/controllers/order/cubit/order_cubit.dart';
+import 'package:single_resturant_app/features/orders/presentation/controllers/order/cancel_order_cubit.dart';
+import 'package:single_resturant_app/features/orders/presentation/controllers/order/orders_cubit.dart';
 import 'package:single_resturant_app/features/profile/data/repo/edit_profile_repo.dart';
 import 'package:single_resturant_app/features/profile/presentation/controllers/profile_cubit.dart';
 import 'package:single_resturant_app/features/wishlist/data/repo/whishlist_repo.dart';
@@ -91,10 +92,16 @@ class SingleApp extends StatelessWidget {
             ServiceLocatorHelper.getIt.get<WhishlistRepo>(),
           ),
         ),
-         BlocProvider(
-          create: (context) => OrderCubit(
+        BlocProvider(
+          create: (context) => OrdersCubit(
             ServiceLocatorHelper.getIt.get<OrderRepo>(),
           ),
+        ),
+         BlocProvider(
+          lazy: false,
+          create: (context) => CancelOrderCubit(
+            ServiceLocatorHelper.getIt.get<OrderRepo>(),
+          )..fetchCancelReasons(),
         ),
       ],
       child: MaterialApp(

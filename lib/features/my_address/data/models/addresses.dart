@@ -1,6 +1,7 @@
 class AddressModel {
   int? id;
   String? name;
+  String? cityName;
   String? phone;
   String? additional_phone;
   int? city_id;
@@ -23,6 +24,7 @@ class AddressModel {
   AddressModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
+    cityName = json['city'];
     phone = json['phone'];
     additional_phone = json['additional_phone'];
     city_id = json['city_id'];

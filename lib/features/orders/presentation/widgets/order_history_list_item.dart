@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
+import 'package:single_resturant_app/core/widgets/cached_network_image_widget.dart';
+import 'package:single_resturant_app/features/orders/data/models/my_order_model.dart';
 import 'package:single_resturant_app/features/orders/presentation/widgets/order_status_widget_builder.dart';
 
 import '../../../../core/utils/assets.dart';
 import '../../../../core/utils/text_styles.dart';
 
 class OrderHistoryListItem extends StatelessWidget {
+  final MyOrderModel orderModel;
   const OrderHistoryListItem({
     super.key,
+    required this.orderModel,
   });
 
   @override
@@ -36,12 +41,10 @@ class OrderHistoryListItem extends StatelessWidget {
               height: 120,
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
-                color: Colors.redAccent,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Image.asset(
-                Assets.assetsImagesBurgerjfif,
-                fit: BoxFit.fill,
+              child: CachedNetworkImageWidget(
+                url: orderModel.orderItems.first.image ?? '',
               ),
             ),
           ),
@@ -52,12 +55,12 @@ class OrderHistoryListItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Beef Burger',
+                Text(
+                  orderModel.orderItems.first.name ?? '',
                   style: TextStyles.black18SemiBold,
                 ),
                 const OrderStatusWidgetBuilder(
-                  orderStatus: OrderStatusEnum.active,
+                  orderStatus: OrderStatusEnum.canceled,
                   showConatiner: false,
                 ),
                 Row(
@@ -70,8 +73,8 @@ class OrderHistoryListItem extends StatelessWidget {
                       ),
                     ),
                     const Gap(6),
-                    const Text(
-                      '#21269',
+                    Text(
+                      '# ${orderModel.id}',
                       style: TextStyles.darkGrey10Regular,
                     ),
                   ],
@@ -87,18 +90,22 @@ class OrderHistoryListItem extends StatelessWidget {
                       ),
                     ),
                     const Gap(6),
-                    const Text(
-                      'Apr 10- 9:30 AM',
+                    Text(
+                      DateFormat('dd-M-yyyy').format(
+                        DateTime.parse(
+                          orderModel.date,
+                        ),
+                      ),
                       style: TextStyles.darkGrey10Regular,
                     ),
                   ],
                 ),
                 const Gap(8),
                 RichText(
-                  text: const TextSpan(
-                    text: '2',
+                  text: TextSpan(
+                    text: orderModel.orderItems.length.toString(),
                     style: TextStyles.primary14Medium,
-                    children: [
+                    children: const [
                       TextSpan(
                         text: ' Items',
                         style: TextStyles.darkGrey14Regular,

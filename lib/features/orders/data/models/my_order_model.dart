@@ -43,11 +43,12 @@ class MyOrderModel {
 }
 
 class OrderItemModel {
-  final int id;
-  final String name;
-  final String image;
+  final int? id;
+  final String? name;
+  final String? category;
+  final String? image;
   final dynamic price;
-  final int quantity;
+  final int? quantity;
 
   OrderItemModel({
     required this.id,
@@ -55,15 +56,17 @@ class OrderItemModel {
     required this.image,
     required this.price,
     required this.quantity,
+    required this.category,
   });
 
   factory OrderItemModel.fromJson(Map<String, dynamic> json) {
     return OrderItemModel(
-      price: json['price'],
-      quantity: json['quantity'],
-      id: json['item']['id'],
-      name: json['item']['name'],
-      image: json['item']['image'],
+      price: json['sale_price'],
+      quantity: json['qty'],
+      id: json['item']?['id'],
+      name: json['item']?['name'],
+      category: json['item']?['category'],
+      image: json['item']?['image'],
     );
   }
 }

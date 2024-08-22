@@ -8,8 +8,11 @@ import '../../../../core/widgets/custom_btn_widget.dart';
 import 'confirm_cancel_order_dialog.dart';
 
 class CancelOrderDialog extends StatelessWidget {
+    final String orderId;
+
   const CancelOrderDialog({
     super.key,
+    required this.orderId,
   });
 
   @override
@@ -63,7 +66,9 @@ class CancelOrderDialog extends StatelessWidget {
                           onTap: () => showDialog(
                             context: context,
                             builder: (context) =>
-                                const ConfirmCancelOrderDialog(),
+                                 ConfirmCancelOrderDialog(
+                                   orderId: orderId,
+                                 ),
                           ),
                           color: AppColors.primaryColor,
                           text: 'Cancel',
