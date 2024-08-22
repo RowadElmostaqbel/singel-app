@@ -16,6 +16,8 @@ import 'package:single_resturant_app/features/checkout/presentation/controllers/
 import 'package:single_resturant_app/features/edit_password/data/repos/passsword_repo.dart';
 import 'package:single_resturant_app/features/edit_password/presentation/controllers/password_cubit.dart';
 import 'package:single_resturant_app/features/meal/presentation/controllers/categories_cubit.dart';
+import 'package:single_resturant_app/features/more_information_details/data/repo/contact_us_repo.dart';
+import 'package:single_resturant_app/features/more_information_details/presentation/controllers/contact_us_cubit.dart';
 import 'package:single_resturant_app/features/my_address/presentation/manager/address_cubit.dart';
 import 'package:single_resturant_app/features/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:single_resturant_app/features/orders/data/repo/order_repo.dart';
@@ -97,6 +99,12 @@ class SingleApp extends StatelessWidget {
         BlocProvider(
           create: (context) => PasswordCubit(
             PasswordRepo(
+              apiService: ServiceLocatorHelper.getIt.get<ApiService>(),
+            ),
+          ),
+        ), BlocProvider(
+          create: (context) => ContactUsCubit(
+            ContactUsRepo(
               apiService: ServiceLocatorHelper.getIt.get<ApiService>(),
             ),
           ),

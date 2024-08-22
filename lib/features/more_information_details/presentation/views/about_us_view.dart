@@ -15,11 +15,11 @@ class AboutUsView extends StatelessWidget {
         child: Stack(
           children: [
             SizedBox(
-              height: context.height * .3,
+              height: context.height * .18,
               width: context.width,
               child: Image.asset(
                 Assets.assetsImagesProfileBackground,
-                fit: BoxFit.fill,
+                fit: BoxFit.fitWidth,
               ),
             ),
             const SafeArea(
@@ -34,7 +34,7 @@ class AboutUsView extends StatelessWidget {
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                height: context.height * .85,
+                height: context.height * .89,
                 width: context.width,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 28,
