@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,10 +6,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/utils/app_colors.dart';
 import 'package:single_resturant_app/core/utils/assets.dart';
-import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/core/utils/text_styles.dart';
 import 'package:single_resturant_app/core/widgets/cached_network_image_widget.dart';
-import 'package:single_resturant_app/features/home/presentation/views/category_view.dart';
 import 'package:single_resturant_app/features/meal/data/models/category_model.dart';
 import 'package:single_resturant_app/features/meal/presentation/controllers/categories_cubit.dart';
 
@@ -31,7 +28,8 @@ class CategoriesListView extends HookWidget {
       listener: (context, state) {
         if (state is CategoriesFailureState) {
           log(name: 'failure', state.failure.msg);
-        } else if (state is CategoriesLoadedState) {
+        } else if (state is CategoriesLoadedState &&
+            state.categories.isNotEmpty) {
           context
               .read<CategoriesCubit>()
               .changeSelectedMainCategoryId(state.categories[0].id ?? 0);
@@ -71,7 +69,7 @@ class CategoriesListView extends HookWidget {
             child: CircularProgressIndicator(),
           );
         }
-        return const SizedBox();
+        return Image.asset(Assets.assetsImagesEmpty);
       },
     );
   }

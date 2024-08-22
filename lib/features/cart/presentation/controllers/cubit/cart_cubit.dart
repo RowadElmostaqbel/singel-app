@@ -1,56 +1,57 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 
 import 'package:meta/meta.dart';
+import 'package:single_resturant_app/core/errors/failure.dart';
+import 'package:single_resturant_app/features/cart/data/models/add_to_cart_data_model.dart';
+import 'package:single_resturant_app/features/cart/data/repos/cart_repo.dart';
 
-import '../../../../meal/data/models/meal_model.dart';
 import '../../../../orders/data/models/order_model.dart';
 import '../../../data/models/cart_model.dart';
 
 part 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
-  CartModel? cartModel;
+  final CartRepo cartRepo;
+  List<CartModel> cart = [];
+  CartCubit(
+    this.cartRepo,
+  ) : super(CartInitial());
 
-  OrderModel? orderModel;
-  CartCubit() : super(CartInitial());
-
-  void updateCartModel(CartModel cartModel) {
-    this.cartModel = cartModel;
-    emit(
-      CartItemChangedState(
-        cartModel: cartModel,
+  sendCartDataToServe(AddToCartDataModel addToCartDataModel) async {
+    emit(SendCartToServerLoadingState());
+    final res = await cartRepo.addItemToCart(addToCartDataModel);
+    res.fold(
+      (error) => emit(
+        SendCartToServerFailureState(
+          failure: error,
+        ),
+      ),
+      (status) => emit(
+        SendCartToServerLoadedState(
+          status: status,
+        ),
       ),
     );
   }
 
-  addOrderToCart({required OrderModel orderModel}) {
-    cartModel ??= CartModel(
-      orders: [orderModel],
-      isCouponApplied: false,
-      couponCode: '',
-    );
-
-    cartModel = cartModel!.copyWith(orders: [...cartModel!.orders, orderModel]);
-    emit(
-      CartItemChangedState(
-        cartModel: cartModel!,
-      ),
-    );
-  }
-
-  changeOrderDetails({List<SideItemModel>? sides, OrderModel? orderModel}) {
-    if (orderModel != null) {
-      this.orderModel = orderModel;
-    }
-    if (sides != null) {
-      MealModel mealModel = this.orderModel!.meal;
-      this.orderModel =
-          this.orderModel!.copyWith(meal: mealModel.copyWith(sides: sides));
-    }
-    emit(
-      OrderDetailsChangedState(
-        orderModel: orderModel,
-      ),
+  fetchCart() async {
+    emit(FetchCartLoadingState());
+    final res = await cartRepo.getCart();
+    res.fold(
+      (error) {
+        log(error.msg);
+        emit(
+          FetchCartFailureState(
+            message: error.msg,
+          ),
+        );
+      },
+      (cart) {
+        this.cart = cart;
+        emit(FetchCartSuccessState());
+      },
     );
   }
 }

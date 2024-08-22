@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
-import 'package:single_resturant_app/features/orders/presentation/widgets/cancel_order_reason_radio_widget.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/assets.dart';
@@ -10,8 +8,11 @@ import '../../../../core/widgets/custom_btn_widget.dart';
 import 'confirm_cancel_order_dialog.dart';
 
 class CancelOrderDialog extends StatelessWidget {
+    final String orderId;
+
   const CancelOrderDialog({
     super.key,
+    required this.orderId,
   });
 
   @override
@@ -54,22 +55,24 @@ class CancelOrderDialog extends StatelessWidget {
                     children: [
                       Expanded(
                         child: CustomBtnWidget(
-                          onTap: () => showDialog(
-                            context: context,
-                            builder: (context) =>
-                                const ConfirmCancelOrderDialog(),
-                          ),
-                          color: AppColors.primaryColor,
-                          text: 'Cancel',
-                          titleStyle: TextStyles.white16Medium,
-                        ),
-                      ),
-                      Expanded(
-                        child: CustomBtnWidget(
                           onTap: () => context.pop(),
                           color: const Color(0xffF4F4F4),
                           text: 'Back',
                           titleStyle: TextStyles.black16Medium,
+                        ),
+                      ),
+                      Expanded(
+                        child: CustomBtnWidget(
+                          onTap: () => showDialog(
+                            context: context,
+                            builder: (context) =>
+                                 ConfirmCancelOrderDialog(
+                                   orderId: orderId,
+                                 ),
+                          ),
+                          color: AppColors.primaryColor,
+                          text: 'Cancel',
+                          titleStyle: TextStyles.white16Medium,
                         ),
                       ),
                     ],

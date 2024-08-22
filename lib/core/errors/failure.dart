@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 
 abstract class Failure {
@@ -27,9 +29,10 @@ class ServerFailure extends Failure {
         return ServerFailure(
             'Request has been cancelled ,please try again later!');
       case DioExceptionType.badResponse:
-        if (exception.response!.data['error'] != null) {
+        log(exception.response!.data.toString());
+        if (exception.response!.data['message'] != null) {
           return ServerFailure(
-            exception.response!.data['error']['message'],
+            exception.response!.data['message'],
             statusCode: exception.response!.statusCode,
           );
         }
@@ -41,3 +44,5 @@ class ServerFailure extends Failure {
     }
   }
 }
+
+

@@ -1,17 +1,9 @@
-import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
-import 'package:gap/gap.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:single_resturant_app/core/utils/assets.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
-import 'package:single_resturant_app/core/utils/text_styles.dart';
 import 'package:single_resturant_app/core/widgets/custom_app_bar.dart';
 import 'package:single_resturant_app/features/track_order/presentation/widgets/order_progress_bottom_sheet.dart';
 
-import '../../../../core/utils/app_colors.dart';
 import '../widgets/driver_details_bottom_sheet.dart';
 
 class TrackOrderView extends StatelessWidget {

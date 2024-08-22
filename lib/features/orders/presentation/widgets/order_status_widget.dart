@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
 
-import '../../../../core/utils/app_colors.dart';
 
 class OrderStatusWidget extends StatelessWidget {
   final String status;

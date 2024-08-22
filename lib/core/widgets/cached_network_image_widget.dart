@@ -12,6 +12,7 @@ class CachedNetworkImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
+      fit: BoxFit.fill,
       imageUrl: url,
       placeholder: (context, url) => Image.asset(
         Assets.assetsImagesLogo,

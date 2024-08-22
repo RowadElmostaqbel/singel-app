@@ -23,8 +23,7 @@ class RegisterDataModel {
       'email': email,
       'password': password,
       'password_confirmation': password_confirmation,
-      'image': image,
-      'restaurant_id':24,
+      'restaurant_id':50,
     };
   }
 }

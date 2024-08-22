@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/utils/app_colors.dart';
@@ -85,7 +83,9 @@ class FastDelivaryListItem extends StatelessWidget {
                             ),
                           ],
                         )),
-                    const AddToFavBtn(),
+                    const AddToFavBtn(
+                      isLiked: false,
+                    ),
                   ],
                 ),
               ),

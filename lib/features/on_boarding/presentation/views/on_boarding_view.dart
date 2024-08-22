@@ -7,7 +7,6 @@ import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/core/utils/text_styles.dart';
 import 'package:single_resturant_app/core/widgets/custom_btn_widget.dart';
 import 'package:single_resturant_app/features/auth/presentation/views/login_view.dart';
-import 'package:single_resturant_app/features/bottom_nav/presentation/views/bottom_nav_view.dart';
 import 'package:single_resturant_app/features/on_boarding/presentation/widgets/on_boarding_image_widget.dart';
 import 'package:single_resturant_app/features/on_boarding/presentation/widgets/on_boarding_skip_btn.dart';
 import 'package:single_resturant_app/features/on_boarding/presentation/widgets/on_boarding_title_widget.dart';

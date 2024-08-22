@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
+import 'package:single_resturant_app/core/widgets/cached_network_image_widget.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/add_to_fav_btn.dart';
+import 'package:single_resturant_app/features/meal/data/models/category_meal_item.dart';
 
 import '../../../../core/utils/app_colors.dart';
-import '../../../../core/utils/assets.dart';
 import '../../../../core/utils/text_styles.dart';
 
 class WishItem extends StatelessWidget {
-  final int index;
+  final CategoryMealItem mealItem;
   const WishItem({
     super.key,
-    required this.index,
+    required this.mealItem,
   });
 
   @override
@@ -44,70 +45,42 @@ class WishItem extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Gap(14),
-                        const Text(
-                          'Spaghetti Chicken Cheese',
-                          style: TextStyles.black14Regular,
+                        Text(
+                          mealItem.name ?? '',
+                          style: TextStyles.black16SemiBold,
                           textAlign: TextAlign.start,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
                         const Gap(8),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Column(
-                              children: [
-                                const Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.star,
-                                      color: AppColors.yellowColor,
-                                    ),
-                                    Text(
-                                      '4.2',
-                                      style: TextStyles.black14Medium,
-                                    ),
-                                  ],
-                                ),
-                                RichText(
-                                  text: const TextSpan(
-                                    text: '65',
-                                    style: TextStyles.black16Regular,
-                                    children: [
-                                      TextSpan(
-                                        text: ' SAR',
-                                        style: TextStyles.primary14Regular,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                            const Icon(
+                              Icons.star,
+                              color: AppColors.yellowColor,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                top: 0,
-                                right: 12,
-                              ),
-                              child: Container(
-                                alignment: Alignment.center,
-                                padding: const EdgeInsets.all(8),
-                                height: 45,
-                                width: 45,
-                                decoration: const BoxDecoration(
-                                  color: AppColors.primaryColor,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Image.asset(
-                                    Assets.assetsIconsAddToCartIcon),
-                              ),
+                            Text(
+                              mealItem.rate.toString(),
+                              style: TextStyles.black14Medium,
                             ),
                           ],
+                        ),
+                        RichText(
+                          text: TextSpan(
+                            text: mealItem.price.toString(),
+                            style: TextStyles.black16Regular,
+                            children: const [
+                              TextSpan(
+                                text: ' SAR',
+                                style: TextStyles.primary14Regular,
+                              ),
+                            ],
+                          ),
                         ),
                         const Gap(12),
                       ],
@@ -118,19 +91,35 @@ class WishItem extends StatelessWidget {
             ),
           ),
           Hero(
-            tag: 'popularDishListItem$index',
+            tag: mealItem.id.toString(),
             child: Align(
               alignment: Alignment.topCenter,
-              child: Image.asset(
-                Assets.assetsImagesDish,
+              child: Container(
+                clipBehavior: Clip.antiAlias,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 10,
+                      offset: Offset(0, 5),
+                    ),
+                  ],
+                ),
                 width: context.width * .225,
+                child: CachedNetworkImageWidget(
+                  url: mealItem.img ?? '',
+                ),
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
             top: 35,
             right: 0,
-            child: AddToFavBtn(),
+            child: AddToFavBtn(
+              isLiked: mealItem.isFavorite,
+              mealItem: mealItem,
+            ),
           )
         ],
       ),

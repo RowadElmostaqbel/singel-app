@@ -1,11 +1,9 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../core/utils/text_styles.dart';
-import '../../../cart/presentation/controllers/cubit/cart_cubit.dart';
 import '../../../meal/data/models/meal_model.dart';
 import 'add_side_list_item.dart';
 
@@ -40,9 +38,7 @@ class AddSidesListView extends HookWidget {
                   sides.value.add(sideItems[index]);
                 }
                 sides.value = sides.value.toSet().toList();
-                context.read<CartCubit>().changeOrderDetails(
-                      sides: sides.value,
-                    );
+             
               },
               child: AddSideListItem(
                 isSelected: sides.value.contains(sideItems[index]),

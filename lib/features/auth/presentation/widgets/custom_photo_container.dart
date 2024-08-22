@@ -41,11 +41,17 @@ class CustomPhotoContainer extends StatelessWidget {
                         child: Column(
                           children: [
                             TextButton(
-                                onPressed: onPressedGallery,
-                                child: const Text('Choose form Gallery')),
+                              onPressed: onPressedGallery,
+                              child: const Text(
+                                'Choose form Gallery',
+                              ),
+                            ),
                             TextButton(
-                                onPressed: onPressedCamera,
-                                child: const Text('Open Camera'))
+                              onPressed: onPressedCamera,
+                              child: const Text(
+                                'Open Camera',
+                              ),
+                            )
                           ],
                         ),
                       ),

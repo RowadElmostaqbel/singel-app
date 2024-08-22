@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
@@ -49,7 +48,9 @@ class CustomSearchAndFilterWidget extends StatelessWidget {
           const Gap(12),
           Expanded(
             child: GestureDetector(
-              onTap: () => context.navigateTo(const FilterView()),
+              onTap: () => context.navigateTo(
+                const FilterView(),
+              ),
               child: Container(
                 padding: const EdgeInsets.all(
                   12,

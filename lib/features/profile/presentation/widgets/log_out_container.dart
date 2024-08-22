@@ -1,9 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/features/profile/presentation/widgets/delete_account_dialog.dart';
 import 'package:single_resturant_app/features/profile/presentation/widgets/logout_dialog.dart';
 
+import '../../../../core/errors/error_handler.dart';
+import '../../../../core/errors/failure.dart';
+import '../../../../core/utils/cache_service.dart';
+import '../../../auth/data/models/user_model.dart';
+
 class LogOutContainer extends StatelessWidget {
   const LogOutContainer({super.key});
+ navigateIfLoggedIn(Widget screen, BuildContext context) {
+    if (checkIfUserISLoggedIn()) {
+      context.navigateTo(
+        screen,
+      );
+    } else {
+      ErrorHandler.handleError(
+          failure: ServerFailure('', statusCode: 401), context: context);
+    }
+  }
+
+  bool checkIfUserISLoggedIn() {
+    return CacheServiceHeper()
+            .getData<UserModel>(boxName: 'user', key: 'user') !=
+        null;
+  }
 
   @override
   Widget build(BuildContext context) {

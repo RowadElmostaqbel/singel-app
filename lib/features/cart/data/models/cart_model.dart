@@ -1,26 +1,31 @@
-
-import '../../../orders/data/models/order_model.dart';
-
 class CartModel {
-  final List<OrderModel> orders;
-  final bool isCouponApplied;
-  final String couponCode;
+  final int? id;
+  final int? itemId;
+  final int? quantity;
+  final double? price;
+  final String? name;
+  final String? img;
+  final String? desc;
 
   CartModel({
-    required this.orders,
-    required this.isCouponApplied,
-    required this.couponCode,
+    required this.id,
+    required this.itemId,
+    required this.quantity,
+    required this.price,
+    required this.name,
+    required this.img,
+    required this.desc,
   });
 
-  CartModel copyWith({
-    List<OrderModel>? orders,
-    bool? isCouponApplied,
-    String? couponCode,
-  }) {
+  factory CartModel.fromJson(Map<String, dynamic> json) {
     return CartModel(
-      orders: orders ?? this.orders,
-      isCouponApplied: isCouponApplied ?? this.isCouponApplied,
-      couponCode: couponCode ?? this.couponCode,
+      id: json['id'],
+      itemId: json['item_id'],
+      quantity: json['qty'],
+      price: double.tryParse(json['sale_price']) ?? 0.0,
+      name: json['itemable']?['name'],
+      img: json['itemable']?['image'],
+      desc: json['itemable']?['details'],
     );
   }
 }

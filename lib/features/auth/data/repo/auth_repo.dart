@@ -1,19 +1,65 @@
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:single_resturant_app/core/utils/api_services.dart';
-import 'package:single_resturant_app/features/auth/data/models/person_model.dart';
-import 'package:single_resturant_app/features/auth/data/models/user_model.dart';
+import 'package:single_resturant_app/features/auth/data/models/register_data_model.dart';
+
+import '../../../../core/errors/failure.dart';
 
 class AuthRepo {
   final ApiService apiService;
 
   AuthRepo(this.apiService);
 
-  Future<bool> register(
-      {
-      required RegisterDataModel registerData}) async {
-    final data = await apiService.postFormData(
-      endpoint: 'client/auth/register',
-      data: registerData.toJson(),
-    );
-    return data['status'];
+  Future<Either<Failure, bool>> register(
+    RegisterDataModel registerData,
+    File? image,
+  ) async {
+    try {
+      final data = await apiService.postFormData(
+        endpoint: 'client/auth/register',
+        data: registerData.toJson(),
+        image: image,
+      );
+      return Right(
+        data['status'],
+      );
+    } on DioException catch (e) {
+      log(name: 'error', e.toString());
+      return Left(
+        ServerFailure.fromDioException(e),
+      );
+    } catch (e) {
+      log(name: 'error', e.toString());
+
+      return Left(
+        ServerFailure(e.toString()),
+      );
+    }
+  }
+
+  Future<Either<Failure, bool>> logout() async {
+    try {
+      final data = await apiService.post(
+        endpoint: 'client/auth/logout',
+        data: {},
+      );
+      return Right(
+        data['status'],
+      );
+    } on DioException catch (e) {
+      log(name: 'error', e.toString());
+      return Left(
+        ServerFailure.fromDioException(e),
+      );
+    } catch (e) {
+      log(name: 'error', e.toString());
+
+      return Left(
+        ServerFailure(e.toString()),
+      );
+    }
   }
 }

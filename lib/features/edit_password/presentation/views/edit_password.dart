@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:single_resturant_app/core/utils/app_colors.dart';
+import 'package:single_resturant_app/features/auth/presentation/widgets/custom_text_form_field.dart';
 
+import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/text_styles.dart';
+import '../../../../core/widgets/custom_navigator_button.dart';
 
-class AboutUs extends StatefulWidget {
-  const AboutUs({super.key});
+class EditPassword extends StatefulWidget {
+  const EditPassword({super.key});
 
   @override
-  State<AboutUs> createState() => _AboutUsState();
+  State<EditPassword> createState() => _EditPasswordState();
 }
 
-class _AboutUsState extends State<AboutUs> {
+class _EditPasswordState extends State<EditPassword> {
+  TextEditingController oldPassword = TextEditingController();
+  TextEditingController newPassword = TextEditingController();
+  TextEditingController confirmPassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
+        scrollDirection: Axis.vertical,
         slivers: [
           SliverAppBar(
             leading: Align(
@@ -50,7 +56,7 @@ class _AboutUsState extends State<AboutUs> {
             pinned: false,
             floating: false,
             stretch: true,
-            title: const Text("About Us"),
+            title: const Text("Change Password"),
             titleTextStyle: TextStyles.white18SemiBold,
             centerTitle: true,
             flexibleSpace: Stack(
@@ -64,7 +70,7 @@ class _AboutUsState extends State<AboutUs> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                      height: 180,
+                      height: 40,
                       decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
@@ -72,27 +78,48 @@ class _AboutUsState extends State<AboutUs> {
                             topRight: Radius.circular(50)),
                       )),
                 ),
-                Positioned(
-                    bottom: 0,
-                    left: 30,
-                    child: Image.asset("assets/images/about_us.png")),
               ],
             ),
-            expandedHeight: 250,
+            expandedHeight: 210,
           ),
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: Padding(
               padding:
-              EdgeInsets.symmetric(horizontal: 24),
+                  const EdgeInsets.symmetric(vertical: 0, horizontal: 36),
               child: Column(
                 children: [
-                  Text(
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 17,
-                        color:AppColors.darkGreyColor),
-                  )
+                  CustomTextFormField(
+                      controller: oldPassword,
+                      label: "Old Password",
+                      hintText: "************",
+                      keyboardType: TextInputType.text,
+                      validator: (value) {
+                        return null;
+                      },
+                      icon: "assets/icons/lock.png",
+                      onChanged: (String value) {}),
+                  CustomTextFormField(
+                      controller: newPassword,
+                      label: " New Password",
+                      hintText: "************",
+                      keyboardType: TextInputType.text,
+                      validator: (value) {
+                        return null;
+                      },
+                      icon: "assets/icons/new_lock.png",
+                      onChanged: (String value) {}),
+                  CustomTextFormField(
+                      controller: confirmPassword,
+                      label: "Confirm Password",
+                      hintText: "************",
+                      keyboardType: TextInputType.text,
+                      validator: (value) {
+                        return null;
+                      },
+                      icon: "assets/icons/new_lock.png",
+                      onChanged: (String value) {}),
+                  CustomNavigatorButton(
+                      title: "Save", onPressed: () {}, padding: 50),
                 ],
               ),
             ),

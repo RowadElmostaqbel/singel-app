@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
@@ -8,6 +8,7 @@ import '../../../../core/utils/assets.dart';
 import '../../../../core/utils/text_styles.dart';
 import '../../../../core/widgets/custom_app_bar.dart';
 import '../../../home/presentation/views/category_view.dart';
+import '../controllers/order/orders_cubit.dart';
 import 'active_order_view.dart';
 
 class MyOrdersView extends HookWidget {
@@ -15,10 +16,14 @@ class MyOrdersView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    useEffect(() {
+      context.read<OrdersCubit>().fetchMyOrders();
+      return null;
+    }, []);
     final PageController pageController = usePageController(initialPage: 0);
     return Scaffold(
       bottomSheet: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+        padding: const EdgeInsets.all(24),
         height: context.height * .85,
         width: context.width,
         decoration: const BoxDecoration(

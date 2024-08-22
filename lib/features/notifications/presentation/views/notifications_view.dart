@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/features/notifications/presentation/widgets/notification_items_list_view.dart';
 
