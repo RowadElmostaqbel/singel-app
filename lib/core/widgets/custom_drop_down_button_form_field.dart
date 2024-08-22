@@ -5,13 +5,14 @@ import '../utils/text_styles.dart';
 
 class CustomDropDownButtonFormField extends StatefulWidget {
   const CustomDropDownButtonFormField(
-      {super.key, required this.dropDownList, required this.label, required this.icon});
+      {super.key, required this.dropDownList, required this.label, required this.icon, required this.onChanged});
 
   final String label;
   final String icon;
   final List<String> dropDownList;
+  final void Function(String?)? onChanged;
 
-  @override
+@override
   State<CustomDropDownButtonFormField> createState() =>
       _CustomDropDownButtonFormFieldState();
 }
@@ -54,11 +55,12 @@ class _CustomDropDownButtonFormFieldState
                 color: AppColors.primaryColor,
               ),
               iconSize: 24,
-              onChanged: (String? newValue) {
-                setState(() {
-                  widget.dropDownList.first = newValue!;
-                });
-              },
+              onChanged: widget.onChanged,
+              //     (String? newValue) {
+              //   setState(() {
+              //     widget.dropDownList.first = newValue!;
+              //   });
+              // },
               items: widget.dropDownList
                   .map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem(
