@@ -251,25 +251,9 @@ class MakeOrderView extends HookWidget {
                       ],
                     ),
                   ),
-                  const SliverToBoxAdapter(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Client’s Review',
-                          style: TextStyles.black18SemiBold,
-                        ),
-                        Text(
-                          'See more',
-                          style: TextStyles.primary16Medium,
-                        ),
-                      ],
-                    ),
+                  ClientReviewsListView(
+                    itemId: categoryMealItem.id ?? 0,
                   ),
-                  const SliverToBoxAdapter(
-                    child: Gap(24),
-                  ),
-                  const ClientReviewsListView(),
                   const SliverToBoxAdapter(
                     child: Gap(110),
                   ),

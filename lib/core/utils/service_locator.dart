@@ -12,6 +12,8 @@ import 'package:single_resturant_app/features/orders/data/repo/order_repo.dart';
 import 'package:single_resturant_app/features/orders/data/repo/order_repo_impl.dart';
 import 'package:single_resturant_app/features/profile/data/repo/edit_profile_repo.dart';
 import 'package:single_resturant_app/features/profile/data/repo/edit_profile_repo_impl.dart';
+import 'package:single_resturant_app/features/review/data/repos/review_repo.dart';
+import 'package:single_resturant_app/features/review/data/repos/review_repo_impl.dart';
 import 'package:single_resturant_app/features/wishlist/data/repo/whishlist_repo.dart';
 import 'package:single_resturant_app/features/wishlist/data/repo/whishlist_repo_impl.dart';
 
@@ -60,6 +62,11 @@ abstract class ServiceLocatorHelper {
     );
     getIt.registerSingleton<OrderRepo>(
       OrderRepoImpl(
+      apiService:   getIt.get<ApiService>(),
+      ),
+    );
+     getIt.registerSingleton<ReviewRepo>(
+      ReviewRepoImpl(
       apiService:   getIt.get<ApiService>(),
       ),
     );

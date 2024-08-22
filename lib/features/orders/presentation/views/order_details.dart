@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:single_resturant_app/core/utils/app_colors.dart';
-import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/core/widgets/cached_network_image_widget.dart';
 import 'package:single_resturant_app/core/widgets/custom_app_bar.dart';
 import 'package:single_resturant_app/features/orders/data/models/my_order_model.dart';
-import 'package:url_launcher/url_launcher.dart';
-
+import 'package:single_resturant_app/features/review/presentation/controllers/review_cubit.dart';                              
 import '../../../../core/utils/assets.dart';
 import '../../../../core/utils/text_styles.dart';
+import '../../../review/presentation/widgets/add_review_widget.dart';
+import '../widgets/order_delivery_details.dart';
 
 class OrderDetails extends StatelessWidget {
+  final bool fromHistory;
   final MyOrderModel orderModel;
   const OrderDetails({
     super.key,
     required this.orderModel,
+    this.fromHistory = false,
   });
 
   @override
@@ -201,6 +205,7 @@ class OrderDetails extends StatelessWidget {
                           ),
                           OrderDeliveryDetails(orderModel: orderModel),
                           const Gap(24),
+                          if (fromHistory) const AddReviewWidget(),
                         ],
                       )
                     ],
@@ -215,13 +220,42 @@ class OrderDetails extends StatelessWidget {
   }
 }
 
-class OrderDeliveryDetails extends StatelessWidget {
-  const OrderDeliveryDetails({
+class OrderItemsListView extends HookWidget {
+  const OrderItemsListView({
     super.key,
     required this.orderModel,
   });
 
   final MyOrderModel orderModel;
+
+  @override
+  Widget build(BuildContext context) {
+    ValueNotifier<int> selectedItemIndex = useState(-1);
+    return ListView.separated(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemBuilder: (context, index) => selectedItemIndex.value == index
+          ? SelectedOrderMealsListItem(
+              orderItemModel: orderModel.orderItems[index],
+            )
+          : GestureDetector(
+              onTap: () => selectedItemIndex.value = index,
+              child: UnSelectedOrderMealsListItem(
+                orderItemModel: orderModel.orderItems[index],
+              ),
+            ),
+      separatorBuilder: (context, index) => const Gap(14),
+      itemCount: orderModel.orderItems.length,
+    );
+  }
+}
+
+class UnSelectedOrderMealsListItem extends StatelessWidget {
+  final OrderItemModel orderItemModel;
+  const UnSelectedOrderMealsListItem({
+    super.key,
+    required this.orderItemModel,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -238,81 +272,120 @@ class OrderDeliveryDetails extends StatelessWidget {
           ),
         ],
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("Address Name: ${orderModel.address.name}",
-                    style: TextStyles.black14Regular),
-                Text("City: ${orderModel.address.cityName}",
-                    style: TextStyles.black14Regular),
-              ],
+      child: Row(
+        children: [
+          Container(
+            height: 60,
+            width: 60,
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
             ),
-            const Gap(4),
-            const Text("Address Description:",
-                style: TextStyles.black14Regular),
-            const Gap(4),
-            Text("${orderModel.address.details}",
-                style: TextStyles.darkGrey14Regular),
-            const Gap(8),
-            GestureDetector(
-              onTap: () async => await launchUrl(
-                Uri.parse(
-                  'https://www.google.com/maps/search/?api=1&query=${orderModel.address.latitude},${orderModel.address.longitude}',
-                ),
-              ),
-              child: Image.asset(
-                "assets/images/map_location.png",
-                width: context.width,
-                fit: BoxFit.fitWidth,
+            child: CachedNetworkImageWidget(
+              url: orderItemModel.image ?? '',
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      RichText(
+                          text: TextSpan(
+                              text: "Order Name:",
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 14,
+                                  color: Colors.black),
+                              children: [
+                            TextSpan(
+                              text: orderItemModel.name,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14,
+                                  color: Colors.black),
+                            )
+                          ])),
+                      RichText(
+                        text: TextSpan(
+                          text: orderItemModel.price.toString(),
+                          style: TextStyles.black16SemiBold,
+                          children: const [
+                            TextSpan(
+                              text: ' SAR',
+                              style: TextStyles.primary14Medium,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Gap(4),
+                  RichText(
+                      text: TextSpan(
+                          text: "Quantity:",
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w300,
+                              fontSize: 14,
+                              color: Colors.black),
+                          children: [
+                        TextSpan(
+                          text: orderItemModel.quantity.toString(),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14,
+                              color: Colors.black),
+                        )
+                      ])),
+                  const Gap(4),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Chicken Burger",
+                        style: TextStyles.black14Regular,
+                      ),
+                      Text(
+                        "Burger",
+                        style: TextStyles.black14Regular,
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
 }
 
-class OrderItemsListView extends StatelessWidget {
-  const OrderItemsListView({
-    super.key,
-    required this.orderModel,
-  });
-
-  final MyOrderModel orderModel;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.separated(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemBuilder: (context, index) => OrderMealsListItem(
-        orderItemModel: orderModel.orderItems[index],
-      ),
-      separatorBuilder: (context, index) => const Gap(14),
-      itemCount: orderModel.orderItems.length,
-    );
-  }
-}
-
-class OrderMealsListItem extends StatelessWidget {
+class SelectedOrderMealsListItem extends HookWidget {
   final OrderItemModel orderItemModel;
-  const OrderMealsListItem({
+  const SelectedOrderMealsListItem({
     super.key,
     required this.orderItemModel,
   });
 
   @override
   Widget build(BuildContext context) {
+    useEffect(() {
+      context.read<ReviewCubit>().addToDataModel(itemId: orderItemModel.id);
+      return null;
+    }, []);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       decoration: BoxDecoration(
         color: Colors.white,
+        border: Border.all(
+          width: 1,
+          color: AppColors.primaryColor,
+        ),
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(

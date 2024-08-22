@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:single_resturant_app/features/more_information_details/presentation/views/contact_us.dart';
 import 'package:single_resturant_app/features/more_information_details/presentation/views/privacy.dart';
 import 'package:single_resturant_app/features/more_information_details/presentation/views/terms_and_conditions.dart';
-import 'package:single_resturant_app/features/profile/presentation/widgets/language_dialog.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../checkout/presentation/widgets/custom_on_button.dart';

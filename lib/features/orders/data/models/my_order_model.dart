@@ -1,6 +1,4 @@
-import 'package:single_resturant_app/features/meal/data/models/category_meal_item.dart';
 import 'package:single_resturant_app/features/my_address/data/models/addresses.dart';
-import 'package:single_resturant_app/features/orders/data/models/order_model.dart';
 
 class MyOrderModel {
   final int id;

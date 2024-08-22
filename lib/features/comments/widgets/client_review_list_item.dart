@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
+import 'package:single_resturant_app/core/widgets/cached_network_image_widget.dart';
+import 'package:single_resturant_app/features/review/data/models/review_model.dart';
 
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/assets.dart';
 import '../../../core/utils/text_styles.dart';
 
 class ClientReviewListItem extends StatelessWidget {
+  final ReviewModel reviewModel;
   const ClientReviewListItem({
     super.key,
+    required this.reviewModel,
   });
 
   @override
@@ -37,20 +42,19 @@ class ClientReviewListItem extends StatelessWidget {
                 Row(
                   children: [
                     Container(
-                      height: 50,
-                      width: 50,
-                      decoration: const BoxDecoration(shape: BoxShape.circle),
-                      child: Image.asset(
-                        Assets.assetsImagesProfile,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
+                        clipBehavior: Clip.antiAlias,
+                        height: 50,
+                        width: 50,
+                        decoration: const BoxDecoration(shape: BoxShape.circle),
+                        child: CachedNetworkImageWidget(
+                          url: reviewModel.image,
+                        )),
                     const Gap(8),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Omar Ali',
+                        Text(
+                          reviewModel.name,
                           style: TextStyles.black16SemiBold,
                         ),
                         Row(
@@ -60,14 +64,22 @@ class ClientReviewListItem extends StatelessWidget {
                               width: 15,
                               child: Image.asset(Assets.assetsIconsStar),
                             ),
-                            const Text('4.7'),
+                            Text(
+                              reviewModel.rate.toString(),
+                            ),
                           ],
                         ),
                       ],
                     ),
                   ],
                 ),
-                const Text('10-8-2024', style: TextStyles.darkGrey14SemiBold),
+                Text(
+                    DateFormat('dd-M-yyyy').format(
+                      DateTime.parse(
+                        reviewModel.createdAt,
+                      ),
+                    ),
+                    style: TextStyles.darkGrey14SemiBold),
               ],
             ),
           ),
@@ -77,8 +89,8 @@ class ClientReviewListItem extends StatelessWidget {
             height: 1,
             color: AppColors.greyColor.withOpacity(.6),
           ),
-          const Text(
-            '''This restaurant is the better for meals and offers and good services...''',
+          Text(
+            reviewModel.comment,
             style: TextStyles.darkGrey14SemiBold,
           ),
         ],
