@@ -167,9 +167,14 @@ class _SignUpViewState extends State<SignUpView> {
                         hintText: '********',
                         obscureText: true,
                         controller: confirmPassword,
-                        validator: FormBuilderValidators.compose([
-                          FormBuilderValidators.required(),
-                        ]),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "This field cannot be empty";
+                          } else if (password.text != confirmPassword.text) {
+                            return "Please enter the same password";
+                          }
+                          return null;
+                        },
                         icon: 'assets/icons/lock.png',
                         keyboardType: TextInputType.name,
                         onChanged: (String confirmPassword) {
