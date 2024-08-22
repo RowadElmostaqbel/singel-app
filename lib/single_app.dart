@@ -95,15 +95,18 @@ class SingleApp extends StatelessWidget {
           ),
         ),
         BlocProvider(
-            create: (context) => PasswordCubit(PasswordRepo(
-                  apiService: ServiceLocatorHelper.getIt.get<ApiService>(),
-                )))
+          create: (context) => PasswordCubit(
+            PasswordRepo(
+              apiService: ServiceLocatorHelper.getIt.get<ApiService>(),
+            ),
+          ),
+        ),
         BlocProvider(
           create: (context) => OrdersCubit(
             ServiceLocatorHelper.getIt.get<OrderRepo>(),
           ),
         ),
-         BlocProvider(
+        BlocProvider(
           lazy: false,
           create: (context) => CancelOrderCubit(
             ServiceLocatorHelper.getIt.get<OrderRepo>(),
