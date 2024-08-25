@@ -10,6 +10,7 @@ import 'package:single_resturant_app/core/widgets/cached_network_image_widget.da
 import 'package:single_resturant_app/features/auth/data/models/user_model.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/categories_list_view.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/offers_list_view.dart';
+import 'package:single_resturant_app/features/home/presentation/widgets/select_address_dialog.dart';
 import 'package:single_resturant_app/features/my_address/presentation/manager/address_cubit.dart';
 import '../../../../core/utils/text_styles.dart';
 import '../widgets/banners_view.dart';
@@ -104,6 +105,7 @@ class HomeView extends HookWidget {
             const Gap(2),
             InkWell(
               onTap: () {
+                showDialog(context: context, builder: (context)=> const SelectAddressDialog());
                 // showDialog(
                 //   context: context,
                 //   builder: (context) => LocationView(

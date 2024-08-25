@@ -9,6 +9,8 @@ import 'package:single_resturant_app/features/my_address/presentation/views/no_a
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/text_styles.dart';
+import '../../../../core/widgets/add_new_address_dialog.dart';
+import '../../../checkout/presentation/widgets/custom_add_button.dart';
 
 class MyAddressView extends HookWidget {
   const MyAddressView({super.key});
@@ -124,3 +126,16 @@ class MyAddressView extends HookWidget {
     );
   }
 }
+
+// >>>>>> add new address dialog
+
+// Positioned(
+// left: 100,
+// child: GestureDetector(
+// onTap: (){showDialog(
+// context: context,
+// builder: (context) {
+// return const AddNewAddressDialog();
+// });},
+// child: const CustomAddButton()),
+// ),
