@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -62,10 +64,14 @@ class LogoutDialog extends StatelessWidget {
                           BlocConsumer<UserCubit, UserState>(
                             listener: (context, state) {
                               if (state is AuthLoadedState) {
-                                Hive.box<UserModel>('user').clear();
-                                Hive.box<UserModel>('remember_me').clear();
-                                Hive.box<UserModel>(Constants.recentQueryBox)
-                                    .clear();
+                                try {
+                                  Hive.box<UserModel>('user').clear();
+                                  Hive.box<UserModel>('remember_me').clear();
+                                  Hive.box<UserModel>(Constants.recentQueryBox)
+                                      .clear();
+                                } catch (e) {
+                                  log(name: 'error', e.toString());
+                                }
                                 context.navigateToReplacement(
                                   const LoginView(),
                                 );

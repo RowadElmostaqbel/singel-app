@@ -19,18 +19,34 @@ class UserCubit extends Cubit<UserState> {
   UserCubit(this.authRepo, this.cacheServiceHeper) : super(UserInitial());
   RegisterDataModel registerDataModel = RegisterDataModel();
 
-  addUserName(String userName) {
-    registerDataModel.name = userName;
+  addDataToModel({
+    String? name,
+    String? phone,
+    String? email,
+    String? password,
+    String? password_confirmation,
+    String? image,
+    String? countryCode,
+  }) {
+    registerDataModel = registerDataModel.copyWith(
+      name: name,
+      phone: phone,
+      email: email,
+      password: password,
+      password_confirmation: password_confirmation,
+      image: image,
+      countryCode: countryCode,
+    );
   }
+
+ 
 
   // addImage(File image) {
   //   registerDataModel.image = image.path;
   //   this.image = image;
   // }
 
-  addEmail(String email) {
-    registerDataModel.email = email;
-  }
+ 
 
   uploadImage(File file) async {
     image = file;
@@ -40,18 +56,9 @@ class UserCubit extends Cubit<UserState> {
     // });
   }
 
-  addPhoneNumber(String number) {
-    registerDataModel.phone = number;
-  }
+ 
 
-  addPassword(String password) {
-    registerDataModel.password = password;
-  }
-
-  addConfirmPassword(String confirmPassword) {
-    registerDataModel.password_confirmation = confirmPassword;
-  }
-
+ 
   register() async {
     emit(AuthLoadingState());
     final res = await authRepo.register(

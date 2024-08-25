@@ -52,7 +52,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                 CustomTextFormField(
                   controller: newPassword,
                   label: "New Password",
-                  obscureText: true,
+                  isPassword: true,
                   hintText: "********",
                   validator: FormBuilderValidators.compose([
                     FormBuilderValidators.required(),
@@ -64,7 +64,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                 CustomTextFormField(
                   controller: confirmPassword,
                   label: "Confirm Password",
-                  obscureText: true,
+                  isPassword: true,
                   hintText: "********",
                   validator: (value) {
                     if (value == null || value.isEmpty) {

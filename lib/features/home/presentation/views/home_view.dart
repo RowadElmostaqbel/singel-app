@@ -78,6 +78,8 @@ class HomeView extends HookWidget {
                 shape: BoxShape.circle,
               ),
               child: CachedNetworkImageWidget(
+                                        isProfileImage: true,
+
                 url: CacheServiceHeper()
                         .getData<UserModel>(boxName: 'user', key: 'user')
                         ?.data

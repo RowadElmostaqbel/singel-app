@@ -36,6 +36,8 @@ class CustomPhotoContainer extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(80),
                   child: CachedNetworkImageWidget(
+                                            isProfileImage: true,
+
                     url:
                         '${CacheServiceHeper().getData<UserModel>(boxName: 'user', key: 'user')?.data?.client?.image}',
                   ),

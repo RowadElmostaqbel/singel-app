@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:single_resturant_app/core/utils/assets.dart';
 
 class CachedNetworkImageWidget extends StatelessWidget {
+  final bool isProfileImage;
   final String url;
   const CachedNetworkImageWidget({
     super.key,
     required this.url,
+    this.isProfileImage = false,
   });
 
   @override
@@ -15,10 +17,10 @@ class CachedNetworkImageWidget extends StatelessWidget {
       fit: BoxFit.fill,
       imageUrl: url,
       placeholder: (context, url) => Image.asset(
-        Assets.assetsImagesLogo,
+        isProfileImage ? 'assets/images/person.png' : Assets.assetsImagesLogo,
       ),
       errorWidget: (context, url, error) => Image.asset(
-        Assets.assetsImagesLogo,
+        isProfileImage ? 'assets/images/person.png' : Assets.assetsImagesLogo,
       ),
     );
   }

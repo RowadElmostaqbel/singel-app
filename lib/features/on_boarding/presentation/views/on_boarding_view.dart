@@ -42,10 +42,11 @@ Reservation Right Away''',
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Gap(context.height * .05),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24),
-            child: OnBoardingSkipBtn(),
-          ),
+          if (index.value < 2)
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24),
+              child: OnBoardingSkipBtn(),
+            ),
           Gap(context.height * .1),
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 500),

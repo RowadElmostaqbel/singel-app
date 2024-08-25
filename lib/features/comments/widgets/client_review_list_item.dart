@@ -42,13 +42,15 @@ class ClientReviewListItem extends StatelessWidget {
                 Row(
                   children: [
                     Container(
-                        clipBehavior: Clip.antiAlias,
-                        height: 50,
-                        width: 50,
-                        decoration: const BoxDecoration(shape: BoxShape.circle),
-                        child: CachedNetworkImageWidget(
-                          url: reviewModel.image,
-                        )),
+                      clipBehavior: Clip.antiAlias,
+                      height: 50,
+                      width: 50,
+                      decoration: const BoxDecoration(shape: BoxShape.circle),
+                      child: CachedNetworkImageWidget(
+                        url: reviewModel.image,
+                        isProfileImage: true,
+                      ),
+                    ),
                     const Gap(8),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

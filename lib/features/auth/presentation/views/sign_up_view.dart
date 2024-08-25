@@ -6,6 +6,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/features/auth/presentation/manager/user_cubit.dart';
+import 'package:single_resturant_app/features/auth/presentation/widgets/custom_phone_text_form_field.dart';
 import 'package:single_resturant_app/features/auth/presentation/widgets/social_media.dart';
 import 'package:single_resturant_app/features/auth/presentation/widgets/terms_and_conditions_row.dart';
 
@@ -108,7 +109,7 @@ class _SignUpViewState extends State<SignUpView> {
                       CustomTextFormField(
                         label: 'User Name',
                         hintText: 'Enter Your Name',
-                        obscureText: false,
+                        isPassword: false,
                         controller: userName,
                         validator: FormBuilderValidators.compose([
                           FormBuilderValidators.required(),
@@ -116,7 +117,7 @@ class _SignUpViewState extends State<SignUpView> {
                         icon: 'assets/icons/profile.png',
                         keyboardType: TextInputType.name,
                         onChanged: (String name) {
-                          BlocProvider.of<UserCubit>(context).addUserName(name);
+                          BlocProvider.of<UserCubit>(context).addDataToModel(name: name);
                         },
                       ),
                       CustomTextFormField(
@@ -128,12 +129,14 @@ class _SignUpViewState extends State<SignUpView> {
                           FormBuilderValidators.email(),
                         ]),
                         icon: 'assets/icons/sms.png',
+                        isPassword: false,
                         keyboardType: TextInputType.emailAddress,
                         onChanged: (String email) {
-                          BlocProvider.of<UserCubit>(context).addEmail(email);
+                          BlocProvider.of<UserCubit>(context).addDataToModel(email: email);
                         },
                       ),
-                      CustomTextFormField(
+                      CustomPhoneTextFormField(
+                        fromRegister: true,
                         label: 'Phone Number',
                         hintText: '0123456789',
                         controller: mobile,
@@ -143,14 +146,14 @@ class _SignUpViewState extends State<SignUpView> {
                         icon: 'assets/icons/phone.png',
                         keyboardType: TextInputType.phone,
                         onChanged: (String phone) {
-                          BlocProvider.of<UserCubit>(context)
-                              .addPhoneNumber(phone);
+                                                   BlocProvider.of<UserCubit>(context).addDataToModel(phone: phone);
+
                         },
                       ),
                       CustomTextFormField(
                         label: 'Password',
                         hintText: '********',
-                        obscureText: true,
+                        isPassword: true,
                         controller: password,
                         validator: FormBuilderValidators.compose([
                           FormBuilderValidators.required(),
@@ -158,14 +161,14 @@ class _SignUpViewState extends State<SignUpView> {
                         icon: 'assets/icons/lock.png',
                         keyboardType: TextInputType.name,
                         onChanged: (String password) {
-                          BlocProvider.of<UserCubit>(context)
-                              .addPassword(password);
+                                                    BlocProvider.of<UserCubit>(context).addDataToModel(password: password);
+
                         },
                       ),
                       CustomTextFormField(
                         label: 'Confirm Password',
                         hintText: '********',
-                        obscureText: true,
+                        isPassword: true,
                         controller: confirmPassword,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -178,8 +181,8 @@ class _SignUpViewState extends State<SignUpView> {
                         icon: 'assets/icons/lock.png',
                         keyboardType: TextInputType.name,
                         onChanged: (String confirmPassword) {
-                          BlocProvider.of<UserCubit>(context)
-                              .addConfirmPassword(confirmPassword);
+                                                   BlocProvider.of<UserCubit>(context).addDataToModel(password_confirmation: confirmPassword);
+
                         },
                       ),
                       const TermsAndConditionsRow(),

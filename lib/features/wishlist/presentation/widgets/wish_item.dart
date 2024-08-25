@@ -6,6 +6,7 @@ import 'package:single_resturant_app/features/home/presentation/widgets/add_to_f
 import 'package:single_resturant_app/features/meal/data/models/category_meal_item.dart';
 
 import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/assets.dart';
 import '../../../../core/utils/text_styles.dart';
 
 class WishItem extends StatelessWidget {
@@ -45,7 +46,7 @@ class WishItem extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Gap(14),
@@ -58,31 +59,54 @@ class WishItem extends StatelessWidget {
                         ),
                         const Gap(8),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Icon(
-                              Icons.star,
-                              color: AppColors.yellowColor,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Icon(
+                                      Icons.star,
+                                      color: AppColors.yellowColor,
+                                    ),
+                                    Text(
+                                      mealItem.rate.toString(),
+                                      style: TextStyles.black14Medium,
+                                    ),
+                                  ],
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                    text: mealItem.price.toString(),
+                                    style: TextStyles.black16Regular,
+                                    children: const [
+                                      TextSpan(
+                                        text: ' SAR',
+                                        style: TextStyles.primary14Regular,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const Gap(12),
+                              ],
                             ),
-                            Text(
-                              mealItem.rate.toString(),
-                              style: TextStyles.black14Medium,
+                            Container(
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.all(8),
+                              height: 45,
+                              width: 45,
+                              decoration: const BoxDecoration(
+                                color: AppColors.primaryColor,
+                                shape: BoxShape.circle,
+                              ),
+                              child:
+                                  Image.asset(Assets.assetsIconsAddToCartIcon),
                             ),
                           ],
                         ),
-                        RichText(
-                          text: TextSpan(
-                            text: mealItem.price.toString(),
-                            style: TextStyles.black16Regular,
-                            children: const [
-                              TextSpan(
-                                text: ' SAR',
-                                style: TextStyles.primary14Regular,
-                              ),
-                            ],
-                          ),
-                        ),
-                        const Gap(12),
+                        const Gap(8),
                       ],
                     ),
                   ),
