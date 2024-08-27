@@ -90,8 +90,9 @@ class CheckoutView extends HookWidget {
                           });
                     },
                   ),
+                  const Gap(12),
                   SizedBox(
-                    height: 143,
+                    height: 85,
                     child: BlocListener<AddressCubit, AddressState>(
                       listener: (context, state) {
                         if (state is SendAddressToServerLoadedState) {
@@ -113,6 +114,7 @@ class CheckoutView extends HookWidget {
                       ),
                     ),
                   ),
+                  const Gap(12),
                   const Text(
                     "Time Options",
                     style: TextStyles.black16SemiBold,
@@ -165,28 +167,41 @@ class MyAddressesListView extends HookWidget {
   @override
   Widget build(BuildContext context) {
     ValueNotifier<int> selectedIndex = useState(-1);
-    return ListView.separated(
-      itemCount: addressess.length,
-      separatorBuilder: (context, index) => const Gap(10),
-      itemBuilder: (context, index) => selectedIndex.value == index
-          ? CustomAddressContainer(
-              containerBorderColor: AppColors.primaryColor,
-              address: addressess[index], deleteAddress: () {  },
-            )
-          : GestureDetector(
-              onTap: () {
-                selectedIndex.value = index;
-                context.read<CheckoutCubit>().addDeliveryAddressToDataModel(
-                      addressess[selectedIndex.value].id.toString(),
-                    );
-              },
-              child: CustomAddressContainer(
-                containerBorderColor: AppColors.greyColor,
-                address: addressess[index], deleteAddress: () {  },
+    return SizedBox(
+      height: 85,
+      child: ListView.separated(
+        itemCount: addressess.length,
+        separatorBuilder: (context, index) => const Gap(10),
+        itemBuilder: (context, index) => selectedIndex.value == index
+            ? CustomAddressContainer(
+                containerBorderColor: AppColors.primaryColor,
+                address: addressess[index],
+                deleteAddress: () {
+                  context.read<AddressCubit>().deleteAddress(
+                        addressess[selectedIndex.value].id,
+                      );
+                },
+              )
+            : GestureDetector(
+                onTap: () {
+                  selectedIndex.value = index;
+                  context.read<CheckoutCubit>().addDeliveryAddressToDataModel(
+                        addressess[selectedIndex.value].id.toString(),
+                      );
+                },
+                child: CustomAddressContainer(
+                  containerBorderColor: AppColors.greyColor,
+                  address: addressess[index],
+                  deleteAddress: () {
+                    context.read<AddressCubit>().deleteAddress(
+                          addressess[selectedIndex.value].id,
+                        );
+                  },
+                ),
               ),
-            ),
-      scrollDirection: Axis.horizontal,
-      shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
+      ),
     );
   }
 }
