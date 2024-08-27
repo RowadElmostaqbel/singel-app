@@ -111,7 +111,9 @@ class MyAddressView extends HookWidget {
                       ),
                       child: CustomAddressContainer(
                         containerBorderColor: AppColors.primaryColor,
-                        address: addressess[index],
+                        address: addressess[index], deleteAddress: () {
+                          BlocProvider.of<AddressCubit>(context).deleteAddress(addressess[index].id);
+                      },
                       ),
                     );
                   },

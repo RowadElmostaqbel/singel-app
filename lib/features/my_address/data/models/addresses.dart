@@ -1,5 +1,5 @@
 class AddressModel {
-  int? id;
+  late int id;
   String? name;
   String? cityName;
   String? phone;

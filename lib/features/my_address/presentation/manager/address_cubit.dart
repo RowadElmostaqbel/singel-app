@@ -83,6 +83,27 @@ class AddressCubit extends Cubit<AddressState> {
     );
   }
 
+  deleteAddress(int addressId) async {
+    emit(DeleteAddress());
+    final result = await addressRepo.deleteAddress(addressId);
+    result.fold(
+          (failure) {
+        emit(
+          SendAddressToServerFailureState(
+            message: failure.msg,
+          ),
+        );
+      },
+          (status) {
+        emit(
+          SendAddressToServerLoadedState(
+            status: status,
+          ),
+        );
+      },
+    );
+  }
+
   checkIfTheDataIsNotComplete() {
     log(addAddressModel.addresses[0].client_id.toString());
     return addAddressModel.addresses.first.city_id == null ||

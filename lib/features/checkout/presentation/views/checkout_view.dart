@@ -171,7 +171,7 @@ class MyAddressesListView extends HookWidget {
       itemBuilder: (context, index) => selectedIndex.value == index
           ? CustomAddressContainer(
               containerBorderColor: AppColors.primaryColor,
-              address: addressess[index],
+              address: addressess[index], deleteAddress: () {  },
             )
           : GestureDetector(
               onTap: () {
@@ -182,7 +182,7 @@ class MyAddressesListView extends HookWidget {
               },
               child: CustomAddressContainer(
                 containerBorderColor: AppColors.greyColor,
-                address: addressess[index],
+                address: addressess[index], deleteAddress: () {  },
               ),
             ),
       scrollDirection: Axis.horizontal,

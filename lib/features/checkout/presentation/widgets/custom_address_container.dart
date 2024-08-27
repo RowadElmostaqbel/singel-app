@@ -9,9 +9,10 @@ class CustomAddressContainer extends StatelessWidget {
   const CustomAddressContainer({
     super.key,
     required this.containerBorderColor,
-    required this.address,
+    required this.address, required this.deleteAddress,
   });
   final Color containerBorderColor;
+  final void Function()? deleteAddress;
 
   @override
   Widget build(BuildContext context) {
@@ -47,10 +48,14 @@ class CustomAddressContainer extends StatelessWidget {
                         color: AppColors.primaryColor),
                   ],
                 ),
-                // Image.asset(
-                //   "assets/icons/delete.png",
-                //   color: const Color(0xff5C5C5C),
-                // )
+                 GestureDetector(
+                   onTap: deleteAddress,
+                   child: Image.asset(
+                     "assets/icons/delete_address.png",
+                     width: 15,
+                     color: const Color(0xff5C5C5C),
+                   ),
+                 )
               ],
             ),
             Row(
