@@ -59,6 +59,7 @@ class EditMyPhotoWidget extends HookWidget {
               borderRadius: BorderRadius.circular(80),
               child: pickedImage.value == null
                   ? CachedNetworkImageWidget(
+                      isProfileImage: true,
                       url:
                           '${CacheServiceHeper().getData<UserModel>(boxName: 'user', key: 'user')?.data?.client?.image}',
                     )

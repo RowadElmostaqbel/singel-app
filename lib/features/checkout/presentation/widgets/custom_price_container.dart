@@ -29,7 +29,7 @@ class CustomPriceContainer extends StatelessWidget {
       child: Column(
         children: [
           PriceDetailsRow(
-            title: 'Subtotal',
+            title: 'Total Price',
             price:
                 '${context.watch<CartCubit>().cart.map((model) => model.price).reduce((a, b) => a! + b!)}',
           ),

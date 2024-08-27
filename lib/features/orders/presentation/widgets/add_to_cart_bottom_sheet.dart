@@ -32,11 +32,18 @@ class AddToCartBottomSheet extends HookWidget {
             context: context,
           );
         }
-      }, 
+      },
       child: Container(
         height: 100,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(.5),
+              blurRadius: 20,
+              offset: const Offset(0, 5),
+            ),
+          ],
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
           ),

@@ -17,13 +17,15 @@ class LoginCubit extends Cubit<LoginState> {
 
   LoginDataModel loginDataModel = LoginDataModel();
 
-  enterPhoneNumber(String phone) {
-    loginDataModel.phone = phone;
+  addDataToModel({ String? phone,  String? password,String?  countryCode}) {
+   loginDataModel=loginDataModel.copyWith(
+     phone: phone,
+     password: password,
+     countryCode: countryCode,
+   );
   }
 
-  enterPassword(String password) {
-    loginDataModel.password = password;
-  }
+  
 
   login({bool rememberUser = false}) async {
     emit(LoginLoadingState());

@@ -5,6 +5,7 @@ import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/core/widgets/custom_toast_widget.dart';
 import 'package:single_resturant_app/features/auth/presentation/manager/login_cubit.dart';
 import 'package:single_resturant_app/features/auth/presentation/views/sign_up_view.dart';
+import 'package:single_resturant_app/features/auth/presentation/widgets/custom_phone_text_form_field.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../bottom_nav/presentation/views/bottom_nav_view.dart';
@@ -59,7 +60,8 @@ class _LoginViewState extends State<LoginView> {
                         const CustomPageTitle(
                           title: 'Login',
                         ),
-                        CustomTextFormField(
+                        CustomPhoneTextFormField(
+                          fromRegister: false,
                           label: 'Phone Number',
                           hintText: '0123456789',
                           controller: phone,
@@ -71,13 +73,13 @@ class _LoginViewState extends State<LoginView> {
                           keyboardType: TextInputType.phone,
                           onChanged: (String phone) {
                             BlocProvider.of<LoginCubit>(context)
-                                .enterPhoneNumber(phone);
+                                .addDataToModel(phone: phone);
                           },
                         ),
                         CustomTextFormField(
                           label: 'Password',
                           hintText: '********',
-                          obscureText: true,
+                          isPassword: true,
                           controller: password,
                           validator: FormBuilderValidators.compose([
                             FormBuilderValidators.required(),
@@ -85,8 +87,8 @@ class _LoginViewState extends State<LoginView> {
                           icon: 'assets/icons/lock.png',
                           keyboardType: TextInputType.name,
                           onChanged: (String password) {
-                            BlocProvider.of<LoginCubit>(context)
-                                .enterPassword(password);
+                             BlocProvider.of<LoginCubit>(context)
+                                .addDataToModel(password: password);
                           },
                         ),
                         Row(

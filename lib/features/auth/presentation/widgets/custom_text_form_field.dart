@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../core/utils/text_styles.dart';
 
-class CustomTextFormField extends StatelessWidget {
+class CustomTextFormField extends HookWidget {
   CustomTextFormField({
     super.key,
     required this.controller,
     required this.label,
     required this.hintText,
-    this.obscureText = false,
+    this.isPassword = false,
     required this.keyboardType,
-    required this.validator, required this.icon, required this.onChanged,
+    required this.validator,
+    required this.icon,
+    required this.onChanged,
   });
 
   final TextEditingController? controller;
-  bool obscureText;
+  bool isPassword;
   final String label;
   final String hintText;
   final String icon;
@@ -24,6 +27,7 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ValueNotifier<bool> obscureTextNotifier = useState(isPassword);
     return Padding(
       padding: const EdgeInsets.only(top: 30.0),
       child: SizedBox(
@@ -32,10 +36,23 @@ class CustomTextFormField extends StatelessWidget {
           children: [
             TextFormField(
               onChanged: onChanged,
-              keyboardType:keyboardType,
+              keyboardType: keyboardType,
               validator: validator,
-              obscureText: obscureText,
+              obscureText: obscureTextNotifier.value,
               decoration: InputDecoration(
+                suffixIcon: isPassword
+                    ? IconButton(
+                        onPressed: () {
+                          obscureTextNotifier.value =
+                              !obscureTextNotifier.value;
+                        },
+                        icon: Icon(
+                          obscureTextNotifier.value
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                        ),
+                      )
+                    : null,
                 hintText: hintText,
                 hintStyle: TextStyles.grey14Regular,
                 fillColor: Colors.white,
@@ -69,7 +86,9 @@ class CustomTextFormField extends StatelessWidget {
                 child: Row(
                   children: [
                     Image.asset(icon),
-                    const SizedBox(width: 4,),
+                    const SizedBox(
+                      width: 4,
+                    ),
                     Text(label, style: TextStyles.black14Bold),
                   ],
                 ),

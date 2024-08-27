@@ -67,6 +67,7 @@ dependencies:
   awesome_dialog: ^3.2.1
   easy_debounce: ^2.0.3
   url_launcher: ^6.3.0
+  country_picker: ^2.0.26
 dev_dependencies:
   flutter_test:
     sdk: flutter
