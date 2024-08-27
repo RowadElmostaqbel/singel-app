@@ -29,4 +29,10 @@ final class SendAddressToServerFailureState extends AddressState {
   SendAddressToServerFailureState({required this.message});
 }
 
-final class DeleteAddress extends AddressState {}
+final class DeleteAddressLoadingState extends AddressState {}
+final class DeleteAddressSuccessState extends AddressState {}
+final class DeleteAddressFailureState extends AddressState {
+   final String message;
+
+  DeleteAddressFailureState({required this.message});
+}

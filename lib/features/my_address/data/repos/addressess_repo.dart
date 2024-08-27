@@ -57,16 +57,23 @@ class AddressRepo {
     }
   }
 
-  Future deleteAddress(int addressId) async {
-    final response = await apiService.delete(
-        addressId: addressId, endpoint: "client/profile/deleteAddress/$addressId");
-    return Right(
-      response['data']
-          .map<AddressModel>(
-            (e) => AddressModel.fromJson(e),
-          )
-          .toList(),
-    );
+  Future<Either<Failure, bool>> deleteAddress(int addressId) async {
+    try {
+      final response = await apiService.delete(
+        endpoint: "client/profile/deleteAddress/$addressId",
+      );
+      return const Right(
+        true,
+      );
+    } on DioException catch (e) {
+      return Left(
+        ServerFailure.fromDioException(e),
+      );
+    } catch (e) {
+      return Left(
+        ServerFailure(e.toString()),
+      );
+    }
   }
 
 // @override

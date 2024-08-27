@@ -194,6 +194,11 @@ static const primary24Medium = TextStyle(
     color: AppColors.primaryColor,
   );
 
+  static const primary14SemiBold = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    color: AppColors.primaryColor,
+  );
 
   static const primary16Medium = TextStyle(
     fontSize: 16,

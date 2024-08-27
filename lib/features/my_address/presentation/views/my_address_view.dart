@@ -26,7 +26,10 @@ class MyAddressView extends HookWidget {
     return Scaffold(
       body: BlocConsumer<AddressCubit, AddressState>(
         listener: (context, state) {
-          // TODO: implement listener
+          if (state is DeleteAddressSuccessState ||
+              state is SendAddressToServerLoadedState) {
+            context.read<AddressCubit>().fetchMyAddresses();
+          }
         },
         builder: (context, state) {
           return CustomScrollView(
@@ -101,7 +104,13 @@ class MyAddressView extends HookWidget {
                 const SliverToBoxAdapter(
                   child: NoAddressView(),
                 ),
-              if (addressess.isNotEmpty)
+              if (addressess.isNotEmpty) ...[
+                const SliverToBoxAdapter(
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: AddNewAddressBtn(),
+                  ),
+                ),
                 SliverList.separated(
                   itemCount: addressess.length,
                   itemBuilder: (context, index) {
@@ -110,20 +119,79 @@ class MyAddressView extends HookWidget {
                         horizontal: 16,
                       ),
                       child: CustomAddressContainer(
-                        containerBorderColor: AppColors.primaryColor,
-                        address: addressess[index], deleteAddress: () {
-                          BlocProvider.of<AddressCubit>(context).deleteAddress(addressess[index].id);
-                      },
+                        containerBorderColor: AppColors.greyColor,
+                        address: addressess[index],
+                        deleteAddress: () {
+                          BlocProvider.of<AddressCubit>(context)
+                              .deleteAddress(addressess[index].id);
+                        },
                       ),
                     );
                   },
                   separatorBuilder: (context, index) => const Gap(
-                    2,
+                    16,
                   ),
                 ),
+              ]
             ],
           );
         },
+      ),
+    );
+  }
+}
+
+class AddNewAddressBtn extends StatelessWidget {
+  const AddNewAddressBtn({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => showDialog(
+        context: context,
+        builder: (context) => const AddNewAddressDialog(),
+      ),
+      child: Container(
+        margin: const EdgeInsets.only(
+          right: 16,
+          bottom: 12,
+        ),
+        alignment: Alignment.center,
+        width: 120,
+        height: 36,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 8,
+          vertical: 6,
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(6),
+          color: AppColors.primaryColor.withOpacity(.2),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              height: 30,
+              width: 30,
+              alignment: Alignment.center,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.add,
+                color: AppColors.primaryColor,
+                size: 20,
+              ),
+            ),
+            const Text(
+              'Add New',
+              style: TextStyles.primary14SemiBold,
+            ),
+          ],
+        ),
       ),
     );
   }

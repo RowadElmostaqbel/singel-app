@@ -26,25 +26,28 @@ class AddressCubit extends Cubit<AddressState> {
     ],
   );
 
-  addAddressName(String userName) {
-    addAddressModel.addresses[0].name = userName;
-  }
-
-  addAddressPhone(String phone) {
-    addAddressModel.addresses[0].phone = phone;
-  }
-
-  addAddressCity() {
-    addAddressModel.addresses[0].city_id = 1;
-  }
-
-  addAddresDetails(String details) {
-    addAddressModel.addresses[0].details = details;
-  }
-
-  addAddresLatlng(LatLng latLng) {
-    addAddressModel.addresses[0].latitude = latLng.latitude.toString();
-    addAddressModel.addresses[0].longitude = latLng.longitude.toString();
+  addDataToModel({
+    String? name,
+    String? cityName,
+    String? phone,
+    String? additionalPhone,
+    int? cityId,
+    int? clientId,
+    String? details,
+    String? latitude,
+    String? longitude,
+  }) {
+    addAddressModel.addresses[0] = addAddressModel.addresses[0].copyWith(
+      name: name,
+      cityName: cityName,
+      phone: phone,
+      additionalPhone: additionalPhone,
+      cityId: cityId,
+      clientId: clientId,
+      details: details,
+      latitude: latitude,
+      longitude: longitude,
+    );
   }
 
   addAddress() async {
@@ -56,7 +59,7 @@ class AddressCubit extends Cubit<AddressState> {
       );
       return;
     }
-    addAddressModel.addresses[0].client_id = CacheServiceHeper()
+    addAddressModel.addresses[0].clientId = CacheServiceHeper()
         .getData<UserModel>(key: 'user', boxName: 'user')!
         .data!
         .client!
@@ -84,29 +87,29 @@ class AddressCubit extends Cubit<AddressState> {
   }
 
   deleteAddress(int addressId) async {
-    emit(DeleteAddress());
+    log(name: 'address Id', addressId.toString());
+    emit(DeleteAddressLoadingState());
     final result = await addressRepo.deleteAddress(addressId);
     result.fold(
-          (failure) {
+      (failure) {
+        log(name: 'error', failure.msg.toString());
         emit(
-          SendAddressToServerFailureState(
+          DeleteAddressFailureState(
             message: failure.msg,
           ),
         );
       },
-          (status) {
+      (status) {
         emit(
-          SendAddressToServerLoadedState(
-            status: status,
-          ),
+          DeleteAddressSuccessState(),
         );
       },
     );
   }
 
   checkIfTheDataIsNotComplete() {
-    log(addAddressModel.addresses[0].client_id.toString());
-    return addAddressModel.addresses.first.city_id == null ||
+    log(addAddressModel.addresses[0].clientId.toString());
+    return addAddressModel.addresses.first.cityId == null ||
         addAddressModel.addresses.first.details == null ||
         addAddressModel.addresses.first.latitude == null ||
         addAddressModel.addresses.first.longitude == null ||

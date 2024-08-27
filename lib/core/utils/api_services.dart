@@ -46,7 +46,6 @@ class ApiService {
   }
 
   Future<dynamic> delete({
-    required int addressId,
     required String endpoint,
     // required Map<String, dynamic> data,
   }) async {
