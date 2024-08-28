@@ -26,6 +26,7 @@ class ResultItem extends StatelessWidget {
                   id: 1,
                   subCategoryId: 1,
                   restaurantId: 1,
+                  isOrdered: false,
                   isActive: true,
                   isFavorite: false,
                   name: 'name',

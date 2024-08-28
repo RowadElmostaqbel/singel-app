@@ -30,22 +30,27 @@ class CustomAddressContainer extends StatelessWidget {
         ),
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  Text(
-                    address.name ?? '',
-                    style: TextStyles.black14Regular,
-                  ),
-                  const SizedBox(
-                    width: 6,
-                  ),
-                  Image.asset("assets/icons/edit.png",
-                      color: AppColors.primaryColor),
-                ],
+              Expanded(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        address.name ?? '',
+                        style: TextStyles.black14Regular,
+                      ),
+                    ),
+                    // const SizedBox(
+                    //   width: 6,
+                    // ),
+                    // Image.asset("assets/icons/edit.png",
+                    //     color: AppColors.primaryColor),
+                  ],
+                ),
               ),
               GestureDetector(
                 onTap: deleteAddress,
@@ -79,12 +84,14 @@ class CustomAddressContainer extends StatelessWidget {
               const SizedBox(
                 width: 6,
               ),
-              Text(
-                address.details ?? '',
-                style: const TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12,
-                  color: Color(0xff5C5C5C),
+              Expanded(
+                child: Text(
+                  address.details ?? '',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 12,
+                    color: Color(0xff5C5C5C),
+                  ),
                 ),
               ),
             ],

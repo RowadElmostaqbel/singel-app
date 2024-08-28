@@ -39,6 +39,7 @@ class AllPopularMealsView extends StatelessWidget {
                 isActive: true,
                 name: 'name',
                 desc: 'desc',
+                isOrdered: false,
                 img: '',
                 isFavorite: false,
               ),

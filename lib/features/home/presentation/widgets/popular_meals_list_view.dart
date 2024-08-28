@@ -47,6 +47,7 @@ class PopularMealsListView extends StatelessWidget {
               categoryMealItem: CategoryMealItem(
                 id: 1,
                 subCategoryId: 1,
+                isOrdered: false,
                 restaurantId: 1,
                 isActive: true,
                 name: 'name',
