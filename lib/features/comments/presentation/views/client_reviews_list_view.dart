@@ -9,12 +9,15 @@ import 'package:single_resturant_app/features/comments/presentation/views/all_re
 import 'package:single_resturant_app/features/comments/widgets/client_review_list_item.dart';
 import 'package:single_resturant_app/features/review/data/models/review_model.dart';
 import 'package:single_resturant_app/features/review/presentation/controllers/review_cubit.dart';
+import 'package:single_resturant_app/features/review/presentation/widgets/add_review_dialog.dart';
+import 'package:single_resturant_app/features/review/presentation/widgets/add_review_widget.dart';
 
 import '../../../../core/utils/text_styles.dart';
 
 class ClientReviewsListView extends HookWidget {
   final int itemId;
-  const ClientReviewsListView({super.key, required this.itemId});
+  final bool isOrdered;
+  const ClientReviewsListView({super.key, required this.itemId,required this.isOrdered,});
 
   @override
   Widget build(BuildContext context) {
@@ -46,14 +49,16 @@ class ClientReviewsListView extends HookWidget {
                       'Client’s Review',
                       style: TextStyles.black18SemiBold,
                     ),
+                    if(isOrdered)
                     GestureDetector(
-                      onTap: () => context.navigateTo(
-                        AllReivewView(
-                          reviews: itemReviews,
+                      onTap: () => showDialog(
+                        context: context,
+                        builder: (context) => const AlertDialog(
+                          content: AddReviewDialog(),
                         ),
                       ),
                       child: const Text(
-                        'See more',
+                        'Add Review',
                         style: TextStyles.primary16Medium,
                       ),
                     ),
@@ -63,11 +68,11 @@ class ClientReviewsListView extends HookWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   shrinkWrap: true,
-                  itemBuilder: (context, index) =>  ClientReviewListItem(
+                  itemBuilder: (context, index) => ClientReviewListItem(
                     reviewModel: itemReviews[index],
                   ),
                   separatorBuilder: (context, index) => const Gap(16),
-                  itemCount: itemReviews.length > 3 ? 3 : itemReviews.length,
+                  itemCount: itemReviews.length,
                 ),
               ],
             );

@@ -203,7 +203,7 @@ class MakeOrderView extends HookWidget {
                         //       ),
                         //       child: const Text(
                         //         'Reset',
-                        //         style: TextStyles.white14Medium,
+                        //         style: TextStyles.white14Medium, 
                         //       ),
                         //     ),
                         //   ],
@@ -253,6 +253,7 @@ class MakeOrderView extends HookWidget {
                   ),
                   ClientReviewsListView(
                     itemId: categoryMealItem.id ?? 0,
+                    isOrdered: categoryMealItem.isOrdered ?? false,
                   ),
                   const SliverToBoxAdapter(
                     child: Gap(110),

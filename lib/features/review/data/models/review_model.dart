@@ -1,6 +1,6 @@
 class ReviewModel {
   final int id;
-  final String comment;
+  final String? comment;
   final dynamic rate;
   final String createdAt;
   final String name;

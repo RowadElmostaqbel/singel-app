@@ -66,8 +66,8 @@ class LogoutDialog extends StatelessWidget {
                               if (state is AuthLoadedState) {
                                 try {
                                   Hive.box<UserModel>('user').clear();
-                                  Hive.box<UserModel>('remember_me').clear();
-                                  Hive.box<UserModel>(Constants.recentQueryBox)
+                                  Hive.box<bool>('remember_me').clear();
+                                  Hive.box<List<String>>(Constants.recentQueryBox)
                                       .clear();
                                 } catch (e) {
                                   log(name: 'error', e.toString());
