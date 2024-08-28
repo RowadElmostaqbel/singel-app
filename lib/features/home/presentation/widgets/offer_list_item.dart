@@ -45,7 +45,7 @@ class OfferListITem extends StatelessWidget {
                   image: AssetImage(
                     Assets.assetsImagesSteak,
                   ),
-                  fit: BoxFit.fitHeight,
+                  fit: BoxFit.fill,
                 ),
               ),
               child: Row(
@@ -55,7 +55,7 @@ class OfferListITem extends StatelessWidget {
                     alignment: Alignment.center,
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     height: 32,
-                    width: constraints.maxWidth * .3,
+                    width: constraints.maxWidth * .4,
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.centerLeft,
@@ -76,15 +76,18 @@ class OfferListITem extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  const AddToFavBtn(),
+                  const AddToFavBtn(
+                    isLiked: false,
+                  ),
                 ],
               ),
             ),
             Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const Gap(4),
                   Row(
                     children: [
                       const Expanded(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:single_resturant_app/features/orders/presentation/controllers/order/cancel_order_cubit.dart';
 
 class CustomBtnWidget extends StatelessWidget {
   final Color color;
@@ -7,6 +9,7 @@ class CustomBtnWidget extends StatelessWidget {
 
   final Function()? onTap;
   final double? radius;
+  final Border? border;
   const CustomBtnWidget({
     super.key,
     required this.color,
@@ -14,28 +17,36 @@ class CustomBtnWidget extends StatelessWidget {
     required this.titleStyle,
     this.onTap,
     this.radius,
+    this.border,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => onTap != null ? onTap!() : () {},
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 6),
-        alignment: Alignment.center,
-        padding: const EdgeInsets.symmetric(
-          horizontal: 36,
-          vertical: 14,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(radius??50),
-          color: color,
-        ),
-        child: Text(
-          text,
-          style: titleStyle,
-        ),
-      ),
+    return BlocBuilder<CancelOrderCubit, CancelOrderState>(
+      builder: (context, state) {
+        return GestureDetector(
+          onTap: () => onTap != null ? onTap!() : () {},
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 6),
+            alignment: Alignment.center,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 24,
+              vertical: 10,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(radius ?? 50),
+              color: color,
+              border: border,
+            ),
+            child:state is CancelOrderLoadingState? const CircularProgressIndicator(
+              color: Colors.white,
+            ): Text(
+              text,
+              style: titleStyle,
+            ),
+          ),
+        );
+      },
     );
   }
 }

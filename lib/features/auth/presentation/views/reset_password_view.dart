@@ -52,16 +52,19 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                 CustomTextFormField(
                   controller: newPassword,
                   label: "New Password",
-                  obscureText: true,
+                  isPassword: true,
                   hintText: "********",
                   validator: FormBuilderValidators.compose([
                     FormBuilderValidators.required(),
-                  ]), icon: 'assets/icons/lock.png', keyboardType: TextInputType.name,
+                  ]),
+                  icon: 'assets/icons/lock.png',
+                  keyboardType: TextInputType.name,
+                  onChanged: (String) {},
                 ),
                 CustomTextFormField(
                   controller: confirmPassword,
                   label: "Confirm Password",
-                  obscureText: true,
+                  isPassword: true,
                   hintText: "********",
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -70,16 +73,23 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                       return "Please enter the same password";
                     }
                     return null;
-                  }, icon: 'assets/icons/lock.png', keyboardType: TextInputType.name,
+                  },
+                  icon: 'assets/icons/lock.png',
+                  keyboardType: TextInputType.name,
+                  onChanged: (String) {},
                 ),
                 CustomNavigatorButton(
                   title: 'Save',
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const LoginView()));
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const LoginView(),
+                        ),
+                      );
                     }
-                  }, padding: 50,
+                  },
+                  padding: 50,
                 )
               ],
             ),

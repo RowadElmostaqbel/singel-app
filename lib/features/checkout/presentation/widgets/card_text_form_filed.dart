@@ -66,7 +66,7 @@ class CardTextFormFiled extends StatelessWidget {
               controller: controller,
             ),
             Align(
-              alignment: const Alignment(-1.05, -1.8),
+              alignment: const Alignment(-0.9, -1.4),
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6),
                 color: Colors.white,

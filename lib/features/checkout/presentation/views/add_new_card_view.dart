@@ -9,7 +9,6 @@ import '../../../../core/utils/text_styles.dart';
 import '../widgets/card_details_row.dart';
 import '../widgets/card_text_form_filed.dart';
 import '../widgets/credit_card_widget.dart';
-import '../widgets/custom_order_button.dart';
 
 class AddNewCardView extends StatefulWidget {
   const AddNewCardView({super.key});
@@ -89,7 +88,7 @@ class _AddNewCardViewState extends State<AddNewCardView> {
                 isBackView = false;
               });
             },
-            inputFormatters: [],
+            inputFormatters: const [],
           ),
           CardTextFormFiled(
             keyboardType: TextInputType.number,

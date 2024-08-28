@@ -18,6 +18,20 @@ static const black18Medium = TextStyle(
     color: AppColors.blackColor,
   );
 
+    static const black14Medium = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    color: AppColors.blackColor,
+  );
+
+
+    static const black18Light = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w300,
+    color: AppColors.blackColor,
+  );
+
+
   static const black16SemiBold = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w600,
@@ -29,6 +43,23 @@ static const black18Medium = TextStyle(
     color: AppColors.blackColor,
   );
 
+static const black20SemiBold = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
+    color: AppColors.blackColor,
+  );
+
+ static const black16Regular = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    color: AppColors.blackColor,
+  );
+
+ static const black12Regular = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    color: AppColors.blackColor,
+  );
    static const black14Regular = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
@@ -67,6 +98,11 @@ static const brightBlack10Regular= TextStyle(
     fontWeight: FontWeight.w400,
     color: AppColors.darkGreyColor,
   );
+   static const darkGrey10Regular = TextStyle(
+    fontSize: 10,
+    fontWeight: FontWeight.w400,
+    color: AppColors.darkGreyColor,
+  );
     static const darkGrey14SemiBold = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w600,
@@ -78,9 +114,26 @@ static const brightBlack10Regular= TextStyle(
     fontWeight: FontWeight.w600,
     color: AppColors.darkGreyColor,
   );
-static const white18SemiBold = TextStyle(
+static const white24SemiBold = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
+  );
+  static const white18SemiBold = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w600,
+    color: Colors.white,
+  );
+
+
+  static const white16SemiBold = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
+  );
+   static const white20Medium = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
     color: Colors.white,
   );
   static const white16Medium = TextStyle(
@@ -124,9 +177,32 @@ static const primary24Medium = TextStyle(
     fontWeight: FontWeight.w500,
     color: AppColors.primaryColor,
   );
+  static const primary20SemiBold = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
+    color: AppColors.primaryColor,
+  );
  static const primary18SemiBold = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w600,
+    color: AppColors.primaryColor,
+  );
+
+   static const primary12SemiBold = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w600,
+    color: AppColors.primaryColor,
+  );
+
+  static const primary14SemiBold = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    color: AppColors.primaryColor,
+  );
+
+  static const primary16Medium = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
     color: AppColors.primaryColor,
   );
 

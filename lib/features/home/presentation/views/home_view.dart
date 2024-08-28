@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/utils/app_colors.dart';
 import 'package:single_resturant_app/core/utils/assets.dart';
+import 'package:single_resturant_app/core/utils/cache_service.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
+import 'package:single_resturant_app/core/widgets/cached_network_image_widget.dart';
+import 'package:single_resturant_app/features/auth/data/models/user_model.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/categories_list_view.dart';
-import 'package:single_resturant_app/features/home/presentation/widgets/client_reviews_list_view.dart';
-import 'package:single_resturant_app/features/home/presentation/widgets/custom_search_and_filter_widget.dart';
-import 'package:single_resturant_app/features/home/presentation/widgets/fast_delivary_list_view.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/offers_list_view.dart';
-import 'package:single_resturant_app/features/home/presentation/widgets/popular_meals_list_view.dart';
-import 'package:single_resturant_app/features/home/presentation/widgets/popular_resturants_list_view.dart';
-
+import 'package:single_resturant_app/features/home/presentation/widgets/select_address_dialog.dart';
+import 'package:single_resturant_app/features/my_address/presentation/manager/address_cubit.dart';
 import '../../../../core/utils/text_styles.dart';
+import '../../../my_address/data/models/addresses.dart';
+import '../widgets/add_new_address_dialog.dart';
 import '../widgets/banners_view.dart';
 
 class HomeView extends HookWidget {
@@ -20,6 +22,14 @@ class HomeView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    useEffect(() {
+      context.read<AddressCubit>().fetchMyAddresses();
+      return null;
+    }, []);
+    final List<AddressModel> addresses =
+        context.watch<AddressCubit>().addresses;
+    bool hasAddresses = context.watch<AddressCubit>().addresses.isNotEmpty;
+
     return Scaffold(
       backgroundColor: Colors.white54,
       appBar: AppBar(
@@ -47,7 +57,7 @@ class HomeView extends HookWidget {
               ],
             ),
             child: Text(
-              'AR',
+              'EN',
               style: TextStyles.primary18SemiBold.copyWith(fontSize: 14),
             ),
           ),
@@ -71,9 +81,22 @@ class HomeView extends HookWidget {
         leading: Row(
           children: [
             const Gap(10),
-            CircleAvatar(
-              radius: 30,
-              child: Image.asset(Assets.assetsImagesProfile),
+            Container(
+              clipBehavior: Clip.antiAlias,
+              height: 50,
+              width: 50,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+              ),
+              child: CachedNetworkImageWidget(
+                isProfileImage: true,
+                url: CacheServiceHeper()
+                        .getData<UserModel>(boxName: 'user', key: 'user')
+                        ?.data
+                        ?.client
+                        ?.image ??
+                    '',
+              ),
             ),
           ],
         ),
@@ -81,18 +104,23 @@ class HomeView extends HookWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Mohamed Omar',
+            Text(
+              CacheServiceHeper()
+                      .getData<UserModel>(boxName: 'user', key: 'user')
+                      ?.data
+                      ?.client
+                      ?.name ??
+                  'Guest',
               style: TextStyles.black16SemiBold,
             ),
+            const Gap(2),
             InkWell(
               onTap: () {
-                // showDialog(
-                //   context: context,
-                //   builder: (context) => LocationView(
-                //     buildContext: context,
-                //   ),
-                // );
+                showDialog(
+                    context: context,
+                    builder: (context) => hasAddresses
+                        ? const SelectAddressDialog()
+                        : const AddNewAddressHomeDialog());
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -105,9 +133,9 @@ class HomeView extends HookWidget {
                     ),
                   ),
                   const Gap(8),
-                  const Expanded(
+                  Expanded(
                     child: Text(
-                      'EL Hoda We Elnoor, Street',
+                      '${(context.watch<AddressCubit>().addresses.isNotEmpty) ? context.watch<AddressCubit>().addresses.first.details : 'No Address '}',
                       style: TextStyles.darkGrey14Regular,
                     ),
                   ),
@@ -138,12 +166,12 @@ class HomeView extends HookWidget {
                 child: CategoriesListView(),
               ),
             ),
-            const SliverToBoxAdapter(
-              child: Gap(24),
-            ),
-            const SliverToBoxAdapter(
-              child: PopularMealsListView(),
-            ),
+            // const SliverToBoxAdapter(
+            //   child: Gap(24),
+            // ),
+            // const SliverToBoxAdapter(
+            //   child: PopularMealsListView(),
+            // ),
             const SliverToBoxAdapter(
               child: Gap(24),
             ),
@@ -153,62 +181,6 @@ class HomeView extends HookWidget {
             const SliverToBoxAdapter(
               child: Gap(24),
             ),
-            // SliverToBoxAdapter(
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //     children: [
-            //       const Text(
-            //         'Client’s Review',
-            //         style: TextStyles.black18SemiBold,
-            //       ),
-            //       GestureDetector(
-            //         // onTap: () => context.navigateTo(
-            //         //   const AllOffersView(),
-            //         // ),
-            //         child: Container(
-            //           alignment: Alignment.center,
-            //           padding: const EdgeInsets.symmetric(
-            //             horizontal: 8,
-            //             vertical: 4,
-            //           ),
-            //           height: 40,
-            //           decoration: BoxDecoration(
-            //             color: AppColors.primaryColor.withOpacity(.1),
-            //             borderRadius: BorderRadius.circular(6),
-            //           ),
-            //           child: Row(
-            //             children: [
-            //               Container(
-            //                 alignment: Alignment.center,
-            //                 height: 20,
-            //                 width: 20,
-            //                 decoration: const BoxDecoration(
-            //                   color: Colors.white,
-            //                   shape: BoxShape.circle,
-            //                 ),
-            //                 child: const FittedBox(
-            //                   child: Icon(
-            //                     Icons.add,
-            //                     color: AppColors.primaryColor,
-            //                   ),
-            //                 ),
-            //               ),
-            //               const Gap(8),
-            //               const Text(
-            //                 'Add New',
-            //                 style: TextStyles.primary14Regular,
-            //               ),
-            //             ],
-            //           ),
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            // const SliverToBoxAdapter(
-            //   child: Gap(24),
-            // ),
-            // const ClientReviewsListView(),
             SliverToBoxAdapter(
               child: Gap(context.height * .06),
             ),

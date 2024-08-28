@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
@@ -180,7 +179,9 @@ class MealGridItem extends StatelessWidget {
                             ),
                           ],
                         )),
-                    const AddToFavBtn(),
+                    const AddToFavBtn(
+                      isLiked: false,
+                    ),
                   ],
                 ),
               ),
@@ -269,7 +270,9 @@ class ResturantCategoryView extends HookWidget {
               Expanded(
                 child: Column(
                   children: [
-                    const AddToFavBtn(),
+                    const AddToFavBtn(
+                      isLiked: false,
+                    ),
                     const Gap(15),
                     Row(
                       children: [
@@ -335,7 +338,13 @@ class CustomTabBar extends HookWidget {
                       child: GestureDetector(
                         onTap: () {
                           index.value = titles.indexOf(title);
-                          pageController.jumpToPage(index.value);
+                          pageController.animateToPage(
+                            index.value,
+                            duration: const Duration(
+                              milliseconds: 250,
+                            ),
+                            curve: Curves.easeInOut,
+                          );
                         },
                         child: UnSelectedTabBarItem(
                           title: title,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/core/widgets/custom_navigator_button.dart';
+import 'package:single_resturant_app/features/track_order/presentation/views/track_order_view.dart';
 import '../../../../core/utils/text_styles.dart';
-
+import '../../../bottom_nav/presentation/views/bottom_nav_view.dart';
 
 class OrderDoneDialog extends StatefulWidget {
   const OrderDoneDialog({super.key});
@@ -25,7 +27,7 @@ class _OrderDoneDialogState extends State<OrderDoneDialog> {
                 alignment: Alignment.topRight,
                 child: InkWell(
                     onTap: () {
-                      //context.navigateTo(const BottomNavView());
+                      context.navigateTo(const BottomNavView());
                     },
                     child: Image.asset(
                       "assets/icons/delete.png",
@@ -51,7 +53,14 @@ class _OrderDoneDialogState extends State<OrderDoneDialog> {
                 );
               },
             ),
-            CustomNavigatorButton(title: "Track Order", onPressed: (){}, padding: 10)
+            CustomNavigatorButton(
+                title: "Track Order",
+                onPressed: () {
+                  context.navigateTo(
+                    const TrackOrderView(),
+                  );
+                },
+                padding: 10)
           ],
         ),
       ),

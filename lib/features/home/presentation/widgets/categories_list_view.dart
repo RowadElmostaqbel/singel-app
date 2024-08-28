@@ -1,87 +1,85 @@
-
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/utils/app_colors.dart';
 import 'package:single_resturant_app/core/utils/assets.dart';
-import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/core/utils/text_styles.dart';
-import 'package:single_resturant_app/features/home/presentation/views/category_view.dart';
+import 'package:single_resturant_app/core/widgets/cached_network_image_widget.dart';
+import 'package:single_resturant_app/features/meal/data/models/category_model.dart';
+import 'package:single_resturant_app/features/meal/presentation/controllers/categories_cubit.dart';
 
 class CategoriesListView extends HookWidget {
-  static List<Map<String, String>> items = [
-    {
-      'title': 'All',
-      'image': Assets.assetsImagesAll,
-    },
-    {
-      'title': 'Burger',
-      'image': Assets.assetsImagesBurger,
-    },
-    {
-      'title': 'Pizza',
-      'image': Assets.assetsImagesPizza,
-    },
-    {
-      'title': 'Pasta',
-      'image': Assets.assetsImagesPasta,
-    },
-    {
-      'title': 'Salad',
-      'image': Assets.assetsImagesSalad,
-    },
-    {
-      'title': 'Salad',
-      'image': Assets.assetsImagesSalad,
-    },
-  ];
   const CategoriesListView({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    ValueNotifier<int> index = useState(0);
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: items
-            .map((item) => index.value == items.indexOf(item)
-                ? GestureDetector(
-                    onTap: () => context.navigateTo(
-                      CategoryView(
-                        title: item['title']!,
-                      ),
-                    ),
-                    child: SelectedCategoryListItem(
-                        title: item['title']!, image: item['image']!),
-                  )
-                : GestureDetector(
-                    onTap: () {
-                      index.value = items.indexOf(item);
-                      context.navigateTo(
-                        CategoryView(
-                          title: item['title']!,
-                        ),
-                      );
-                    },
-                    child: UnSelectedCategoryListItem(
-                        title: item['title']!, image: item['image']!),
-                  ))
-            .toList(),
-      ),
+    ValueNotifier<int> index =
+        useState(context.read<CategoriesCubit>().selectedMainCategoryId);
+    useEffect(() {
+      context.read<CategoriesCubit>().fetchMainCategories();
+      return null;
+    }, []);
+    return BlocConsumer<CategoriesCubit, CategoriesState>(
+      listener: (context, state) {
+        if (state is CategoriesFailureState) {
+          log(name: 'failure', state.failure.msg);
+        } else if (state is CategoriesLoadedState &&
+            state.categories.isNotEmpty) {
+          context
+              .read<CategoriesCubit>()
+              .changeSelectedMainCategoryId(state.categories[0].id ?? 0);
+          index.value = state.categories[0].id ?? 0;
+        }
+      },
+      builder: (context, state) {
+        if (context.read<CategoriesCubit>().mainCategories.isNotEmpty) {
+          final categories = context.read<CategoriesCubit>().mainCategories;
+          return Align(
+            alignment: Alignment.centerLeft,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: categories
+                    .map((item) => index.value == item.id
+                        ? SelectedCategoryListItem(
+                            categoryModel: item,
+                          )
+                        : GestureDetector(
+                            onTap: () {
+                              index.value = item.id ?? 0;
+                              context
+                                  .read<CategoriesCubit>()
+                                  .changeSelectedMainCategoryId(item.id ?? 0);
+                            },
+                            child: UnSelectedCategoryListItem(
+                              categoryModel: item,
+                            ),
+                          ))
+                    .toList(),
+              ),
+            ),
+          );
+        } else if (state is CategoriesLoadingState) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        return Image.asset(Assets.assetsImagesEmpty);
+      },
     );
   }
 }
 
 class SelectedCategoryListItem extends StatelessWidget {
-  final String title;
-  final String image;
+  final CategoryModel categoryModel;
   const SelectedCategoryListItem({
     super.key,
-    required this.title,
-    required this.image,
+    required this.categoryModel,
   });
 
   @override
@@ -96,16 +94,16 @@ class SelectedCategoryListItem extends StatelessWidget {
           Container(
             height: 64,
             width: 64,
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               color: AppColors.primaryColor,
             ),
-            child: Image.asset(image),
+            child: CachedNetworkImageWidget(url: categoryModel.img ?? ""),
           ),
           const Gap(8),
           Text(
-            title,
+            categoryModel.name!,
             style: TextStyles.primary14Medium,
           )
         ],
@@ -115,12 +113,11 @@ class SelectedCategoryListItem extends StatelessWidget {
 }
 
 class UnSelectedCategoryListItem extends StatelessWidget {
-  final String title;
-  final String image;
+  final CategoryModel categoryModel;
+
   const UnSelectedCategoryListItem({
     super.key,
-    required this.title,
-    required this.image,
+    required this.categoryModel,
   });
 
   @override
@@ -135,16 +132,16 @@ class UnSelectedCategoryListItem extends StatelessWidget {
           Container(
             height: 64,
             width: 64,
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               color: const Color(0xffF4F4F4),
             ),
-            child: Image.asset(image),
+            child: CachedNetworkImageWidget(url: categoryModel.img ?? ""),
           ),
           const Gap(8),
           Text(
-            title,
+            categoryModel.name!,
             style: TextStyles.darkGrey14Regular,
           )
         ],

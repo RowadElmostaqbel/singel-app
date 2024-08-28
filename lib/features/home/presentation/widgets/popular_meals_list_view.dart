@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/core/utils/text_styles.dart';
-import 'package:single_resturant_app/features/home/presentation/views/all_popular_dishes_view.dart';
+import 'package:single_resturant_app/features/home/presentation/views/all_popular_meals_view.dart';
 import 'package:single_resturant_app/features/home/presentation/widgets/popular_meal_list_item.dart';
+import 'package:single_resturant_app/features/meal/data/models/category_meal_item.dart';
 
 class PopularMealsListView extends StatelessWidget {
   const PopularMealsListView({
@@ -23,7 +24,7 @@ class PopularMealsListView extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () => context.navigateTo(
-                const AllPopularDishesView(),
+                const AllPopularMealsView(),
               ),
               child: const Text(
                 'Show all',
@@ -34,7 +35,7 @@ class PopularMealsListView extends StatelessWidget {
         ),
         const Gap(16),
         SizedBox(
-          height: 225,
+          height: 190,
           child: ListView.separated(
             padding: const EdgeInsets.only(
               top: 12,
@@ -43,7 +44,17 @@ class PopularMealsListView extends StatelessWidget {
               left: 4,
             ),
             itemBuilder: (context, index) => PopularMealListItem(
-              index: index,
+              categoryMealItem: CategoryMealItem(
+                id: 1,
+                subCategoryId: 1,
+                isOrdered: false,
+                restaurantId: 1,
+                isActive: true,
+                name: 'name',
+                desc: 'desc',
+                img: '',
+                isFavorite: false,
+              ),
             ),
             scrollDirection: Axis.horizontal,
             separatorBuilder: (context, index) => const Gap(16),

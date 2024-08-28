@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:single_resturant_app/core/utils/app_colors.dart';
 import 'package:single_resturant_app/features/checkout/presentation/views/add_new_card_view.dart';
 import 'package:single_resturant_app/features/checkout/presentation/widgets/wallet_dialog.dart';
 
-class PaymentMethodContainer extends StatelessWidget {
+class PaymentMethodContainer extends HookWidget {
   const PaymentMethodContainer({super.key});
 
   @override
@@ -15,9 +17,11 @@ class PaymentMethodContainer extends StatelessWidget {
       ("${iconsPath}colored_empty_wallet.png"),
     ];
     List paymentScreens = [const AddNewCardView(), const WalletDialog()];
+    ValueNotifier<String> groupValue = useState(paymentMethods.first);
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 20),
-      height: MediaQuery.sizeOf(context).height * 0.29,
+      height: 250,
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -34,35 +38,44 @@ class PaymentMethodContainer extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           itemCount: paymentMethods.length,
           itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: index == 0
-                  ? () {}
-                  : index == 1
-                      ? () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => paymentScreens[0]));
-                        }
-                      : () {
-                         showDialog(context: context, builder: (context)=>paymentScreens[1]);
-                        },
-              child: Container(
-                margin: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: const Color(0xffF4F4F4))),
-                child: ListTile(
-                  title: Text(
-                    paymentMethods[index],
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xff5C5C5C),
-                    ),
+            return Container(
+              margin: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: const Color(
+                    0xffF4F4F4,
                   ),
-                  leading: Image.asset(paymentIcons[index]),
-                  trailing: index == 0
-                      ? Image.asset("assets/icons/checked.png")
-                      : Image.asset("assets/icons/unchecked.png"),
+                ),
+              ),
+              child: RadioListTile<String>(
+                activeColor: AppColors.primaryColor,
+                value: paymentMethods[index],
+                groupValue: groupValue.value,
+                onChanged: (val) {
+                  groupValue.value = val!;
+                  if (index == 1) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => paymentScreens[0]));
+                  } else if (index == 2) {
+                    showDialog(
+                        context: context,
+                        builder: (context) => paymentScreens[1]);
+                  }
+                },
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      paymentMethods[index],
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xff5C5C5C),
+                      ),
+                    ),
+                    Image.asset(paymentIcons[index])
+                  ],
                 ),
               ),
             );

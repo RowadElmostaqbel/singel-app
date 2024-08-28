@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:single_resturant_app/core/utils/app_colors.dart';
 
-class ReservationWayContainer extends StatelessWidget {
+class ReservationWayContainer extends HookWidget {
   const ReservationWayContainer({super.key});
 
   @override
@@ -9,6 +11,8 @@ class ReservationWayContainer extends StatelessWidget {
       "On Site",
       "Delivery",
     ];
+    ValueNotifier<String> groupValue = useState("On Site");
+
     String iconsPath = "assets/icons/";
     List<String> paymentIcons = [
       ("${iconsPath}on_site.png"),
@@ -16,7 +20,7 @@ class ReservationWayContainer extends StatelessWidget {
     ];
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 20),
-      height: MediaQuery.sizeOf(context).height * 0.2,
+      height: 180,
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -36,21 +40,34 @@ class ReservationWayContainer extends StatelessWidget {
             return Container(
               margin: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xffF4F4F4))),
-              child: ListTile(
-                title: Text(
-                  paymentMethods[index],
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xff5C5C5C),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: const Color(
+                    0xffF4F4F4,
                   ),
                 ),
-                leading: Image.asset(paymentIcons[index]),
-                trailing: index == 0
-                    ? Image.asset("assets/icons/checked.png")
-                    : Image.asset("assets/icons/unchecked.png"),
+              ),
+              child: RadioListTile<String>(
+                activeColor: AppColors.primaryColor,
+                value: paymentMethods[index],
+                groupValue: groupValue.value,
+                onChanged: (val) {
+                  groupValue.value = val.toString();
+                },
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      paymentMethods[index],
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xff5C5C5C),
+                      ),
+                    ),
+                    Image.asset(paymentIcons[index])
+                  ],
+                ),
               ),
             );
           }),
