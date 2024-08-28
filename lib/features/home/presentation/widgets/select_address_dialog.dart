@@ -1,33 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hive/hive.dart';
+import 'package:single_resturant_app/core/utils/cache_service.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
+import 'package:single_resturant_app/core/widgets/add_new_address_dialog.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/text_styles.dart';
+import '../../../my_address/data/models/addresses.dart';
+import '../../../my_address/presentation/manager/address_cubit.dart';
 
 class SelectAddressDialog extends HookWidget {
-  const SelectAddressDialog({super.key});
+   SelectAddressDialog({
+    super.key,
+  });
+  late int indexAddress;
 
   @override
   Widget build(BuildContext context) {
-    List<String> paymentMethods = [
-      "On Site",
-      "Delivery",
-    ];
-    String iconsPath = "assets/icons/";
-    List<String> paymentIcons = [
-      ("${iconsPath}on_site.png"),
-      ("${iconsPath}delivery_ic.png"),
-    ];
-    ValueNotifier<String> groupValue = useState("On Site");
-    return SizedBox(
-      height: MediaQuery.sizeOf(context).height,
-      child: ClipRRect(
+    useEffect(() {
+      context.read<AddressCubit>().fetchMyAddresses();
+      return null;
+    }, []);
+    final List<AddressModel> addresses =
+        context.watch<AddressCubit>().addresses;
+    ValueNotifier<String> groupValue = useState(addresses[0].details!);
+    return AlertDialog(
+      contentPadding: EdgeInsets.zero,
+      content: ClipRRect(
           borderRadius: BorderRadius.circular(28),
           child: SizedBox(
-            height: MediaQuery.sizeOf(context).height * 0.55,
             width: MediaQuery.sizeOf(context).width * 0.75,
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
                   height: 47,
@@ -75,84 +81,112 @@ class SelectAddressDialog extends HookWidget {
                         "Specify an address to be delivered to",
                         style: TextStyles.grey14Regular,
                       ),
-                      // ListView.builder(
-                      //   physics: const NeverScrollableScrollPhysics(),
-                      //   itemCount: paymentMethods.length,
-                      //   itemBuilder: (context, index) {
-                      //     return RadioListTile<String>(
-                      //       activeColor: AppColors.primaryColor,
-                      //       value: paymentMethods[index],
-                      //       groupValue: groupValue.value,
-                      //       onChanged: (val) {
-                      //         groupValue.value = val.toString();
-                      //       },
-                      //       title: Row(
-                      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //         children: [
-                      //           Text(
-                      //             paymentMethods[index],
-                      //             style: const TextStyle(
-                      //               fontSize: 16,
-                      //               fontWeight: FontWeight.w500,
-                      //               color: Color(0xff5C5C5C),
-                      //             ),
-                      //           ),
-                      //           Image.asset(paymentIcons[index])
-                      //         ],
-                      //       ),
-                      //     );
-                      //   },
-                      // ),
-                      ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        title: const Text(
-                          "Home",
-                          style: TextStyles.darkGrey14Regular,
-                        ),
-                        subtitle: const Text(
-                          "El Huda We Elnoor, street",
-                          style: TextStyles.brightBlack11SemiMedium,
-                        ),
-                        leading: Container(
-                          height: 34,
-                          width: 34,
-                          decoration: BoxDecoration(
-                            color: const Color(0xffF4F4F4),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: SizedBox(
-                            child: Image.asset(
-                              "assets/icons/location_home.png",
-                              scale: 3,
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: addresses.length,
+                        itemBuilder: (context, index) {
+                          return RadioListTile<String>(
+                            activeColor: AppColors.primaryColor,
+                            value: addresses[index].details!,
+                            groupValue: groupValue.value,
+                            onChanged: (val) {
+                              groupValue.value = val!;
+                              indexAddress = index;
+                            },
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      addresses[index].name!,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xff5C5C5C),
+                                      ),
+                                    ),
+                                    Text(
+                                      addresses[index].details!,
+                                      style: TextStyles.brightBlack11SemiMedium,
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  height: 34,
+                                  width: 34,
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xffF4F4F4),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: SizedBox(
+                                    child: Image.asset(
+                                        "assets/icons/location_home.png",
+                                        scale: 3),
+                                  ),
+                                )
+                              ],
                             ),
-                          ),
-                        ),
-                        trailing: Image.asset("assets/icons/check.png"),
+                          );
+                        },
                       ),
-                      ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        title: const Text(
-                          "Office",
-                          style: TextStyles.darkGrey14Regular,
-                        ),
-                        subtitle: const Text(
-                          "52 Riverside St.Norcross",
-                          style: TextStyles.brightBlack11SemiMedium,
-                        ),
-                        leading: Container(
-                          height: 34,
-                          width: 34,
-                          decoration: BoxDecoration(
-                            color: const Color(0xffF4F4F4),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: SizedBox(
-                            child: Image.asset("assets/icons/location_home.png",
-                                scale: 3),
-                          ),
-                        ),
-                        trailing: Image.asset("assets/icons/unchecked.png"),
-                      ),
+
+                      // >>>>>>>>>>>> Static Data
+
+                      // ListTile(
+                      //   contentPadding: EdgeInsets.zero,
+                      //   title: const Text(
+                      //     "Home",
+                      //     style: TextStyles.darkGrey14Regular,
+                      //   ),
+                      //   subtitle: const Text(
+                      //     "El Huda We Elnoor, street",
+                      //     style: TextStyles.brightBlack11SemiMedium,
+                      //   ),
+                      //   leading: Container(
+                      //     height: 34,
+                      //     width: 34,
+                      //     decoration: BoxDecoration(
+                      //       color: const Color(0xffF4F4F4),
+                      //       borderRadius: BorderRadius.circular(8),
+                      //     ),
+                      //     child: SizedBox(
+                      //       child: Image.asset(
+                      //         "assets/icons/location_home.png",
+                      //         scale: 3,
+                      //       ),
+                      //     ),
+                      //   ),
+                      //   trailing: Image.asset("assets/icons/check.png"),
+                      // ),
+                      // ListTile(
+                      //   contentPadding: EdgeInsets.zero,
+                      //   title: const Text(
+                      //     "Office",
+                      //     style: TextStyles.darkGrey14Regular,
+                      //   ),
+                      //   subtitle: const Text(
+                      //     "52 Riverside St.Norcross",
+                      //     style: TextStyles.brightBlack11SemiMedium,
+                      //   ),
+                      //   leading:
+                      //   Container(
+                      //     height: 34,
+                      //     width: 34,
+                      //     decoration: BoxDecoration(
+                      //       color: const Color(0xffF4F4F4),
+                      //       borderRadius: BorderRadius.circular(8),
+                      //     ),
+                      //     child: SizedBox(
+                      //       child: Image.asset(
+                      //           "assets/icons/location_home.png",
+                      //           scale: 3),
+                      //     ),
+                      //   ),
+                      //   trailing: Image.asset("assets/icons/unchecked.png"),
+                      // ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Container(
@@ -167,10 +201,10 @@ class SelectAddressDialog extends HookWidget {
                             "Your current location",
                             style: TextStyles.black14Regular,
                           )),
-                      const Align(
+                      Align(
                           alignment: Alignment.topLeft,
                           child: Text(
-                            "Mansoura, Hay Elgama, street",
+                            groupValue.value,
                             style: TextStyles.brightBlack11SemiMedium,
                           )),
                       Padding(
@@ -203,7 +237,10 @@ class SelectAddressDialog extends HookWidget {
                                 ),
                               ),
                               onPressed: () {
-                                context.pop();
+                                showDialog(
+                                    context: context,
+                                    builder: (context) =>
+                                        const AddNewAddressDialog());
                               },
                               child: const Text(
                                 "Add New",
@@ -223,6 +260,11 @@ class SelectAddressDialog extends HookWidget {
                                         borderRadius: BorderRadius.circular(12),
                                       )),
                                   onPressed: () {
+                                    print(indexAddress);
+                                    CacheServiceHeper().storeData<int>(
+                                        data: indexAddress!,
+                                        boxName: 'index',
+                                        key: "index");
                                     context.pop();
                                   },
                                   child: const Text(

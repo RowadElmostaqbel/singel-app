@@ -26,8 +26,6 @@ class HomeView extends HookWidget {
       context.read<AddressCubit>().fetchMyAddresses();
       return null;
     }, []);
-    final List<AddressModel> addresses =
-        context.watch<AddressCubit>().addresses;
     bool hasAddresses = context.watch<AddressCubit>().addresses.isNotEmpty;
 
     return Scaffold(
@@ -119,7 +117,7 @@ class HomeView extends HookWidget {
                 showDialog(
                     context: context,
                     builder: (context) => hasAddresses
-                        ? const SelectAddressDialog()
+                        ?  SelectAddressDialog()
                         : const AddNewAddressHomeDialog());
               },
               child: Row(
@@ -135,7 +133,9 @@ class HomeView extends HookWidget {
                   const Gap(8),
                   Expanded(
                     child: Text(
-                      '${(context.watch<AddressCubit>().addresses.isNotEmpty) ? context.watch<AddressCubit>().addresses.first.details : 'No Address '}',
+                      '${(context.watch<AddressCubit>().addresses.isNotEmpty) ?
+                      context.watch<AddressCubit>().addresses
+                      [CacheServiceHeper().getData<int>(boxName: 'index', key: 'index')??0].details : 'No Address '}',
                       style: TextStyles.darkGrey14Regular,
                     ),
                   ),

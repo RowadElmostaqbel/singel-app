@@ -17,7 +17,7 @@ class AddNewAddressHomeDialog extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(24),
             child: SizedBox(
-              height: MediaQuery.sizeOf(context).height * 0.2,
+              height: MediaQuery.sizeOf(context).height * 0.17,
               width: MediaQuery.sizeOf(context).width * 0.9,
               child: Container(
                 decoration: const BoxDecoration(color: Colors.white),
@@ -38,7 +38,7 @@ class AddNewAddressHomeDialog extends StatelessWidget {
                         style: TextStyles.grey16Medium,
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
@@ -63,30 +63,28 @@ class AddNewAddressHomeDialog extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: AppColors.primaryColor,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                    )),
-                                onPressed: () {
-                                    showDialog(
-                                    context: context,
-                                    builder: (context) =>
-                                        const AddNewAddressDialog(),
-                                  );
-                                },
-                                child: const Text(
-                                  "Add New",
-                                  style: TextStyle(
-                                    fontFamily: "Montserrat",
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                  ),
-                                )),
-                          ),
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColors.primaryColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  )),
+                              onPressed: () {
+                                  showDialog(
+                                  context: context,
+                                  builder: (context) =>
+                                      const AddNewAddressDialog(),
+                                );
+                              },
+                              child: const Text(
+                                "Add New",
+                                style: TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              )),
                         ],
                       )
                     ],
@@ -97,14 +95,14 @@ class AddNewAddressHomeDialog extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: context.height * .35,
+          top: context.height * .37,
           left: 25,
           child: Container(
               height: 60,
               width: 60,
               decoration: const BoxDecoration(
                   color: AppColors.primaryColor, shape: BoxShape.circle),
-              child: Image.asset("assets/icons/location_dialog.png")),
+              child: Image.asset("assets/icons/location_dialog.png" ,scale: 2.5,)),
         ),
         Positioned(
           top: context.height * .5,
