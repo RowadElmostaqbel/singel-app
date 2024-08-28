@@ -13,6 +13,8 @@ import 'package:single_resturant_app/features/home/presentation/widgets/offers_l
 import 'package:single_resturant_app/features/home/presentation/widgets/select_address_dialog.dart';
 import 'package:single_resturant_app/features/my_address/presentation/manager/address_cubit.dart';
 import '../../../../core/utils/text_styles.dart';
+import '../../../my_address/data/models/addresses.dart';
+import '../widgets/add_new_address_dialog.dart';
 import '../widgets/banners_view.dart';
 
 class HomeView extends HookWidget {
@@ -20,6 +22,14 @@ class HomeView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    useEffect(() {
+      context.read<AddressCubit>().fetchMyAddresses();
+      return null;
+    }, []);
+    final List<AddressModel> addresses =
+        context.watch<AddressCubit>().addresses;
+    bool hasAddresses = context.watch<AddressCubit>().addresses.isNotEmpty;
+
     return Scaffold(
       backgroundColor: Colors.white54,
       appBar: AppBar(
@@ -79,8 +89,7 @@ class HomeView extends HookWidget {
                 shape: BoxShape.circle,
               ),
               child: CachedNetworkImageWidget(
-                                        isProfileImage: true,
-
+                isProfileImage: true,
                 url: CacheServiceHeper()
                         .getData<UserModel>(boxName: 'user', key: 'user')
                         ?.data
@@ -107,13 +116,11 @@ class HomeView extends HookWidget {
             const Gap(2),
             InkWell(
               onTap: () {
-                showDialog(context: context, builder: (context)=> const SelectAddressDialog());
-                // showDialog(
-                //   context: context,
-                //   builder: (context) => LocationView(
-                //     buildContext: context,
-                //   ),
-                // );
+                showDialog(
+                    context: context,
+                    builder: (context) => hasAddresses
+                        ? const SelectAddressDialog()
+                        : const AddNewAddressHomeDialog());
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
