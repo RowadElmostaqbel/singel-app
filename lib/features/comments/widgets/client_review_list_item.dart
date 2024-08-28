@@ -92,7 +92,7 @@ class ClientReviewListItem extends StatelessWidget {
             color: AppColors.greyColor.withOpacity(.6),
           ),
           Text(
-            reviewModel.comment,
+            reviewModel.comment ?? '',
             style: TextStyles.darkGrey14SemiBold,
           ),
         ],
