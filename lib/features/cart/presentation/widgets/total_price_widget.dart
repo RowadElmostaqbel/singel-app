@@ -60,28 +60,28 @@ class TotalPriceWidget extends StatelessWidget {
             ],
           ),
           const Gap(16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Shipping fee',
-                style: TextStyles.black16SemiBold,
-              ),
-              RichText(
-                text: const TextSpan(
-                  text: '10',
-                  style: TextStyles.darkGrey16SemiBold,
-                  children: [
-                    TextSpan(
-                      text: ' SAR',
-                      style: TextStyles.grey16Medium,
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const Gap(18),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: [
+          //     const Text(
+          //       'Shipping fee',
+          //       style: TextStyles.black16SemiBold,
+          //     ),
+          //     RichText(
+          //       text: const TextSpan(
+          //         text: '10',
+          //         style: TextStyles.darkGrey16SemiBold,
+          //         children: [
+          //           TextSpan(
+          //             text: ' SAR',
+          //             style: TextStyles.grey16Medium,
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // const Gap(18),
           Divider(
             color: const Color(0xffB7B7B7).withOpacity(.5),
           ),

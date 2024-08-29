@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
@@ -17,13 +18,17 @@ import '../../../../core/utils/text_styles.dart';
 import '../../../../core/widgets/custom_btn_widget.dart';
 import '../widgets/cancel_order_dialog.dart';
 
-class ActiveOrdersView extends StatelessWidget {
+class ActiveOrdersView extends HookWidget {
   const ActiveOrdersView({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    useEffect(() {
+      context.read<CancelOrderCubit>().fetchCancelReasons();
+      return null;
+    }, []);
     return BlocListener<CancelOrderCubit, CancelOrderState>(
       listener: (context, state) {
         if (state is CancelOrderStatus && state.status) {

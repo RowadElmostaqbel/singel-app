@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../features/coupons/data/models/coupon_model.dart';
+
 extension SizeHelper on BuildContext {
   double get width => MediaQuery.of(this).size.width;
   double get height => MediaQuery.of(this).size.height;
@@ -18,5 +20,19 @@ extension NavigationHelper on BuildContext {
 extension StringHelper on String {
   String capitalize() {
     return "${this[0].toUpperCase()}${substring(1)}";
+  }
+
+}
+
+extension EnumHelper on String?{
+  CouponType toCouponType(){
+    switch(this){
+      case "percentage":
+        return CouponType.percentage;
+      case "fixed":
+        return CouponType.fixed;
+      default:
+        return CouponType.percentage;
+    }
   }
 }

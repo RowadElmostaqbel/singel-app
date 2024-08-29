@@ -19,9 +19,9 @@ class _OrderDoneDialogState extends State<OrderDoneDialog> {
       contentPadding: const EdgeInsets.all(24),
       backgroundColor: Colors.white,
       content: SizedBox(
-        height: MediaQuery.sizeOf(context).height * 0.45,
         width: MediaQuery.sizeOf(context).width,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Align(
                 alignment: Alignment.topRight,

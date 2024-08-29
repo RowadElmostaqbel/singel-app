@@ -13,6 +13,8 @@ import 'package:single_resturant_app/features/bottom_nav/presentation/views/bott
 import 'package:single_resturant_app/features/cart/data/repos/cart_repo.dart';
 import 'package:single_resturant_app/features/checkout/data/repo/checkout_repo.dart';
 import 'package:single_resturant_app/features/checkout/presentation/controllers/checkout_cubit.dart';
+import 'package:single_resturant_app/features/coupons/data/repos/coupon_repo.dart';
+import 'package:single_resturant_app/features/coupons/presentation/controllers/coupon_cubit.dart';
 import 'package:single_resturant_app/features/edit_password/data/repos/passsword_repo.dart';
 import 'package:single_resturant_app/features/edit_password/presentation/controllers/password_cubit.dart';
 import 'package:single_resturant_app/features/meal/presentation/controllers/categories_cubit.dart';
@@ -133,6 +135,11 @@ class SingleApp extends StatelessWidget {
          BlocProvider(
           create: (context) => ReviewCubit(
             ServiceLocatorHelper.getIt.get<ReviewRepo>(),
+          ),
+        ),
+         BlocProvider(
+          create: (context) => CouponCubit(
+            ServiceLocatorHelper.getIt.get<CouponRepo>(),
           ),
         ),
         BlocProvider(

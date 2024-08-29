@@ -5,6 +5,8 @@ import 'package:single_resturant_app/features/cart/data/repos/cart_repo.dart';
 import 'package:single_resturant_app/features/cart/data/repos/cart_repo_impl.dart';
 import 'package:single_resturant_app/features/checkout/data/repo/checkout_repo.dart';
 import 'package:single_resturant_app/features/checkout/data/repo/checkout_repo_impl.dart';
+import 'package:single_resturant_app/features/coupons/data/repos/coupon_repo.dart';
+import 'package:single_resturant_app/features/coupons/data/repos/coupon_repo_impl.dart';
 import 'package:single_resturant_app/features/meal/data/repos/categories_repo.dart';
 import 'package:single_resturant_app/features/meal/data/repos/categories_repo_impl.dart';
 import 'package:single_resturant_app/features/meal/presentation/controllers/categories_cubit.dart';
@@ -74,6 +76,11 @@ abstract class ServiceLocatorHelper {
     );
     getIt.registerSingleton<ReviewRepo>(
       ReviewRepoImpl(
+        apiService: getIt.get<ApiService>(),
+      ),
+    );
+     getIt.registerSingleton<CouponRepo>(
+      CouponRepoImpl(
         apiService: getIt.get<ApiService>(),
       ),
     );

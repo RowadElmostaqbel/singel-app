@@ -13,7 +13,6 @@ class CustomPriceContainer extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 20),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-      // height: MediaQuery.sizeOf(context).height * 0.23,
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [

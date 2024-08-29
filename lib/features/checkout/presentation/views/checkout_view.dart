@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/widgets/custom_toast_widget.dart';
 import 'package:single_resturant_app/features/checkout/presentation/controllers/checkout_cubit.dart';
-import 'package:single_resturant_app/features/checkout/presentation/widgets/custom_coupon_row.dart';
+import 'package:single_resturant_app/features/coupons/presentation/views/coupon_view.dart';
 import 'package:single_resturant_app/features/checkout/presentation/widgets/reservation_way_container.dart';
 
 import '../../../../core/utils/app_colors.dart';
@@ -138,7 +138,7 @@ class CheckoutView extends HookWidget {
                       style: TextStyles.black16SemiBold,
                     ),
                   ),
-                  const CustomCouponRow(),
+                   CouponView(),
                   const CustomPriceContainer(),
                   CustomNavigatorButton(
                     title: "Order Now",

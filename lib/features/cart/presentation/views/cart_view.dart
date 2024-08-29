@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -5,6 +7,7 @@ import 'package:gap/gap.dart';
 import 'package:single_resturant_app/core/utils/extensions.dart';
 import 'package:single_resturant_app/features/cart/presentation/views/empty_cart_view.dart';
 import 'package:single_resturant_app/features/cart/presentation/widgets/total_price_widget.dart';
+import 'package:single_resturant_app/features/coupons/presentation/controllers/coupon_cubit.dart';
 
 import '../../../../core/utils/text_styles.dart';
 import '../controllers/cubit/cart_cubit.dart';
