@@ -30,9 +30,18 @@ class ServerFailure extends Failure {
             'Request has been cancelled ,please try again later!');
       case DioExceptionType.badResponse:
         log(exception.response!.data.toString());
-        if (exception.response!.data['message'] != null) {
+        // Check if response data is a Map before accessing it
+        if (exception.response!.data is Map<String, dynamic>) {
+          if (exception.response!.data['message'] != null) {
+            return ServerFailure(
+              exception.response!.data['message'],
+              statusCode: exception.response!.statusCode,
+            );
+          }
+        } else if (exception.response!.data is String) {
+          // If the response is a String, return it directly
           return ServerFailure(
-            exception.response!.data['message'],
+            exception.response!.data,
             statusCode: exception.response!.statusCode,
           );
         }
